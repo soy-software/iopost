@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// A: Fabian Lopez
+//D:En estas rutas se encuentra todo lo relacionado a maestrias
+Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
+Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');

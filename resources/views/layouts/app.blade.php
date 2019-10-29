@@ -7,11 +7,12 @@
 	<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'UTC-POSGRADOS') }} | {{ ucfirst($title ?? '') }}</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 	<link href="{{ asset('fonts/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('fonts/fontawesome-free-5.11.2-web/css/all.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/layout.min.css') }}" rel="stylesheet" type="text/css">
@@ -27,6 +28,17 @@
 
 	<script src="{{ asset('js/app.js') }}"></script>
 	<!-- /theme JS files -->
+
+	@stack('linksCabeza')
+
+	<script>
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+	</script>
+
 
 </head>
 
@@ -107,5 +119,15 @@
 	</div>
 	<!-- /page content -->
 
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+		$('table').on('draw.dt', function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		})
+	</script>
+
+	@stack('linksPie')
 </body>
 </html>

@@ -21,15 +21,21 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <!-- Main -->
-                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
+                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Navegación</div> 
+                    <i class="icon-menu" title="Navegación"></i>
+                </li>
+                
+                @can('Usuarios')
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link active">
+                    <a href="{{ route('usuarios') }}" class="nav-link" id="menuUsuarios">
                         <i class="icon-home4"></i>
                         <span>
-                            Dashboard
+                            Usuarios
                         </span>
                     </a>
                 </li>
+                @endcan
+
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
             

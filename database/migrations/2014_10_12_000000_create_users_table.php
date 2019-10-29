@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->enum('estado_civil',['Soltero/a','Casado/a','Divorciado/a','Vuido/a'])->default('Soltero/a');
             $table->enum('etnia',['Mestizos','Blancos','Afroecuatorianos','Indígenas','Montubios','otros'])->default('Mestizos');
             $table->string('foto')->nullable();
+            $table->enum('estado',['Activo','Inactivo'])->default('Activo');
 
             // domicilio
             $table->string('pais')->nullable();

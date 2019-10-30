@@ -28,11 +28,13 @@ Route::middleware(['verified', 'auth'])->group(function () {
     // D:Gestion de usuarios
     Route::namespace('Usuarios')->group(function () {
         Route::get('/usuarios', 'Usuarios@index')->name('usuarios');
+        Route::get('/nuevo-usuario', 'Usuarios@nuevo')->name('nuevoUsuario');
     });
     // A: Fabian Lopez
     //D:En estas rutas se encuentra todo lo relacionado a maestrias
     Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
     Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
     Route::post('/guardar-mestria', 'Maestrias@guardarMaestria')->name('guardarMaestria');
+
     
 });

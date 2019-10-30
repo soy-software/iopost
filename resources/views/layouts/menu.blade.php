@@ -28,7 +28,7 @@
                 @can('Usuarios')
                 <li class="nav-item">
                     <a href="{{ route('usuarios') }}" class="nav-link" id="menuUsuarios">
-                        <i class="icon-home4"></i>
+                        <i class="fas fa-users"></i>
                         <span>
                             Usuarios
                         </span>

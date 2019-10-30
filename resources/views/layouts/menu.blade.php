@@ -36,6 +36,15 @@
                 </li>
                 @endcan
 
+                {{-- menu para la administracion de maestrias --}}
+                <li class="nav-item">
+                    <a href="{{ route('maestrias') }}" class="nav-link ">
+                        <i class="icon-newspaper"></i>
+                        <span>
+                            Maestrías
+                        </span>
+                    </a>
+                </li>
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
             

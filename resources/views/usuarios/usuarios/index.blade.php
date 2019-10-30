@@ -28,7 +28,7 @@
         Listado de usuarios
     </div>
     <div class="card-body">
-        <div class="table-reponsive">
+        <div class="table-responsive">
             {!! $dataTable->table()  !!}
         </div>
     </div>
@@ -42,12 +42,29 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
 <script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 
 @endpush
 
 @prepend('linksPie')
     <script>
-    $('#menuUsuarios').addClass('active');    
+    $('#menuUsuarios').addClass('active');  
+
+    {{-- $.confirm({
+        title: 'Confirme!',
+        content: 'Simple confirmación!',
+        theme: 'modern',
+        type:'dark',
+        icon:'far fa-sad-cry',
+        closeIcon:true,
+        buttons: {
+            confirmar: function () {
+                $.alert('Confirmed!');
+            }
+        }
+    }); --}}
+    
+    
     </script>
     {!! $dataTable->scripts() !!}
     

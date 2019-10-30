@@ -16,6 +16,7 @@
         "laravel/tinker": "^1.0",
         "laraveles/spanish": "^1.4",
         "spatie/laravel-permission": "^3.2",
+        "tavo1987/laravel-ec-validator": "^1.2",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-buttons": "^4.0",
         "yajra/laravel-datatables-html": "^4.0"

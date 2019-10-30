@@ -17,7 +17,7 @@ class Provincias extends Model
     }
 
     public function cantones(){
-    	return $this->hasMany(Canton::class);
+    	return $this->hasMany(Canton::class,'provincia_id');
     }
 
 }

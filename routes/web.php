@@ -26,6 +26,12 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::namespace('Usuarios')->group(function () {
         Route::get('/usuarios', 'Usuarios@index')->name('usuarios');
         Route::get('/nuevo-usuario', 'Usuarios@nuevo')->name('nuevoUsuario');
+        Route::post('/obtener-cantones-x-provincia', 'Usuarios@obtenerCantonesXprovincia')->name('obtenerCantonesXprovincia');
+        Route::post('/obtener-parroquias-x-canton', 'Usuarios@obtenerParroquiasXcanton')->name('obtenerParroquiasXcanton');
+        Route::post('/guardar-usuario', 'Usuarios@guardar')->name('guardarUsuario');
+        
+        
+        
     });
 
     

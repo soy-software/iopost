@@ -26,6 +26,10 @@
 	<script src="{{ asset('js/blockui.min.js') }}"></script>
 	<!-- /core JS files -->
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+	<script src="{{ asset('js/notify.min.js') }}"></script>
+
 	<script src="{{ asset('js/app.js') }}"></script>
 	<!-- /theme JS files -->
 
@@ -86,6 +90,25 @@
 
 			<!-- Content area -->
 			<div class="content">
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
+
+				@foreach (['success', 'warn', 'info', 'error'] as $msg)
+					@if(Session::has($msg))
+					<script>
+						$.notify("{{ Session::get($msg) }}", "{{ $msg }}");
+					</script>
+					@endif
+				@endforeach
+
+
                 @yield('content')
 			</div>
 			<!-- /content area -->

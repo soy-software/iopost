@@ -34,6 +34,7 @@ class CreateMaestriasTable extends Migration
             $table->string('vigencia');
             $table->date('fechaAprobacion');
             $table->integer('capacidadParalelo');
+            $table->enum('estado',['Activo','Inactivo'])->default('Activo');
             $table->timestamps();
               $table->bigInteger('usuarioCreado')->nullable();
             $table->bigInteger('usuarioActualizado')->nullable();

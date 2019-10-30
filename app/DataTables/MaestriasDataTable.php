@@ -21,7 +21,13 @@ class MaestriasDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'maestrias.action');
+            ->editColumn('estado',function($query){
+                return view('maestrias.estado',['maestria'=>$query])->render();
+            })
+            ->addColumn('Acciones', function($query){
+                return view('maestrias.acciones',['maestria'=>$query])->render();
+            })
+            ->rawColumns(['estado','Acciones']);;
     }
 
     /**
@@ -65,18 +71,20 @@ class MaestriasDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
+            Column::computed('Acciones')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('id')->title('#'),
+            Column::make('nombre')->title('Nombre'),
+            Column::make('tipoPrograma')->title('Tipo Programa'),
+            Column::make('titulo')->title('Título'),
+            Column::make('estado'),
         ];
     }
 
+  
     /**
      * Get filename for export.
      *

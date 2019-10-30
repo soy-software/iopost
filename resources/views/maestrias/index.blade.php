@@ -1,11 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.app',['title'=>'Listado de maestrias'])
+
+@section('breadcrumbs', Breadcrumbs::render('mestrias'))
+@section('barraLateral')
+
+    <div class="breadcrumb justify-content-center">
+        <a href="{{ route('nuevaMaestria') }}" class="breadcrumb-elements-item">
+            <i class="fas fa-plus"></i>
+            Nueva Maestría.
+        </a>
+        
+    </div>
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Administración de Maestrías <a href="{{ route('nuevaMaestria') }}">Nueva</a></div>
+                <div class="card-header">Administración de Maestrías</div>
 
                 <div class="card-body">
                     @if (session('status'))

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Maestrias;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RqCrear extends FormRequest
+class RqEditar extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class RqCrear extends FormRequest
     public function rules()
     {
         return [
+            'maestria'=>'required|numeric',
             'nombre'=>'required|string|max:255',
             'tipoPrograma'=>'required|string|max:255',
             'campoAmplio'=>'required|string|max:255',

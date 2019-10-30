@@ -14,16 +14,16 @@
                         </div>
                     @endif
                     {{-- inicio del formulario --}}
-                    <form action="" method="POST">
+                    <form action="{{ route('guardarMaestria') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre de la Maestría :</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Maestría en desarrollo local">
+                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Maestría en desarrollo local">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="tipoProyecto">Tipo Programa</label>
-                                <input type="text" class="form-control" name="tipoProyecto" id="tipoProyecto" placeholder="Maestría Profesional">
+                                <label for="tipoPrograma">Tipo Programa</label>
+                                <input type="text" class="form-control" name="tipoPrograma" id="tipoPrograma" placeholder="Maestría Profesional">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="campoAmplio">Campo Amplio</label>
@@ -52,8 +52,8 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="CodificacionPrograma">Codificación Programa</label>
-                                <input type="text" class="form-control" name="CodificacionPrograma" id="CodificacionPrograma" placeholder="750312C04">
+                                <label for="codificacionPrograma">Codificación Programa</label>
+                                <input type="text" class="form-control" name="codificacionPrograma" id="codificacionPrograma" placeholder="750312C04">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lugarEjecucion">Lugar de Ejecución</label>
@@ -75,17 +75,21 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="resolucion">Resolución</label>
                                 <input type="text" class="form-control" name="resolucion" id="resolucion" placeholder="RPC-SO-35-N°">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="fechaResolucion">Fecha de Resolución</label>
                                 <input type="date" class="form-control" name="fechaResolucion" id="fechaResolucion" placeholder="Semestral">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="modalidad">Modalidad</label>
                                 <input type="text" class="form-control" name="modalidad" id="modalidad" placeholder="Presencial">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="vigencia">Vigencia</label>
+                                <input type="text" class="form-control" name="vigencia" id="vigencia" placeholder="5 años">
                             </div>
                         </div>
                         <div class="form-row">
@@ -94,8 +98,8 @@
                                 <input type="number" class="form-control" name="paralelos" id="paralelos" placeholder="2">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="capacidadParalelos">Capacidad por Paralelos</label>
-                                <input type="number" class="form-control" name="capacidadParalelos" id="capacidadParalelos" placeholder="30">
+                                <label for="capacidadParalelo">Capacidad por Paralelos</label>
+                                <input type="number" class="form-control" name="capacidadParalelo" id="capacidadParalelo" placeholder="30">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="fechaAprobacion">Fecha de Aprobación</label>

@@ -21,7 +21,20 @@
         </div>
     </div>
 </div>
-@endsection
-<script>
+@push('linksCabeza')
+{{--  datatable  --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
+<script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 
-</script>
+@endpush
+
+@prepend('linksPie')
+    <script>
+    $('#menuUsuarios').addClass('active');    
+    </script>
+    {!! $dataTable->scripts() !!}
+    
+@endprepend
+@endsection
+

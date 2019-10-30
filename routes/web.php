@@ -15,12 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => false,'verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// A: Fabian Lopez
-//D:En estas rutas se encuentra todo lo relacionado a maestrias
-Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
-Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
+Route::middleware(['verified', 'auth'])->group(function () {
+    
+    Route::get('/home', 'HomeController@index')->name('home');
+    
+    // A:Deivid
+    // D:Gestion de usuarios
+    Route::namespace('Usuarios')->group(function () {
+        Route::get('/usuarios', 'Usuarios@index')->name('usuarios');
+    });
+    // A: Fabian Lopez
+    //D:En estas rutas se encuentra todo lo relacionado a maestrias
+    Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
+    Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
+    Route::post('/guardar-mestria', 'Maestrias@guardarMaestria')->name('guardarMaestria');
+    
+});

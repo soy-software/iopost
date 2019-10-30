@@ -26,14 +26,14 @@ class CreateMaestriasTable extends Migration
             $table->string('lugarEjecucion',255);
             $table->string('duracion');
             $table->string('tipoPeriodo');
-            $table->integer('numerHoras');
+            $table->integer('numeroHoras');
             $table->string('resolucion');
             $table->date('fechaResolucion');            
             $table->string('modalidad');
             $table->string('paralelos');
             $table->string('vigencia');
             $table->date('fechaAprobacion');
-            $table->integer('capacidaParalelo');
+            $table->integer('capacidadParalelo');
             $table->timestamps();
               $table->bigInteger('usuarioCreado')->nullable();
             $table->bigInteger('usuarioActualizado')->nullable();

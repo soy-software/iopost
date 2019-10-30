@@ -13,26 +13,20 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">Administración de Maestrías</div>
+<div class="card">
+        <div class="card-header">Administración de Maestrías</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <div class="table-responsive">
-                        {!! $dataTable->table()  !!}
-                    </div>
+        <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
                 </div>
+            @endif
+            <div class="table-responsive">
+                {!! $dataTable->table()  !!}
             </div>
         </div>
     </div>
-</div>
 @push('linksCabeza')
 {{--  datatable  --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>

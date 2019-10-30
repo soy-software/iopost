@@ -57,16 +57,34 @@ return [
      * Default html builder parameters.
      */
     'parameters'    => [
-        'dom'     => 'Bfrtip',
-        'order'   => [[0, 'desc']],
+        // 'dom'     => 'Bfrtip',
+        // 'order'   => [[0, 'desc']],
         'sPaginationType'=> 'full_numbers',
         'autoWidth' => false,
         'buttons' => [
-            // 'create',
-            'export',
-            'print',
-            'reset',
-            'reload',
+            [
+              'extend'=>'copy',
+              
+              'text'=> '<i class="fas fa-copy"></i> Copiar'
+            ],
+            [
+              'extend'=> 'export',
+              'text'=> '<i class="fas fa-download"></i> Exportar'
+            ],
+            [
+              'extend'=>'print',
+              'text'=>'<i class="fas fa-print"></i> Imprimir',
+               'messageTop' => 'User Report',
+              
+            ],
+            [
+              'extend'=>'reset',
+              'text'=>'<i class="fas fa-undo-alt"></i> Resetear'
+            ],
+            [
+              'extend'=>'reload',
+              'text'=>'<i class="fas fa-sync"></i> Recargar'
+            ]
         ],
         'language'=> [
             "sProcessing"=> "Procesando...",

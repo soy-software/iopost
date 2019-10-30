@@ -50,43 +50,16 @@ class UsuariosDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    ->buttons(
-                        // Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    )
-                    ->language($this->lenguaje());
+                    // ->buttons(
+                    //     Button::make('create'),
+                    //     Button::make('export')->text('Exportar'),
+                    //     Button::make('print'),
+                    //     Button::make('reset'),
+                    //     Button::make('reload')
+                    // )
+                    ->parameters($this->getBuilderParameters());
     }
-    public function lenguaje()
-    {
-        return [
-            "sProcessing"=> "Procesando...",
-            "sLengthMenu"=> "Mostrar _MENU_ registros",
-            "sZeroRecords"=> "No se encontraron resultados",
-            "sEmptyTable"=> "Ningún dato disponible en esta tabla",
-            "sInfo"=> "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty"=> "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered"=> "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix"=> "",
-            "sSearch"=> "Buscar:",
-            "sUrl"=> "",
-            "sInfoThousands"=> ",",
-            "sLoadingRecords"=> "Cargando...",
-    
-            "oPaginate"=> [
-                "sFirst"=> "Primero",
-                "sLast"=> "Último",
-                "sNext"=> "Siguiente",
-                "sPrevious"=> "Anterior"
-            ],
-            "oAria"=> [
-                "sSortAscending"=> ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending"=> ": Activar para ordenar la columna de manera descendente"
-            ]
-        ];
-    }
+   
 
     /**
      * Get columns.
@@ -98,9 +71,8 @@ class UsuariosDataTable extends DataTable
         return [
             Column::computed('action')
                 ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+                ->printable(false),             
+                
             Column::make('email'),
             Column::make('nombres'),
             Column::make('apellidos'),

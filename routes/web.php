@@ -25,6 +25,8 @@ Route::middleware(['verified', 'auth'])->group(function () {
     // D:Gestion de usuarios
     Route::namespace('Usuarios')->group(function () {
         Route::get('/usuarios', 'Usuarios@index')->name('usuarios');
+        Route::get('/nuevo-usuario', 'Usuarios@nuevo')->name('nuevoUsuario');
     });
+
     
 });

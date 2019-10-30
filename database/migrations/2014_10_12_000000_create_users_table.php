@@ -25,14 +25,15 @@ class CreateUsersTable extends Migration
             $table->string('nombres')->nullable();
             $table->string('apellidos')->nullable();
             $table->enum('sexo',['Masculino','Femenino'])->default('Masculino');
-            $table->date('fecha_nacimiento')->nullable();
             $table->enum('tipo_identificacion',['Cédula','Ruc persona Natural','Ruc Sociedad Pública','Ruc Sociedad Privada','Pasaporte','Otros'])->default('Cédula');
             $table->string('identificacion')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
             $table->enum('estado_civil',['Soltero/a','Casado/a','Divorciado/a','Vuido/a'])->default('Soltero/a');
             $table->enum('etnia',['Mestizos','Blancos','Afroecuatorianos','Indígenas','Montubios','otros'])->default('Mestizos');
-            $table->string('foto')->nullable();
             $table->enum('estado',['Activo','Inactivo'])->default('Activo');
-
+            // contactos
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
             // domicilio
             $table->string('pais')->nullable();
             $table->string('provincia')->nullable();
@@ -40,17 +41,14 @@ class CreateUsersTable extends Migration
             $table->string('parroquia')->nullable();
             $table->string('direccion')->nullable();
 
-            // contactos
-            $table->string('telefono')->nullable();
-            $table->string('celular')->nullable();
-            $table->string('facebook')->nullable();
+            
 
             // discapacidad
             $table->enum('tiene_discapacidad',['SI','NO'])->default('NO');
             $table->decimal('porcentaje_discapacidad',8,2)->default(0);
             $table->enum('tiene_carnet_conadis',['SI','NO'])->default('NO');
-            $table->decimal('porcentaje_tiene_carnet_conadis',8,2)->default(0);
-
+            $table->decimal('porcentaje_carnet_conadis',8,2)->default(0);
+            $table->string('foto')->nullable();
 
 
             

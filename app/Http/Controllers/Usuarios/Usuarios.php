@@ -97,5 +97,19 @@ class Usuarios extends Controller
         
         return redirect()->route('usuarios');
     }
+    public function informacionUsuario($idUsuario)
+    {
+        $usuario=User::findOrFail($idUsuario);
+        $data = array('usuario'=>$usuario);
+        return view('usuarios.usuarios.informacion',$data);
+    }
     
+    public function editarUsuario($idUsuario)
+    {
+        $usuario=User::findOrFail($idUsuario);
+        $roles=Role::all();
+        $provincias=Provincias::all();
+        $data = array('usuario'=>$usuario,'roles' => $roles,'provincias'=>$provincias);
+        return view('usuarios.usuarios.editar',$data);
+    }
 }

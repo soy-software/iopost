@@ -18,7 +18,7 @@ class Usuarios extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role_or_permission:Administrador|Usuarios']);
+        $this->middleware(['role_or_permission:Administrador|G. Usuarios']);
     }
 
     public function index(UsuariosDataTable $dataTable,$rol=null)

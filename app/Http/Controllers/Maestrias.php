@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class Maestrias extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role_or_permission:Administrador|G. Maestrias']);
+    }
+
     public function index(MaestriasDataTable $dataTable)
     {
         return  $dataTable->render('maestrias.index') ;
@@ -44,6 +49,7 @@ class Maestrias extends Controller
         $maestria->capacidadParalelo=$request->capacidadParalelo;
         $maestria->usuarioCreado=Auth::id();
         $maestria->save();
+        $request->session()->flash('success','Maestria creada');
         return redirect()->route('maestrias');
     }
     public function editarMaestria($idMaestria)
@@ -76,6 +82,7 @@ class Maestrias extends Controller
         $maestria->capacidadParalelo=$request->capacidadParalelo;
         $maestria->usuarioActualizado=Auth::id();        
         $maestria->save();
+        $request->session()->flash('success','Maestria actualizada');
         return redirect()->route('maestrias');
     }
     public function informacionMaestria($idMaestria)
@@ -85,4 +92,11 @@ class Maestrias extends Controller
         return view('maestrias.informacion',$data);
     }
     
+    public function eliminarMaestria(Request $request,$idMaestria)
+    {
+        $maestria=Maestria::findOrFail($idMaestria);
+        $maestria->delete();
+        $request->session()->flash('success','Maestria eliminada');
+        return redirect()->route('maestrias');
+    }
 }

@@ -47,5 +47,6 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::get('/editar-mestria/{id}', 'Maestrias@editarMaestria')->name('editarMaestria');
     Route::post('/actualizar-mestria', 'Maestrias@actualizarMaestria')->name('actualizarMaestria');
     Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
+    Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
     
 });

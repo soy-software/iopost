@@ -24,6 +24,9 @@ class UsuariosDataTable extends DataTable
             ->addColumn('action', function($query){
                 return view('usuarios.usuarios.acciones',['usuario'=>$query])->render();
             })
+            ->editColumn('estado',function($user){
+                return view('usuarios.usuarios.estado',['user'=>$user])->render();
+            })
             ->rawColumns(['estado','action']);
     }
 
@@ -35,6 +38,9 @@ class UsuariosDataTable extends DataTable
      */
     public function query(User $model)
     {
+        if($this->rol){
+            return $model->role($this->rol)->newQuery();    
+        }
         return $model->newQuery();
     }
 
@@ -73,34 +79,13 @@ class UsuariosDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->title('Acciones'),             
-                
+                ->title('Acciones'),
             Column::make('email'),
             Column::make('nombres'),
             Column::make('apellidos'),
             Column::make('identificacion')->title('Identificación'),
-            // Column::make('tipo_identificacion')->title('T.identificación'),
-            // Column::make('fecha_nacimiento')->title('F.nacimiento'),
-            // Column::make('sexo'),
-            // Column::make('estado_civil'),
-            // Column::make('etnia'),
-            // Column::make('estado'),
-            // Column::make('telefono')->title('Teléfono'),
             Column::make('celular'),
-            // Column::make('pais')->title('País'),
-            // Column::make('provincia'),
-            // Column::make('canton')->title('Cantón'),
-            // Column::make('parroquia'),
-            // Column::make('direccion')->title('Dirección'),
-            // Column::make('tiene_discapacidad')->title('Discapacidad'),
-            // Column::make('porcentaje_discapacidad')->title('% discapacidad'),
-            // Column::make('tiene_carnet_conadis')->title('Carnet conadis'),
-            // Column::make('porcentaje_carnet_conadis')->title('% carnet conadis'),
-            Column::make('estado')
-                ->exportable(false)
-                ->printable(false)
-            ,
-
+            Column::make('estado'),
         ];
     }
 

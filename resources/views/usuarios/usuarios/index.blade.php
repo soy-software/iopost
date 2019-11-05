@@ -16,6 +16,13 @@
 
             <div class="dropdown-menu dropdown-menu-right">
                 <a href="{{ route('usuarios') }}" class="dropdown-item"><i class="fas fa-user-lock"></i>Ver todos</a>
+                @if (count($roles)>0)
+                    @foreach ($roles as $rol_i)
+                        <a href="{{ route('usuarios',$rol_i->id) }}" class="dropdown-item">
+                            <i class="fas fa-user-lock"></i>{{ $rol_i->name }}
+                        </a>        
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -48,6 +55,5 @@
     $('#menuUsuarios').addClass('active');  
     </script>
     {!! $dataTable->scripts() !!}
-    eliminar();
 @endprepend
 @endsection

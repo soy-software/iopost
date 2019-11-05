@@ -62,12 +62,12 @@
                 <div class="form-group col-md-3">
                     <label for="tipo_identificacion">Tipo de identificación<i class="text-danger">*</i></label>
                     <select id="tipo_identificacion" class="form-control @error('tipo_identificacion') is-invalid @enderror" name="tipo_identificacion" required>
-                        <option value="Cédula" {{ old('tipo_identificacion')=='Cédula'?'selected':'' }}>Cédula</option>
-                        <option value="Ruc persona Natural" {{ old('tipo_identificacion')=='Ruc persona Natural'?'selected':'' }}>Ruc persona Natural</option>
-                        <option value="Ruc Sociedad Pública" {{ old('tipo_identificacion')=='Ruc Sociedad Pública'?'selected':'' }}>Ruc Sociedad Pública</option>
-                        <option value="Ruc Sociedad Privada" {{ old('tipo_identificacion')=='Ruc Sociedad Privada'?'selected':'' }}>Ruc Sociedad Privada</option>
-                        <option value="Pasaporte" {{ old('tipo_identificacion')=='Pasaporte'?'selected':'' }}>Pasaporte</option>
-                        <option value="Otros" {{ old('tipo_identificacion')=='Otros'?'selected':'' }}>Otros</option>
+                        <option value="Cédula" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Cédula'?'selected':'' }}>Cédula</option>
+                        <option value="Ruc persona Natural" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Ruc persona Natural'?'selected':'' }}>Ruc persona Natural</option>
+                        <option value="Ruc Sociedad Pública" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Ruc Sociedad Pública'?'selected':'' }}>Ruc Sociedad Pública</option>
+                        <option value="Ruc Sociedad Privada" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Ruc Sociedad Privada'?'selected':'' }}>Ruc Sociedad Privada</option>
+                        <option value="Pasaporte" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Pasaporte'?'selected':'' }}>Pasaporte</option>
+                        <option value="Otros" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Otros'?'selected':'' }}>Otros</option>
                         
                     </select>
                     @error('tipo_identificacion')
@@ -97,11 +97,11 @@
                 <div class="form-group col-md-3">
                     <label for="">Sexo<i class="text-danger">*</i></label>
                     <div class="form-check form-check-inline ml-2">
-                        <input class="form-check-input @error('sexo') is-invalid @enderror" type="radio" name="sexo" id="sexo_hombre" value="Masculino" {{ old('sexo')=='Masculino'?'checked':'checked' }}>
+                        <input class="form-check-input @error('sexo') is-invalid @enderror" type="radio" name="sexo" id="sexo_hombre" value="Masculino" {{ old('sexo',$usuario->sexo)=='Masculino'?'checked':'checked' }}>
                         <label class="form-check-label" for="sexo_hombre">Masculino</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexo_mujer" value="Femenino" {{ old('sexo')=='Femenino'?'checked':'' }}>
+                        <input class="form-check-input" type="radio" name="sexo" id="sexo_mujer" value="Femenino" {{ old('sexo',$usuario->sexo)=='Femenino'?'checked':'' }}>
                         <label class="form-check-label" for="sexo_mujer">Femenino</label>
                     </div>
                     @error('sexo')
@@ -118,10 +118,10 @@
                     <label for="estado_civil">Estado civil<i class="text-danger">*</i></label>
                     <select id="estado_civil" class="form-control @error('estado_civil') is-invalid @enderror" name="estado_civil" required>
                         
-                        <option value="Soltero/a" {{ old('estado_civil')=='Soltero/a'?'selected':'' }}>Soltero/a</option>
-                        <option value="Casado/a" {{ old('estado_civil')=='Casado/a'?'selected':'' }}>Casado/a</option>
-                        <option value="Divorciado/a" {{ old('estado_civil')=='Divorciado/a'?'selected':'' }}>Divorciado/a</option>
-                        <option value="Vuido/a" {{ old('estado_civil')=='Vuido/a'?'selected':'' }}>Vuido/a</option>
+                        <option value="Soltero/a" {{ old('estado_civil',$usuario->estado_civil)=='Soltero/a'?'selected':'' }}>Soltero/a</option>
+                        <option value="Casado/a" {{ old('estado_civil',$usuario->estado_civil)=='Casado/a'?'selected':'' }}>Casado/a</option>
+                        <option value="Divorciado/a" {{ old('estado_civil',$usuario->estado_civil)=='Divorciado/a'?'selected':'' }}>Divorciado/a</option>
+                        <option value="Vuido/a" {{ old('estado_civil',$usuario->estado_civil)=='Vuido/a'?'selected':'' }}>Vuido/a</option>
                         
                     </select>
                     @error('estado_civil')
@@ -134,12 +134,12 @@
                     <label for="etnia">Etnia<i class="text-danger">*</i></label>
                     <select id="etnia" class="form-control @error('etnia') is-invalid @enderror" name="etnia" required>
                         
-                        <option value="Mestizos" {{ old('etnia')=='Mestizos'?'selected':'' }}>Mestizos</option>
-                        <option value="Blancos" {{ old('etnia')=='Blancos'?'selected':'' }}>Blancos</option>
-                        <option value="Afroecuatorianos" {{ old('etnia')=='Afroecuatorianos'?'selected':'' }}>Afroecuatorianos</option>
-                        <option value="Indígenas" {{ old('etnia')=='Indígenas'?'selected':'' }}>Indígenas</option>
-                        <option value="Montubios" {{ old('etnia')=='Montubios'?'selected':'' }}>Montubios</option>
-                        <option value="otros" {{ old('etnia')=='otros'?'selected':'' }}>otros</option>
+                        <option value="Mestizos" {{ old('etnia',$usuario->etnia)=='Mestizos'?'selected':'' }}>Mestizos</option>
+                        <option value="Blancos" {{ old('etnia',$usuario->etnia)=='Blancos'?'selected':'' }}>Blancos</option>
+                        <option value="Afroecuatorianos" {{ old('etnia',$usuario->etnia)=='Afroecuatorianos'?'selected':'' }}>Afroecuatorianos</option>
+                        <option value="Indígenas" {{ old('etnia',$usuario->etnia)=='Indígenas'?'selected':'' }}>Indígenas</option>
+                        <option value="Montubios" {{ old('etnia',$usuario->etnia)=='Montubios'?'selected':'' }}>Montubios</option>
+                        <option value="otros" {{ old('etnia',$usuario->etnia)=='otros'?'selected':'' }}>otros</option>
                         
                     </select>
                     @error('etnia')
@@ -183,7 +183,7 @@
                     <label for="provincia">Provincia<i class="text-danger">*</i></label>
                     <select id="provincia" class="form-control @error('provincia') is-invalid @enderror" name="provincia" required onchange="cargarCantones(this);">
                         @foreach ($provincias as $provincia)
-                        <option value="{{ $provincia->id }}" {{ old('provincia')==$provincia->id?'selected':'' }} {{ $usuario->parroquia->canton->provincia->id??0==$provincia->id?'selected':'' }}>
+                        <option value="{{ $provincia->id }}" {{ old('provincia',$usuario->parroquia->canton->provincia->id??0)==$provincia->id?'selected':'' }}>
                             {{ $provincia->provincia }}
                         </option>
                         @endforeach
@@ -306,11 +306,20 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
+
+                <a href="">
+                    <img src="" alt="">
+                </a>
+                @if (Storage::exists($usuario->foto))
+                    <a href="{{ Storage::url($usuario->foto) }}" class="btn-link float-right" data-toggle="tooltip" data-placement="top" title="Ver foto">
+                        <img src="{{ Storage::url($usuario->foto) }}" alt="" class="img-fluid" width="45px;">
+                    </a>
+                @endif
             </div>
             
         </div>
         <div class="card-footer text-muted">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
     </div>
 </form>

@@ -18,6 +18,11 @@ Breadcrumbs::for('editarUsuario', function ($trail,$usuario) {
     $trail->parent('usuarios');
     $trail->push('Editar usuario', route('editarUsuario',$usuario->id));
 });
+Breadcrumbs::for('informacionUsuario', function ($trail,$usuario) {
+    $trail->parent('usuarios');
+    $trail->push('Información usuario', route('informacionUsuario',$usuario->id));
+});
+
 
 //maestrias
 Breadcrumbs::for('mestrias', function ($trail) {

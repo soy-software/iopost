@@ -233,11 +233,11 @@
                 <div class="form-group col-md-3">
                     <label for="">Tiene discapacidad</label>
                     <div class="form-check form-check-inline ml-2">
-                        <input class="form-check-input @error('tiene_discapacidad') is-invalid @enderror" type="radio" name="tiene_discapacidad"  id="tiene_discapacidad1" value="SI" {{ old('tiene_discapacidad')=='SI'?'checked':'checked' }}>
+                        <input class="form-check-input @error('tiene_discapacidad') is-invalid @enderror" type="radio" name="tiene_discapacidad"  id="tiene_discapacidad1" value="SI" {{ old('tiene_discapacidad',$usuario->tiene_discapacidad)=='SI'?'checked':'checked' }}>
                         <label class="form-check-label" for="tiene_discapacidad1">SI</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="tiene_discapacidad" id="tiene_discapacidad2" value="NO" {{ old('tiene_discapacidad')=='NO'?'checked':'' }}>
+                        <input class="form-check-input" type="radio" name="tiene_discapacidad" id="tiene_discapacidad2" value="NO" {{ old('tiene_discapacidad',$usuario->tiene_discapacidad)=='NO'?'checked':'' }}>
                         <label class="form-check-label" for="tiene_discapacidad2">NO</label>
                     </div>
                     @error('tiene_discapacidad')
@@ -259,11 +259,11 @@
                 <div class="form-group col-md-3">
                     <label for="canton">Tiene carnet de conadis</label>
                     <div class="form-check form-check-inline ml-2">
-                        <input class="form-check-input @error('tiene_carnet_conadis') is-invalid @enderror" type="radio" name="tiene_carnet_conadis" id="tiene_carnet_conadis1" value="SI" {{ old('tiene_carnet_conadis')=='SI'?'checked':'checked' }}>
+                        <input class="form-check-input @error('tiene_carnet_conadis') is-invalid @enderror" type="radio" name="tiene_carnet_conadis" id="tiene_carnet_conadis1" value="SI" {{ old('tiene_carnet_conadis',$usuario->tiene_carnet_conadis)=='SI'?'checked':'checked' }}>
                         <label class="form-check-label" for="tiene_carnet_conadis1">SI</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="tiene_carnet_conadis" id="tiene_carnet_conadis2" value="NO" {{ old('tiene_carnet_conadis')=='NO'?'checked':'' }}>
+                        <input class="form-check-input" type="radio" name="tiene_carnet_conadis" id="tiene_carnet_conadis2" value="NO" {{ old('tiene_carnet_conadis',$usuario->tiene_carnet_conadis)=='NO'?'checked':'' }}>
                         <label class="form-check-label" for="tiene_carnet_conadis2">NO</label>
                     </div>
                     @error('tiene_carnet_conadis')
@@ -288,7 +288,7 @@
                 @foreach ($roles as $rol)
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="roles[{{ $rol->id }}]"  value="{{ $rol->id }}" {{ old('roles.'.$rol->id)==$rol->id ?'checked':'' }} id="rol_{{ $rol->id }}">
+                        <input class="form-check-input" type="checkbox" name="roles[{{ $rol->id }}]"  value="{{ $rol->id }}" {{ $usuario->hasRole($rol)?'checked':'' }} {{ old('roles.'.$rol->id)==$rol->id ?'checked':'' }} id="rol_{{ $rol->id }}">
                         <label class="form-check-label" for="rol_{{ $rol->id }}">
                             {{ $rol->name }}
                         </label>

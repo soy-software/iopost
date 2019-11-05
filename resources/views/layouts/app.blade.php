@@ -133,6 +133,24 @@
 		$('table').on('draw.dt', function() {
 			$('[data-toggle="tooltip"]').tooltip();
 		})
+
+		function eliminar(arg){
+			var url=$(arg).data('url');
+			var msg=$(arg).data('title');
+			$.confirm({
+				title: 'Confirme!',
+				content: msg,
+				theme: 'modern',
+				type:'dark',
+				icon:'far fa-sad-cry',
+				closeIcon:true,
+				buttons: {
+					confirmar: function () {
+						location.replace(url);
+					}
+				}
+			});
+		}
 	</script>
 
 	@stack('linksPie')

@@ -36,9 +36,8 @@ class CreateUsersTable extends Migration
             $table->string('celular')->nullable();
             // domicilio
             $table->string('pais')->nullable();
-            $table->string('provincia')->nullable();
-            $table->string('canton')->nullable();
-            $table->string('parroquia')->nullable();
+            $table->unsignedBigInteger('parroquia_id')->nullable();
+            $table->foreign('parroquia_id')->references('id')->on('parroquias');
             $table->string('direccion')->nullable();
 
             

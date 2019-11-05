@@ -21,9 +21,10 @@ class UsuariosDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function($user){
-                return $user->id;
-            });
+            ->addColumn('action', function($query){
+                return view('usuarios.usuarios.acciones',['usuario'=>$query])->render();
+            })
+            ->rawColumns(['estado','action']);
     }
 
     /**
@@ -71,30 +72,31 @@ class UsuariosDataTable extends DataTable
         return [
             Column::computed('action')
                 ->exportable(false)
-                ->printable(false),             
+                ->printable(false)
+                ->title('Acciones'),             
                 
             Column::make('email'),
             Column::make('nombres'),
             Column::make('apellidos'),
             Column::make('identificacion')->title('Identificación'),
-            Column::make('tipo_identificacion')->title('T.identificación'),
-            Column::make('fecha_nacimiento')->title('F.nacimiento'),
-            Column::make('sexo'),
-            Column::make('estado_civil'),
-            Column::make('etnia'),
-            Column::make('estado'),
-            Column::make('telefono')->title('Teléfono'),
+            // Column::make('tipo_identificacion')->title('T.identificación'),
+            // Column::make('fecha_nacimiento')->title('F.nacimiento'),
+            // Column::make('sexo'),
+            // Column::make('estado_civil'),
+            // Column::make('etnia'),
+            // Column::make('estado'),
+            // Column::make('telefono')->title('Teléfono'),
             Column::make('celular'),
-            Column::make('pais')->title('País'),
-            Column::make('provincia'),
-            Column::make('canton')->title('Cantón'),
-            Column::make('parroquia'),
-            Column::make('direccion')->title('Dirección'),
-            Column::make('tiene_discapacidad')->title('Discapacidad'),
-            Column::make('porcentaje_discapacidad')->title('% discapacidad'),
-            Column::make('tiene_carnet_conadis')->title('Carnet conadis'),
-            Column::make('porcentaje_carnet_conadis')->title('% carnet conadis'),
-            Column::make('foto')
+            // Column::make('pais')->title('País'),
+            // Column::make('provincia'),
+            // Column::make('canton')->title('Cantón'),
+            // Column::make('parroquia'),
+            // Column::make('direccion')->title('Dirección'),
+            // Column::make('tiene_discapacidad')->title('Discapacidad'),
+            // Column::make('porcentaje_discapacidad')->title('% discapacidad'),
+            // Column::make('tiene_carnet_conadis')->title('Carnet conadis'),
+            // Column::make('porcentaje_carnet_conadis')->title('% carnet conadis'),
+            Column::make('estado')
                 ->exportable(false)
                 ->printable(false)
             ,

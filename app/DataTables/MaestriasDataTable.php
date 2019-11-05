@@ -27,7 +27,7 @@ class MaestriasDataTable extends DataTable
             ->addColumn('Acciones', function($query){
                 return view('maestrias.acciones',['maestria'=>$query])->render();
             })
-            ->rawColumns(['estado','Acciones']);;
+            ->rawColumns(['estado','Acciones']);
     }
 
     /**

@@ -40,8 +40,10 @@ class UsuariosDataTable extends DataTable
     {
         if($this->rol){
             return $model->role($this->rol)->newQuery();    
+        }else{
+            return $model->newQuery();
         }
-        return $model->newQuery();
+        
     }
 
     /**

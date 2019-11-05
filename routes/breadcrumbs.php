@@ -43,3 +43,14 @@ Breadcrumbs::for('informacionMaestria', function ($trail,$maestria) {
     $trail->parent('mestrias');
     $trail->push('Información  '. $maestria->nombre, route('informacionMaestria',$maestria->id));
 });
+
+//A:Deivid
+//D:Breadcrums de roles y permisos
+Breadcrumbs::for('roles', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Roles', route('roles'));
+});
+Breadcrumbs::for('permisos', function ($trail,$rol) {
+    $trail->parent('roles');
+    $trail->push('Permisos', route('permisos',$rol->id));
+});

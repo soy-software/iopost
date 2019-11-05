@@ -25,11 +25,8 @@ class Usuarios extends Controller
     {
         $roles=Role::all();
         $data = array('roles' =>$roles );
-        $rol_m=Role::find($rol);
-        if($rol_m){
-            return $dataTable->with('rol',$rol)->render('usuarios.usuarios.index',$data);
-        }
-        return $dataTable->render('usuarios.usuarios.index',$data);
+        return $dataTable->with('rol',$rol)->render('usuarios.usuarios.index',$data);
+        
         
     }
 
@@ -149,6 +146,7 @@ class Usuarios extends Controller
         $user->porcentaje_discapacidad=$request->porcentaje_discapacidad??0;
         $user->tiene_carnet_conadis=$request->tiene_carnet_conadis;
         $user->porcentaje_carnet_conadis=$request->porcentaje_carnet_conadis??0;
+        $user->estado=$request->estado;
         
         $user->save();
 

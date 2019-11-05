@@ -18,7 +18,7 @@
                 <a href="{{ route('usuarios') }}" class="dropdown-item"><i class="fas fa-user-lock"></i>Ver todos</a>
                 @if (count($roles)>0)
                     @foreach ($roles as $rol_i)
-                        <a href="{{ route('usuarios',$rol_i->id) }}" class="dropdown-item">
+                        <a href="{{ route('usuarios',$rol_i->name) }}" class="dropdown-item">
                             <i class="fas fa-user-lock"></i>{{ $rol_i->name }}
                         </a>        
                     @endforeach
@@ -46,7 +46,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
 <script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-<script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 
 @endpush
 

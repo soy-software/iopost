@@ -20,7 +20,7 @@ Auth::routes(['register' => false,'verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::middleware(['verified', 'auth'])->group(function () {
+Route::middleware(['estado','verified', 'auth'])->group(function () {
     
     Route::get('/home', 'HomeController@index')->name('home');
     
@@ -48,5 +48,18 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::post('/actualizar-mestria', 'Maestrias@actualizarMaestria')->name('actualizarMaestria');
     Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
     Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
+
+
+    //A:Deivid
+    //D. roles y permisos de sistema solo acesso Administrador
+    Route::namespace('Sistema')->group(function () {
+        // roles
+        Route::get('/roles', 'Roles@index')->name('roles');
+        Route::post('/roles-guardar', 'Roles@guardar')->name('guardarRol');
+        Route::post('/roles-eliminar', 'Roles@eliminar')->name('eliminarRol');
+        // permisos
+        Route::get('/permisos/{idRol}', 'Permisos@index')->name('permisos');
+        Route::post('/permisos-sincronizar', 'Permisos@sincronizar')->name('sincronizarPermiso');
+    });
     
 });

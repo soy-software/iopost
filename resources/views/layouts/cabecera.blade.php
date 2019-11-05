@@ -159,7 +159,12 @@
 				@else
 					<li class="nav-item dropdown dropdown-user">
 						<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+							@if (Storage::exists(Auth::user()->foto))
+								<img src="{{ Storage::url(Auth::user()->foto) }}" class="rounded-circle mr-2" height="34" alt="">
+							@else
 							<img src="{{ asset('img/face.jpg') }}" class="rounded-circle mr-2" height="34" alt="">
+							@endif
+							
 							{{ Auth::user()->name }} <span class="caret"></span>
 						</a>
 

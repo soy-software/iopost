@@ -284,15 +284,28 @@
             </div>
 
             <div class="form-group">
-                <label for="">Selecionar rol<i class="text-danger">*</i></label>
+                <label for="">Estado<i class="text-danger">*</i> </label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estado" id="estadoActivo" {{ old('estado')=='Activo'?'checked':'' }} value="Activo" {{ $usuario->estado=='Activo'?'checked':'' }}>
+                    <label class="form-check-label" for="estadoActivo">Activo</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estado" id="estadoInactivo" {{ old('estado')=='Inactivo'?'checked':'' }} value="Inactivo" {{ $usuario->estado=='Inactivo'?'checked':'' }}>
+                    <label class="form-check-label" for="estadoInactivo">Inactivo</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Selecionar rol<i class="text-danger">*</i></label> <br>
                 @foreach ($roles as $rol)
 
-                    <div class="form-check">
+                    <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" name="roles[{{ $rol->id }}]"  value="{{ $rol->id }}" {{ $usuario->hasRole($rol)?'checked':'' }} {{ old('roles.'.$rol->id)==$rol->id ?'checked':'' }} id="rol_{{ $rol->id }}">
                         <label class="form-check-label" for="rol_{{ $rol->id }}">
                             {{ $rol->name }}
                         </label>
                     </div>
+
                 @endforeach
                 
             </div>

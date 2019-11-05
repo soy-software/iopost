@@ -36,11 +36,6 @@
                                 <th scope="row">Duración: <strong> {{$maestria->duracion}} </strong></th>
                                 <th scope="row">Tipo Periodo: <strong> {{$maestria->tipoPeriodo}} </strong></th>                                    
                             </tr>
-
-                            <tr>
-                                <th scope="row">Duración: <strong> {{$maestria->duracion}} </strong></th>
-                                <th scope="row">Tipo Periodo: <strong> {{$maestria->tipoPeriodo}} </strong></th>                                    
-                            </tr>
                             <tr>
                                 <th scope="row">Número de horas: <strong> {{$maestria->numeroHoras}} </strong></th>
                                 <th scope="row">Resolución: <strong> {{$maestria->resolucion}} </strong></th>                                    
@@ -66,4 +61,9 @@
         </div>
     </div>
 </div>
+@prepend('linksPie')
+    <script>
+        $('#menuMaestria').addClass('active');    
+    </script>   
+@endprepend
 @endsection

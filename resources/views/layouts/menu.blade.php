@@ -25,7 +25,7 @@
                     <i class="icon-menu" title="Navegación"></i>
                 </li>
                 
-                @can('Usuarios')
+                @can('G. Usuarios')
                 <li class="nav-item">
                     <a href="{{ route('usuarios') }}" class="nav-link" id="menuUsuarios">
                         <i class="fas fa-users"></i>
@@ -38,7 +38,7 @@
 
                 {{-- menu para la administracion de maestrias --}}
                 <li class="nav-item">
-                    <a href="{{ route('maestrias') }}" class="nav-link ">
+                    <a href="{{ route('maestrias') }}" class="nav-link" id="menuMaestria">
                         <i class="icon-newspaper"></i>
                         <span>
                             Maestrías

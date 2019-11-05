@@ -37,7 +37,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuUsuarios').addClass('active');    
+    $('#menuMaestria').addClass('active');    
     </script>
     {!! $dataTable->scripts() !!}
     

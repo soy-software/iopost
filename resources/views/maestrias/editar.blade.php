@@ -214,4 +214,9 @@
         </div>
     </div>
 </div>
+@prepend('linksPie')
+    <script>
+        $('#menuMaestria').addClass('active');    
+    </script>   
+@endprepend
 @endsection

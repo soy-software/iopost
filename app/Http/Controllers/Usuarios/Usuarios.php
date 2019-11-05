@@ -116,4 +116,12 @@ class Usuarios extends Controller
     {
         return $request;
     }
+
+    public function eliminar(Request $request, $idUsuario)
+    {
+        $user=User::findOrFail($idUsuario);
+        $user->delete();
+        $request->session()->flash('success','Usuario eliminado');
+        return redirect()->route('usuarios');
+    }
 }

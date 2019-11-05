@@ -32,9 +32,6 @@
             {!! $dataTable->table()  !!}
         </div>
     </div>
-    <div class="card-footer text-muted">
-        Footer
-    </div>
 </div>
 
 @push('linksCabeza')
@@ -49,24 +46,8 @@
 @prepend('linksPie')
     <script>
     $('#menuUsuarios').addClass('active');  
-
-    {{-- $.confirm({
-        title: 'Confirme!',
-        content: 'Simple confirmación!',
-        theme: 'modern',
-        type:'dark',
-        icon:'far fa-sad-cry',
-        closeIcon:true,
-        buttons: {
-            confirmar: function () {
-                $.alert('Confirmed!');
-            }
-        }
-    }); --}}
-    
-    
     </script>
     {!! $dataTable->scripts() !!}
-    
+    eliminar();
 @endprepend
 @endsection

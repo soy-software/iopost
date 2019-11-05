@@ -54,13 +54,14 @@ class MaestriasDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+                    // ->buttons(
+                    //     Button::make('create'),
+                    //     Button::make('export'),
+                    //     Button::make('print'),
+                    //     Button::make('reset'),
+                    //     Button::make('reload')
+                    // );
+                    ->parameters($this->getBuilderParameters());
     }
 
     /**
@@ -76,7 +77,7 @@ class MaestriasDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id')->title('#'),
+           
             Column::make('nombre')->title('Nombre'),
             Column::make('tipoPrograma')->title('Tipo Programa'),
             Column::make('titulo')->title('Título'),

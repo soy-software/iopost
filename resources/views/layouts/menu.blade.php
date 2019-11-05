@@ -45,6 +45,26 @@
                         </span>
                     </a>
                 </li>
+
+
+                @role('Administrador')
+                <li class="nav-item-header">
+                    <div class="text-uppercase font-size-xs line-height-xs">SISTEMA</div> 
+                    <i class="icon-menu" title="Sistemas"></i>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('roles') }}" class="nav-link" id="menuRoles">
+                        <i class="fas fa-unlock-alt"></i>
+                        <span>
+                            Roles y permisos
+                        </span>
+                    </a>
+                </li>
+                @endrole
+
+
+                
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
             

@@ -73,6 +73,7 @@ class RqEditar extends FormRequest
             'foto'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             "roles"    => "nullable|array",
             "roles.*"  => "nullable|exists:roles,id",
+            "estado"=>'required|in:Activo,Inactivo'
         ];
     }
 }

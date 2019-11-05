@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\MaestriasDataTable;
 use App\Http\Requests\Maestrias\RqCrear;
 use App\Http\Requests\Maestrias\RqEditar;
+use App\Models\Corte;
 use App\Models\Maestria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,4 +100,5 @@ class Maestrias extends Controller
         $request->session()->flash('success','Maestria eliminada');
         return redirect()->route('maestrias');
     }
+
 }

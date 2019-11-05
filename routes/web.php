@@ -49,4 +49,11 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
     Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
     
+    // A: Fabian Lopez
+    //D:En estas rutas se encuentra todo lo relacionado con cortes
+    Route::get('/cortes-mestria/{id}', 'Cortes@index')->name('cortesMaestria');
+    Route::post('/nuevo-corte', 'Cortes@guardarCortes')->name('guardarCortes');
+
+    Route::get('/eliminar-corte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
+    
 });

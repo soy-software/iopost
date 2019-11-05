@@ -14,6 +14,11 @@ Breadcrumbs::for('nuevoUsuario', function ($trail) {
     $trail->parent('usuarios');
     $trail->push('Ingreso de nuevo usuario', route('nuevoUsuario'));
 });
+Breadcrumbs::for('editarUsuario', function ($trail,$usuario) {
+    $trail->parent('usuarios');
+    $trail->push('Editar usuario', route('editarUsuario',$usuario->id));
+});
+
 //maestrias
 Breadcrumbs::for('mestrias', function ($trail) {
     $trail->parent('home');

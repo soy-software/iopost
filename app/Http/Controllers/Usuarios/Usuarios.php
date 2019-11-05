@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Usuarios;
 
-use App\Canton;
 use App\DataTables\Usuarios\UsuariosDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Usuarios\RqEditar;
 use App\Http\Requests\Usuarios\RqGuardar;
-use App\Provincias;
+use App\Models\Domicilio\Canton;
+use App\Models\Domicilio\Provincia;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +28,7 @@ class Usuarios extends Controller
     public function nuevo()
     {
         $roles=Role::all();
-        $provincias=Provincias::all();
+        $provincias=Provincia::all();
         $data = array('roles' => $roles,'provincias'=>$provincias);
         return view('usuarios.usuarios.nuevo',$data);
     }
@@ -36,7 +37,7 @@ class Usuarios extends Controller
     // D: obtener cantones por provinvia 
     public function obtenerCantonesXprovincia(Request $request)
     {
-        $provincia=Provincias::findOrFail($request->id);
+        $provincia=Provincia::findOrFail($request->id);
         return response()->json($provincia->cantones);
     }
 
@@ -69,9 +70,7 @@ class Usuarios extends Controller
         $user->telefono=$request->telefono;
         $user->celular=$request->celular;
         $user->pais=$request->pais;
-        $user->provincia=$request->provincia;
-        $user->canton=$request->canton;
-        $user->parroquia=$request->parroquia;
+        $user->parroquia_id=$request->parroquia;
         $user->direccion=$request->direccion;
         $user->tiene_discapacidad=$request->tiene_discapacidad;
         $user->porcentaje_discapacidad=$request->porcentaje_discapacidad??0;
@@ -108,8 +107,13 @@ class Usuarios extends Controller
     {
         $usuario=User::findOrFail($idUsuario);
         $roles=Role::all();
-        $provincias=Provincias::all();
+        $provincias=Provincia::all();
         $data = array('usuario'=>$usuario,'roles' => $roles,'provincias'=>$provincias);
         return view('usuarios.usuarios.editar',$data);
+    }
+
+    public function actualizar(RqEditar $request)
+    {
+        return $request;
     }
 }

@@ -4,56 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "899244195dbee31e34e58f568edb0bb6",
+    "content-hash": "363d97142f7887987199c0342362b9f8",
     "packages": [
-        {
-            "name": "andres/ecuadlocation",
-            "version": "v1.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/christiantigre/ecuadlocation.git",
-                "reference": "aeb672d15860b3d800f7be1e57b2e856684271f1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/christiantigre/ecuadlocation/zipball/aeb672d15860b3d800f7be1e57b2e856684271f1",
-                "reference": "aeb672d15860b3d800f7be1e57b2e856684271f1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "laravel",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Ecuadlocation\\EcuadServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ecuadlocation\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christian Tigre",
-                    "email": "andrescondo17@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Este paquete contiene las provincias, cantones y parroquias de Ecuador. lo desarrolle para implementarlo en un proyecto personal pero pueden hacer de su uso en sus proyectos bienvenidos sean mas colaboradores para mejorar la versión.",
-            "keywords": [
-                "ecuad",
-                "ecuadlocation"
-            ],
-            "time": "2018-02-16T16:56:22+00:00"
-        },
         {
             "name": "davejamesmiller/laravel-breadcrumbs",
             "version": "5.3.1",

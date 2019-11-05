@@ -33,8 +33,8 @@ Route::middleware(['verified', 'auth'])->group(function () {
         Route::post('/obtener-parroquias-x-canton', 'Usuarios@obtenerParroquiasXcanton')->name('obtenerParroquiasXcanton');
         Route::post('/guardar-usuario', 'Usuarios@guardar')->name('guardarUsuario');
         Route::get('/informacion-usuario/{id}', 'Usuarios@informacionUsuario')->name('informacionUsuario');   
-    
         Route::get('/editar-usuario/{id}', 'Usuarios@editarUsuario')->name('editarUsuario');
+        Route::post('/actualizar-usuario', 'Usuarios@actualizar')->name('actualizarUsuario');
         
         
     });

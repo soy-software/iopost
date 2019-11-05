@@ -1,18 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app',['title'=>'Bienvenido'])
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Bienvenido a UTC POSGRADOS
-                </div>
-                <div class="card-body">
-                    GENIAL.!
-                </div>
-            </div>
-        </div>
+<div class="card">
+    <img src="{{ asset('img/utc.jpg') }}" class="card-img-top" alt="...">
+    <div class="card-body">
     </div>
-</div>
+  </div>
 @endsection

@@ -1,15 +1,16 @@
 @extends('layouts.app',['title'=>'Editar de usuarios'])
 
-@section('breadcrumbs', Breadcrumbs::render('nuevoUsuario'))
+@section('breadcrumbs', Breadcrumbs::render('editarUsuario',$usuario))
 
 
 @section('content')
 
-<form action="{{ route('guardarUsuario') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('actualizarUsuario') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" name="usuario" id="usuario" value="{{ $usuario->id }}" required>
     <div class="card">
         <div class="card-header">
-            Complete información
+            Complete información 
         </div>
         <div class="card-body">
             
@@ -24,8 +25,8 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="password">Password<i class="text-danger">*</i></label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Ingrese password..." required>
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Ingrese password...">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -182,7 +183,7 @@
                     <label for="provincia">Provincia<i class="text-danger">*</i></label>
                     <select id="provincia" class="form-control @error('provincia') is-invalid @enderror" name="provincia" required onchange="cargarCantones(this);">
                         @foreach ($provincias as $provincia)
-                        <option value="{{ $provincia->id }}" {{ old('provincia')==$provincia->id?'selected':'' }}>
+                        <option value="{{ $provincia->id }}" {{ old('provincia')==$provincia->id?'selected':'' }} {{ $usuario->parroquia->canton->provincia->id??0==$provincia->id?'selected':'' }}>
                             {{ $provincia->provincia }}
                         </option>
                         @endforeach
@@ -323,13 +324,22 @@
     
     function cargarCantones(arg){
         var id=$(arg).val();
+        obtenerCantones(id);
+    }
+
+    function obtenerCantones(id){
         var fila;
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
         $.post( "{{ route('obtenerCantonesXprovincia') }}", { id: id })
         .done(function( data ) {
             $('#canton').html('');
             $.each(data, function(i, item) {
-                fila+='<option value="'+item.id+'">'+item.canton+'</option>';
+                if(item.id=={{ $usuario->parroquia->canton->id??0 }}){
+                    fila+='<option value="'+item.id+'" selected>'+item.canton+'</option>';
+                }else{
+                    fila+='<option value="'+item.id+'">'+item.canton+'</option>';
+                }
+                
             });
             $('#canton').append(fila);
         }).always(function(){
@@ -341,21 +351,37 @@
 
     function cargarParroquias(arg){
         var id=$(arg).val();
+        obtenerParroquias(id);
+        
+    }
+    
+    function obtenerParroquias(id){
         var fila;
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
         $.post( "{{ route('obtenerParroquiasXcanton') }}", { id: id })
         .done(function( data ) {
             $('#parroquia').html('');
             $.each(data, function(i, item) {
-                fila+='<option value="'+item.id+'">'+item.parroquia+'</option>';
+                if(item.id=={{ $usuario->parroquia->id??0 }}){
+                    fila+='<option value="'+item.id+'" selected>'+item.parroquia+'</option>';
+                }else{
+                    fila+='<option value="'+item.id+'">'+item.parroquia+'</option>';
+                }
+                
             });
             $('#parroquia').append(fila);
         }).always(function(){
             $.unblockUI();
-        }).fail(function(){
-            notificar("error","Ocurrio un error");
+        }).fail(function(err){
+            $.notify('Parroquia no cargado, vuelva intentar', "error");
         });
     }
+
+    @if ($usuario->parroquia)
+        obtenerCantones({{ $usuario->parroquia->canton->provincia->id }});
+        obtenerParroquias({{ $usuario->parroquia->canton->id }});    
+    @endif
+    
 
     </script>
     

@@ -1,6 +1,6 @@
 @extends('layouts.app',['title'=>'Listado de maestrias'])
 
-@section('breadcrumbs', Breadcrumbs::render('mestrias'))
+@section('breadcrumbs', Breadcrumbs::render('maestrias'))
 @section('barraLateral')
 
     <div class="breadcrumb justify-content-center">

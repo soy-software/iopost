@@ -9,6 +9,7 @@ use App\Models\Corte;
 use App\Models\Maestria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Maestrias extends Controller
 {
@@ -48,8 +49,19 @@ class Maestrias extends Controller
         $maestria->vigencia=$request->vigencia;
         $maestria->fechaAprobacion=$request->fechaAprobacion;
         $maestria->capacidadParalelo=$request->capacidadParalelo;
+        $maestria->descripcionGeneral=$request->descripcionGeneral;
         $maestria->usuarioCreado=Auth::id();
         $maestria->save();
+        if ($request->hasFile('foto')) {
+            if ($request->file('foto')->isValid()) {
+                $extension = $request->foto->extension();
+                $path = Storage::putFileAs(
+                    'maestrias/usuarios', $request->file('foto'), $maestria->id.'.'.$extension
+                );
+                $maestria->foto=$path;
+                $maestria->save();
+            }
+        }
         $request->session()->flash('success','Maestria creada');
         return redirect()->route('maestrias');
     }
@@ -95,10 +107,17 @@ class Maestrias extends Controller
     
     public function eliminarMaestria(Request $request,$idMaestria)
     {
-        $maestria=Maestria::findOrFail($idMaestria);
-        $maestria->delete();
-        $request->session()->flash('success','Maestria eliminada');
-        return redirect()->route('maestrias');
+        try {
+            DB::beginTransaction();
+            $maestria=Maestria::findOrFail($idMaestria);
+            $maestria->delete();
+            $request->session()->flash('success','Maestria eliminada');
+            return redirect()->route('maestrias');
+        } catch (\Exception $th) {
+            DB::rollBack();
+            $request->session()->flash('warn','La maestria no puede ser eliminado');
+            return redirect()->route('maestrias');            
+        }
     }
 
 }

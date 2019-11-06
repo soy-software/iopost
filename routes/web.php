@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Estaticas@index')->name('welcome');
 
 Auth::routes(['register' => false,'verify' => true]);
 

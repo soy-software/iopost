@@ -13,6 +13,10 @@
 
 // welcome
 Route::get('/', 'Estaticas@index')->name('welcome');
+// obtener cantones y parroquias
+Route::post('/obtener-cantones-x-provincia', 'Estaticas@obtenerCantonesXprovincia')->name('obtenerCantonesXprovincia');
+Route::post('/obtener-parroquias-x-canton', 'Estaticas@obtenerParroquiasXcanton')->name('obtenerParroquiasXcanton');
+
 
 // A:Deivid
 // D:inscripcion en linea
@@ -35,8 +39,6 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::namespace('Usuarios')->group(function () {
         Route::get('/usuarios/{rol?}', 'Usuarios@index')->name('usuarios');
         Route::get('/nuevo-usuario', 'Usuarios@nuevo')->name('nuevoUsuario');
-        Route::post('/obtener-cantones-x-provincia', 'Usuarios@obtenerCantonesXprovincia')->name('obtenerCantonesXprovincia');
-        Route::post('/obtener-parroquias-x-canton', 'Usuarios@obtenerParroquiasXcanton')->name('obtenerParroquiasXcanton');
         Route::post('/guardar-usuario', 'Usuarios@guardar')->name('guardarUsuario');
         Route::get('/informacion-usuario/{id}', 'Usuarios@informacionUsuario')->name('informacionUsuario');   
         Route::get('/editar-usuario/{id}', 'Usuarios@editarUsuario')->name('editarUsuario');

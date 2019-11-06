@@ -11,7 +11,15 @@
 |
 */
 
+// welcome
 Route::get('/', 'Estaticas@index')->name('welcome');
+
+// A:Deivid
+// D:inscripcion en linea
+Route::namespace('Inscripciones')->group(function () {
+    Route::get('/inscripcion-en-linea/{corte}', 'Inscripciones@index')->name('incripcion');
+});
+
 
 Auth::routes(['register' => false,'verify' => true]);
 
@@ -34,8 +42,6 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/editar-usuario/{id}', 'Usuarios@editarUsuario')->name('editarUsuario');
         Route::post('/actualizar-usuario', 'Usuarios@actualizar')->name('actualizarUsuario');
         Route::get('/eliminar-usuario/{id}', 'Usuarios@eliminar')->name('eliminarUsuario');
-        
-        
     });
     // A: Fabian Lopez
     //D:En estas rutas se encuentra todo lo relacionado a maestrias
@@ -46,6 +52,10 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::post('/actualizar-mestria', 'Maestrias@actualizarMaestria')->name('actualizarMaestria');
     Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
     Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
+
+
+
+    
 
 
     //A:Deivid

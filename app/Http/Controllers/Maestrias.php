@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\DataTables\MaestriasDataTable;
 use App\Http\Requests\Maestrias\RqCrear;
 use App\Http\Requests\Maestrias\RqEditar;
-use App\Models\Corte;
 use App\Models\Maestria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Maestrias extends Controller
 {
@@ -56,7 +56,7 @@ class Maestrias extends Controller
             if ($request->file('foto')->isValid()) {
                 $extension = $request->foto->extension();
                 $path = Storage::putFileAs(
-                    'maestrias/usuarios', $request->file('foto'), $maestria->id.'.'.$extension
+                    'public/maestrias', $request->file('foto'), $maestria->id.'.'.$extension
                 );
                 $maestria->foto=$path;
                 $maestria->save();
@@ -111,13 +111,13 @@ class Maestrias extends Controller
             DB::beginTransaction();
             $maestria=Maestria::findOrFail($idMaestria);
             $maestria->delete();
+            DB::commit();
             $request->session()->flash('success','Maestria eliminada');
-            return redirect()->route('maestrias');
         } catch (\Exception $th) {
             DB::rollBack();
-            $request->session()->flash('warn','La maestria no puede ser eliminado');
-            return redirect()->route('maestrias');            
+            $request->session()->flash('warn','La maestria no puede ser eliminado');      
         }
+        return redirect()->route('maestrias');      
     }
 
 }

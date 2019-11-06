@@ -38,22 +38,7 @@ class Usuarios extends Controller
         return view('usuarios.usuarios.nuevo',$data);
     }
 
-    // A:Deivid
-    // D: obtener cantones por provinvia 
-    public function obtenerCantonesXprovincia(Request $request)
-    {
-        $provincia=Provincia::findOrFail($request->id);
-        return response()->json($provincia->cantones);
-    }
-
-
-    // A:Deivid
-    // D: obtener parroquias por canton 
-    public function obtenerParroquiasXcanton(Request $request)
-    {
-        $canton=Canton::findOrFail($request->id);
-        return response()->json($canton->parroquias);
-    }
+    
 
 
     // A:Deivid

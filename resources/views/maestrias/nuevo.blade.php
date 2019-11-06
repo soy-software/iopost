@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     {{-- inicio del formulario --}}
-                    <form action="{{ route('guardarMaestria') }}" method="POST">
+                    <form action="{{ route('guardarMaestria') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre de la Maestría :</label>
@@ -202,7 +202,27 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>                      
+                        </div> 
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="foto">Seleciona foto</label>
+                                <input type="file" class="form-control-file @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/*">
+                                @error('foto')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>  
+                            <div class="form-group col-md-6">
+                                <label for="descripcionGeneral">Descripción General</label>
+                                <textarea class="form-control @error('descripcionGeneral') is-invalid @enderror"  name="descripcionGeneral" id="descripcionGeneral" required placeholder="Descripción General" >{{ old('descripcionGeneral') }}</textarea>
+                                @error('descripcionGeneral')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>                   
                         
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>

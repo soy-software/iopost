@@ -47,7 +47,7 @@ class Cortes extends Controller
 
         } catch (\Exception $th) {
             DB::rollBack();
-            $request->session()->flash('danger','El corte no puede ser eliminado');
+            $request->session()->flash('warn','El corte no puede ser eliminado');
             return redirect()->route('cortesMaestria',$corte->maestria_id);
             
         }

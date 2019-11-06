@@ -10,7 +10,16 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th colspan="2">Nombre: <strong> {{$maestria->nombre}}</strong> <span class="badge badge-light badge-striped badge-striped-right border-right-{{$maestria->estado=='Activo'?'success':'danger'}}">{{$maestria->estado=='Activo'?'Activo':'Inactivo'}}</span></th>                                    
+                    <th>Nombre: <strong> {{$maestria->nombre}}</strong> <span class="badge badge-light badge-striped badge-striped-right border-right-{{$maestria->estado=='Activo'?'success':'danger'}}">{{$maestria->estado=='Activo'?'Activo':'Inactivo'}}</span></th>                                    
+                    <th >
+                        @if (Storage::exists($maestria->foto))
+                            <a href="{{ Storage::url($maestria->foto) }}" class="btn-link" data-toggle="tooltip" data-placement="top" title="Ver foto">
+                                <img src="{{ Storage::url($maestria->foto) }}" alt="" class="img-fluid" width="45px;">
+                            </a>
+                        @else
+                            <img src="{{ asset('img/face.jpg') }}" alt="" class="img-fluid" width="45px;">
+                        @endif
+                    </th>
                 </tr>
             </thead>
             <tbody>

@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Corte;
+use App\Models\MateriaMaestria;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CortesDataTable extends DataTable
+class MateriasMaestriasDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,27 +21,16 @@ class CortesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('numero', function($query){
-                return "Corte" .$query->numero ;
-            })
-            ->filterColumn('numero', function($query, $keyword) {
-                $sql = "CONCAT('Corte',' ',cortes.numero)  like ?";
-                return $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
-
-            ->addColumn('action', function($query){
-                return view('maestrias.cortes.acciones',['corte'=>$query])->render();
-            })
-            ->rawColumns(['action']);
+            ->addColumn('action', 'materiasmaestrias.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Corte $model
+     * @param \App\MateriasMaestria $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Corte $model)
+    public function query(MateriaMaestria $model)
     {
         $idMaestria=$this->idMaestria;
         return $model->where('maestria_id',$idMaestria)->select();
@@ -55,18 +44,18 @@ class CortesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('cortes-table')
+                    ->setTableId('materiasmaestrias-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    // ->buttons(
+                      // ->buttons(
                     //     Button::make('create'),
-                    //     Button::make('export')->text('Exportar'),
+                    //     Button::make('export'),
                     //     Button::make('print'),
                     //     Button::make('reset'),
                     //     Button::make('reload')
-                    // )
+                    // );
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -82,12 +71,11 @@ class CortesDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
-                  ->title('Acciones')
                   ->addClass('text-center'),
-            Column::make('numero')->title('Número'),
+            Column::make('id'),
+            Column::make('nombre'),
+            Column::make('descripcion')->title('Descripción'),
             Column::make('estado'),
-            Column::make('created_at')->title('Creado el'),
-            Column::make('updated_at')->title('Actualizado el'),
         ];
     }
 
@@ -98,6 +86,6 @@ class CortesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Cortes_' . date('YmdHis');
+        return 'MateriasMaestrias_' . date('YmdHis');
     }
 }

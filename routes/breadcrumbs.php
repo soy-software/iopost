@@ -44,6 +44,19 @@ Breadcrumbs::for('informacionMaestria', function ($trail,$maestria) {
     $trail->push('Información  '. $maestria->nombre, route('informacionMaestria',$maestria->id));
 });
 
+//A:fabian 
+//d:Breadcrums de materias maestria
+Breadcrumbs::for('listadoMateriaMaestria', function ($trail,$maestria) {
+    $trail->parent('maestrias');
+    $trail->push('Materia de   '. $maestria->nombre, route('materiaMaestria',$maestria->id));
+});
+//A:fabian 
+//d:Breadcrums de cortes
+Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {
+    $trail->parent('maestrias');
+    $trail->push('Cortes de '.$maestria->nombre, route('cortesMaestria',$maestria->id));
+});
+
 //A:Deivid
 //D:Breadcrums de roles y permisos
 Breadcrumbs::for('roles', function ($trail) {
@@ -55,10 +68,4 @@ Breadcrumbs::for('permisos', function ($trail,$rol) {
     $trail->push('Permisos', route('permisos',$rol->id));
 });
 
-//A:fabian 
-//d:Breadcrums de cortes
-Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {
-    $trail->parent('maestrias');
-    $trail->push('Cortes de '.$maestria->nombre, route('cortesMaestria',$maestria->id));
-});
 

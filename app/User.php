@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\Domicilio\Parroquia;
+use App\Models\Usuario\InformacionLaboral;
+use App\Models\Usuario\RegistroAcademico;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +47,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function parroquia()
     {
         return $this->belongsTo(Parroquia::class);
+    }
+
+
+
+    // A:Deivid
+    // D: un usuario estudiante tiene un informacion laboral
+    public function informacionLaboral()
+    {
+        return $this->hasOne(InformacionLaboral::class);
+    }
+
+    // A:Deivid
+    // D: un usuario estudiante tiene un registro académmico
+    public function registroAcademico()
+    {
+        return $this->hasOne(RegistroAcademico::class);
     }
 }

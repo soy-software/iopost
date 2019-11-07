@@ -5,7 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">
+                    {{ __('Login') }}
+                    
+                    @if (session('inscripcionOk'))
+                        <div class="alert alert-success" role="alert">
+                            <p>Inscripción procesado exitosamente en {{ session('inscripcionOk')->corte->maestria->nombre }}</p>
+                            ¡Se le envio información a {{ session('inscripcionOk')->user->email }}. Por favor revisa su cuenta de correo!
+                            <p>Para acceder al sistema, puedes obtener tu nueva clave  <a href="{{ url('/password/reset') }}">aquí</a>
+                            </p>
+                        </div>
+                    @endif
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

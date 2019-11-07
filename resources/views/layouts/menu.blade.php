@@ -25,6 +25,15 @@
                     <i class="icon-menu" title="Navegación"></i>
                 </li>
                 
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link" id="menuHome">
+                        <i class="fas fa-home"></i>
+                        <span>
+                            Administración
+                        </span>
+                    </a>
+                </li>
+
                 @can('G. Usuarios')
                 <li class="nav-item">
                     <a href="{{ route('usuarios') }}" class="nav-link" id="menuUsuarios">
@@ -42,6 +51,17 @@
                         <i class="icon-newspaper"></i>
                         <span>
                             Maestrías
+                        </span>
+                    </a>
+                </li>
+
+
+                {{--  menu mis inscripciones  --}}
+                <li class="nav-item">
+                    <a href="{{ route('maestrias') }}" class="nav-link" id="menuMaestria">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>
+                            Mis inscripciones
                         </span>
                     </a>
                 </li>

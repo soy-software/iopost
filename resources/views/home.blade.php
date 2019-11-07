@@ -14,4 +14,11 @@
         You are logged in!
     </div>
 </div>
+
+@prepend('linksPie')
+    <script>
+    $('#menuHome').addClass('active');  
+    </script>
+@endprepend
+
 @endsection

@@ -1,10 +1,19 @@
 <?php
 
+Breadcrumbs::for('inicio', function ($trail) {
+    $trail->push('Inicio', url('/'));
+});
 // Home
 Breadcrumbs::for('home', function ($trail) {
     $trail->push('Administración', route('home'));
 });
 
+// inscripcion
+
+Breadcrumbs::for('incripcion', function ($trail,$corte) {
+    $trail->parent('inicio');
+    $trail->push('Inscripción en línea', route('incripcion',$corte->id));
+});
 // usuarios
 Breadcrumbs::for('usuarios', function ($trail) {
     $trail->parent('home');

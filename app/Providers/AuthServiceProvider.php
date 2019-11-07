@@ -4,10 +4,14 @@ namespace App\Providers;
 
 use App\Models\Maestria;
 use App\Policies\MaestriaPolicy;
+use App\Models\Corte;
+use App\Policies\CortePolicy;
+use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         User::class=>UserPolicy::class,
         Maestria::class=>MaestriaPolicy::class,
+        Corte::class=>CortePolicy::class,
+        Role::class=>RolePolicy::class,
     ];
 
     /**

@@ -16,13 +16,13 @@ Route::get('/', 'Estaticas@index')->name('welcome');
 // obtener cantones y parroquias
 Route::post('/obtener-cantones-x-provincia', 'Estaticas@obtenerCantonesXprovincia')->name('obtenerCantonesXprovincia');
 Route::post('/obtener-parroquias-x-canton', 'Estaticas@obtenerParroquiasXcanton')->name('obtenerParroquiasXcanton');
-
+// inscripciones
+Route::get('/inscripcion-en-linea/{corte}', 'Estaticas@inscripcion')->name('incripcion');
+Route::post('/inscripcion-procesar', 'Estaticas@procesarInscripcion')->name('procesarInscripcion');
 
 // A:Deivid
 // D:inscripcion en linea
-Route::namespace('Inscripciones')->group(function () {
-    Route::get('/inscripcion-en-linea/{corte}', 'Inscripciones@index')->name('incripcion');
-});
+
 
 
 Auth::routes(['register' => false,'verify' => true]);
@@ -56,7 +56,12 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
 
 
-
+    // A:deivid
+    // incripciones
+    Route::namespace('Inscripciones')->group(function () {
+        Route::get('/ver-mi-inscripcion/{corte}', 'Inscripciones@verMiInscripcion')->name('verMiInscripcion');
+        
+    });
     
 
 

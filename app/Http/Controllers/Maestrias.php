@@ -93,8 +93,20 @@ class Maestrias extends Controller
         $maestria->vigencia=$request->vigencia;
         $maestria->fechaAprobacion=$request->fechaAprobacion;
         $maestria->capacidadParalelo=$request->capacidadParalelo;
+        $maestria->descripcionGeneral=$request->descripcionGeneral;
         $maestria->usuarioActualizado=Auth::id();        
         $maestria->save();
+        if ($request->hasFile('foto')) {
+            if ($request->file('foto')->isValid()) {
+                Storage::delete($maestria->foto);
+                $extension = $request->foto->extension();
+                $path = Storage::putFileAs(
+                    'public/maestrias', $request->file('foto'), $maestria->id.'.'.$extension
+                );
+                $maestria->foto=$path;
+                $maestria->save();
+            }
+        }
         $request->session()->flash('success','Maestria actualizada');
         return redirect()->route('maestrias');
     }
@@ -110,6 +122,9 @@ class Maestrias extends Controller
         try {
             DB::beginTransaction();
             $maestria=Maestria::findOrFail($idMaestria);
+            if ($maestria->foto) {              
+                Storage::delete($maestria->foto);               
+            }
             $maestria->delete();
             DB::commit();
             $request->session()->flash('success','Maestria eliminada');

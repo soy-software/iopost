@@ -10,5 +10,9 @@
     </button> 
     <a  href="{{ route('cortesMaestria', $maestria->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cortes de {{ $maestria->nombre }}">
         <i class="icon-reading"></i>
+    </a> 
+    <a  href="{{ route('materiaMaestria', $maestria->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Materias de {{ $maestria->nombre }}">
+        <i class="icon-paste"></i>
     </a>   
 </div>
+

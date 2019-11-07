@@ -21,7 +21,12 @@ class MateriasMaestriasDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'materiasmaestrias.action');
+            ->editColumn('estado',function($query){
+                return view('maestrias.materiasMaestrias.estado',['materiaMaestria'=>$query])->render();
+            })
+            ->addColumn('action', function($query){
+                return view('maestrias.materiasMaestrias.acciones',['materiaMaestria'=>$query])->render();
+            })->rawColumns(['estado','action']);
     }
 
     /**
@@ -71,8 +76,9 @@ class MateriasMaestriasDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
+                  ->title('Acciones')
                   ->addClass('text-center'),
-            Column::make('id'),
+            
             Column::make('nombre'),
             Column::make('descripcion')->title('Descripción'),
             Column::make('estado'),

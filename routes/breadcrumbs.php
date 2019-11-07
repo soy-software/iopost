@@ -50,6 +50,14 @@ Breadcrumbs::for('listadoMateriaMaestria', function ($trail,$maestria) {
     $trail->parent('maestrias');
     $trail->push('Materia de   '. $maestria->nombre, route('materiaMaestria',$maestria->id));
 });
+Breadcrumbs::for('nuevaMateriaMaestria', function ($trail,$maestria) {
+    $trail->parent('listadoMateriaMaestria',$maestria);
+    $trail->push('Nueva Materia '. $maestria->nombre, route('materiaMaestria',$maestria->id));
+});
+Breadcrumbs::for('editarMateriaMaestria', function ($trail,$materiaMaestria) {
+    $trail->parent('listadoMateriaMaestria',$materiaMaestria->maestria);
+    $trail->push('Editar materia', route('materiaMaestria',$materiaMaestria->id));
+});
 //A:fabian 
 //d:Breadcrums de cortes
 Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {

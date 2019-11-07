@@ -2,7 +2,8 @@
 
 namespace App\Policies;
 
-use App\Maestria;
+
+use App\Models\Maestria ;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -39,9 +40,15 @@ class MaestriaPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function crearCortesMaestria(User $user, $maestria)
     {
-        //
+        $maes=$maestria->cortes()->where('cortes.estado','=','Inscripciones')->count();
+        if($maes>0){
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 
     /**

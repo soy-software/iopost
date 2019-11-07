@@ -19,9 +19,14 @@
                         Estado de la maestría: 
                         <span class="badge badge-light badge-striped badge-striped-right border-right-{{$maestria->estado=='Activo'?'success':'danger'}}">{{$maestria->estado=='Activo'?'Activo':'Inactivo'}}
                         </span>
+                      
+                        @can('crearCortesMaestria',$maestria)
+                            
                         <div class="float-right">
-                        <button onclick="cerarCorte(this)"  data-id="{{$maestria->id}}" class="btn btn-default border-dark" data-title="Crear nueva corte de {{$maestria->nombre}}"><i class="icon-plus3"></i></button>                           
-                        </div>
+                            <button onclick="cerarCorte(this)"  data-id="{{$maestria->id}}" class="btn btn-default border-dark" data-title="Crear nueva corte de {{$maestria->nombre}}"><i class="icon-plus3"></i></button>                           
+                        </div>                            
+                        @endcan
+                       
                     </th>                                    
                     
                 </tr>

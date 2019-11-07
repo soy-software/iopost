@@ -1,6 +1,6 @@
 @extends('layouts.app',['title'=>'nueva de maestría'])
 
-@section('breadcrumbs', Breadcrumbs::render('nuevaMaestria'))
+@section('breadcrumbs', Breadcrumbs::render('nuevaMateriaMaestria',$maestria))
 
 @section('content')
 <div class="card">
@@ -9,7 +9,7 @@
         <div class="card-body">
             <form action="{{ route('guardarMateriaMaestria') }}" method="POST" >
                 @csrf
-                <input type="text" name="maestria" id="maestria" value="{{$maestria->id}}">
+                <input type="hidden" name="maestria" id="maestria" value="{{$maestria->id}}">
                 <div class="form-group">
                     <label for="nombre">Nombre de la materia</label>
                     <input type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" value="{{ old('nombre') }}" placeholder="Seminario II. Elaboracion de Informes y Socializan de Resultados">

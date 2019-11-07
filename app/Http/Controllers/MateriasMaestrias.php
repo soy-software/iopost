@@ -6,6 +6,7 @@ use App\DataTables\MateriasMaestriasDataTable;
 use App\Models\Maestria;
 use App\Models\MateriaMaestria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MateriasMaestrias extends Controller
 {
@@ -29,10 +30,48 @@ class MateriasMaestrias extends Controller
             'nombre' => 'required|unique:materia_maestrias|max:255',
             'descripcion' => 'required|string|max:255',
         ]);
-        $maretiaMaestria=new MateriaMaestria();
-        $maretiaMaestria->maestria_id=$request->maestria;
-        $maretiaMaestria->nombre=$request->nombre;
-        $maretiaMaestria->descripcion=$request->descripcion;
-        $maretiaMaestria->save();
+        $materiaMaestria=new MateriaMaestria();
+        $materiaMaestria->maestria_id=$request->maestria;
+        $materiaMaestria->nombre=$request->nombre;
+        $materiaMaestria->descripcion=$request->descripcion;
+        $materiaMaestria->save();
+        $request->session()->flash('success','Materia Maestria creada');
+        return redirect()->route('materiaMaestria',$request->maestria);
+    }
+    public function editarMateriaMaestria($idMateriaMaestria)
+    {
+        $materiaMaestria= MateriaMaestria::findOrFail($idMateriaMaestria);
+        $data = array('materiaMaestria' =>$materiaMaestria , );
+        return  view('maestrias.materiasMaestrias.editar',$data);
+    }
+    
+    public function actualizarMateriaMaestria(Request $request)
+    {
+        $request->validate([
+            'materiaMaestria'=>'required',
+            'nombre' => 'required|max:255|unique:materia_maestrias,nombre,'.$request->materiaMaestria,
+            'descripcion' => 'required|string|max:255',
+        ]);
+        $materiaMaestria= MateriaMaestria::findOrFail($request->materiaMaestria);
+        $materiaMaestria->nombre=$request->nombre;
+        $materiaMaestria->descripcion=$request->descripcion;
+        $materiaMaestria->estado=$request->estado;
+        $materiaMaestria->save();
+        $request->session()->flash('success','Materia Maestria actualizada');
+        return redirect()->route('materiaMaestria',$materiaMaestria->maestria_id);
+    }
+    public function eliminarMateriaMaestria(Request $request,$idMateriaMaestria)
+    {
+        try {
+            DB::beginTransaction();
+            $materiaMaestria=MateriaMaestria::findOrFail($idMateriaMaestria);          
+            $materiaMaestria->delete();
+            DB::commit();
+            $request->session()->flash('success','Materia Maestria eliminada');
+        } catch (\Exception $th) {
+            DB::rollBack();
+            $request->session()->flash('warn','La Materia Maestria no puede ser eliminado');      
+        }
+        return redirect()->route('materiaMaestria',$materiaMaestria->maestria_id);      
     }
 }

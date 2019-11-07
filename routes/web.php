@@ -84,5 +84,9 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::get('/materias-mestria/{id}', 'MateriasMaestrias@index')->name('materiaMaestria');
     Route::get('/nueva-materias-mestria/{id}', 'MateriasMaestrias@nuevaMateria')->name('nuevaMateriaMaestria');
     Route::post('/guardar-materias-mestria', 'MateriasMaestrias@guardarMateria')->name('guardarMateriaMaestria');
+    Route::get('/editar-materias-mestria/{id}', 'MateriasMaestrias@editarMateriaMaestria')->name('editarmateriaMaestria');
+    Route::post('/actualizar-materias-mestria', 'MateriasMaestrias@actualizarMateriaMaestria')->name('actualizarMateriaMaestrias');
+    Route::get('/eliminar-materias-mestria/{id}', 'MateriasMaestrias@eliminarMateriaMaestria')->name('eliminarMateriaMaestria');
+    
     
 });

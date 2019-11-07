@@ -1,0 +1,1 @@
+<span class="badge badge-light badge-striped badge-striped-right border-right-{{$materiaMaestria->estado==1?'success':'danger'}}">{{$materiaMaestria->estado==1?'Activo':'Inactivo'}}</span>

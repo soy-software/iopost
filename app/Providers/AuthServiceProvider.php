@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Maestria;
 use App\Policies\MaestriaPolicy;
 use App\Models\Corte;
+use App\Models\Inscripcion;
 use App\Policies\CortePolicy;
+use App\Policies\InscripcionPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use App\User;
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         Maestria::class=>MaestriaPolicy::class,
         Corte::class=>CortePolicy::class,
         Role::class=>RolePolicy::class,
+        Inscripcion::class=>InscripcionPolicy::class
     ];
 
     /**

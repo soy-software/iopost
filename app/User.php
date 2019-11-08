@@ -73,6 +73,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Maestria::class, 'inscripcions', 'user_id', 'corte_id')
         ->as('inscripcion')
+        ->withPivot('id','estado','comprobante')
         ->withTimestamps();
     }
 

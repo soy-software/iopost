@@ -22,6 +22,9 @@ class CreateInscripcionsTable extends Migration
 
             $table->unsignedBigInteger('corte_id');
             $table->foreign('corte_id')->references('id')->on('cortes');
+
+            $table->enum('estado',['Inscrito','Subir comprobante de pago','Aprobado'])->default('Inscrito');
+            $table->string('comprobante')->nullable();
             
         });
     }

@@ -61,9 +61,9 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::namespace('Inscripciones')->group(function () {
 
         Route::get('/mis-inscripciones', 'Inscripciones@misInscripciones')->name('misInscripciones');
-        Route::get('/ver-mi-inscripcion/{corte}', 'Inscripciones@verMiInscripcion')->name('verMiInscripcion');
         Route::get('/subir-comprobante-pago/{inscripcion}', 'Inscripciones@subirComprobantePago')->name('subirComprobantePago');
         Route::post('/guardar-comprobante-pago', 'Inscripciones@guardarComprobantePago')->name('guardarComprobantePago');
+        Route::get('/ver-mi-inscripcion/{id}', 'Inscripciones@verMiInscripcion')->name('verMiInscripcion');
         
         
         

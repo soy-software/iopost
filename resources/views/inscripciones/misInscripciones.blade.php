@@ -27,7 +27,7 @@
                                 <th scope="row">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-                                        <a href="" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Ver documento de inscripción">
+                                        <a href="{{ route('verMiInscripcion',$inscri->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Ver documento de inscripción">
                                             <i class="fas fa-file-alt fa-2x"></i>
                                         </a>
 

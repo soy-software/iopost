@@ -47,4 +47,13 @@ class Inscripciones extends Controller
         $request->session()->flash('success','Comprobante subido exitosamente');
         return redirect()->route('misInscripciones');
     }
+
+
+    public function verMiInscripcion($idInscripcion)
+    {
+        $inscripcion=Inscripcion::findOrFail($idInscripcion);
+        
+        $pdf = PDF::loadView('pdf.invoice', $data);
+        return $pdf->inline('invoice.pdf');
+    }
 }

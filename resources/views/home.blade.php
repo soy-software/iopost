@@ -11,7 +11,9 @@
             </div>
         @endif
 
-        You are logged in!
+        @foreach (Auth::user()->getRoleNames() as $rol)
+        {{ $rol }},
+        @endforeach
     </div>
 </div>
 

@@ -46,6 +46,7 @@
                 @endcan
 
                 {{-- menu para la administracion de maestrias --}}
+                @can('G. Maestrias')
                 <li class="nav-item">
                     <a href="{{ route('maestrias') }}" class="nav-link" id="menuMaestria">
                         <i class="icon-newspaper"></i>
@@ -54,11 +55,12 @@
                         </span>
                     </a>
                 </li>
+                @endcan
 
 
                 {{--  menu mis inscripciones  --}}
                 <li class="nav-item">
-                    <a href="{{ route('maestrias') }}" class="nav-link" id="menuMaestria">
+                    <a href="{{ route('misInscripciones') }}" class="nav-link" id="menuMisInscripciones">
                         <i class="fas fa-clipboard-check"></i>
                         <span>
                             Mis inscripciones
@@ -83,22 +85,11 @@
                 </li>
                 @endrole
 
-
-                
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
-            
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="index.html" class="nav-link active">Default layout</a></li>
-                        <li class="nav-item"><a href="../../../../layout_2/LTR/default/full/index.html" class="nav-link">Layout 2</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-color-sampler"></i> <span>Themes</span></a>
-            
-                    <ul class="nav nav-group-sub" data-submenu-title="Themes">
-                        <li class="nav-item"><a href="index.html" class="nav-link active">Default</a></li>
-                        <li class="nav-item"><a href="../../../LTR/material/full/index.html" class="nav-link">Material</a></li>
+                        <li class="nav-item"><a href="" class="nav-link active">Default layout</a></li>
+                        <li class="nav-item"><a href="" class="nav-link">Layout 2</a></li>
                     </ul>
                 </li>
             

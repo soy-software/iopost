@@ -4,7 +4,7 @@
         <i class="fas fa-key"></i>
     </a>
     @can('eliminar', $rol)
-        <button onclick="eliminar(this);" data-id="{{ $rol->id }}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar {{ $rol->name }}">
+        <button onclick="eliminar(this);" data-url="{{ route('eliminarRol',$rol->id) }}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-title="Eliminar {{ $rol->name }}">
             <i class="fas fa-trash-alt"></i>
         </button>    
     @endcan

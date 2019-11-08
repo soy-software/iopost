@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Models\Corte;
 use App\Models\Domicilio\Parroquia;
+use App\Models\Maestria;
 use App\Models\Usuario\InformacionLaboral;
 use App\Models\Usuario\RegistroAcademico;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,4 +66,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(RegistroAcademico::class);
     }
+
+    // A:deivid
+    // D:un estudiante puede tener varias incripciones
+    public function inscripciones()
+    {
+        return $this->belongsToMany(Maestria::class, 'inscripcions', 'user_id', 'corte_id')
+        ->as('inscripcion')
+        ->withTimestamps();
+    }
+
 }

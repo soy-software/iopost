@@ -59,6 +59,8 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     // A:deivid
     // incripciones
     Route::namespace('Inscripciones')->group(function () {
+
+        Route::get('/mis-inscripciones', 'Inscripciones@misInscripciones')->name('misInscripciones');
         Route::get('/ver-mi-inscripcion/{corte}', 'Inscripciones@verMiInscripcion')->name('verMiInscripcion');
         
     });
@@ -71,7 +73,7 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         // roles
         Route::get('/roles', 'Roles@index')->name('roles');
         Route::post('/roles-guardar', 'Roles@guardar')->name('guardarRol');
-        Route::post('/roles-eliminar', 'Roles@eliminar')->name('eliminarRol');
+        Route::get('/roles-eliminar/{id}', 'Roles@eliminar')->name('eliminarRol');
         // permisos
         Route::get('/permisos/{idRol}', 'Permisos@index')->name('permisos');
         Route::post('/permisos-sincronizar', 'Permisos@sincronizar')->name('sincronizarPermiso');

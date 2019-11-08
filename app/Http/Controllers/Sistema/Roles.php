@@ -29,28 +29,21 @@ class Roles extends Controller
         return redirect()->route('roles');
     }
 
-    public function eliminar(Request $request)
+    public function eliminar( Request $request, $idRol)
     {
         try {
-            $validatedData = $request->validate([
-                'id' => 'required|exists:roles,id',
-            ]);
-            $rol=Role::findOrFail($request->id);
+            
+            $rol=Role::findOrFail($idRol);
             if($rol->users->count()>0){
-                return response()->json(['default'=>'No se puede eliminar rol, ya que existe usuarios asignados']);
+                $request->session()->flash('info','No se puede eliminar rol, ya que existe usuarios asignados');
             }else{
-
-                if($rol->name!='Administrador' && $rol->name!='Coordinador' && $rol->name!='Gestor'){
-                    $rol->delete();
-                    return response()->json(['success'=>'Rol eliminado']);
-                    
-                }else {
-                    return response()->json(['default'=>'No puede eliminar este rol.']);
-                }
-                
+                $this->authorize('eliminar', $rol);    
+                $rol->delete();
+                $request->session()->flash('success','Rol eliminado');
             }
         } catch (\Exception $th) {
-            return response()->json(['default'=>'No se puede eliminar rol']);
+            $request->session()->flash('error','No se puede eliminar rol');
         }
+        return redirect()->route('roles');
     }
 }

@@ -150,13 +150,14 @@ class Estaticas extends Controller
                 return redirect()->route('login');
             }else{
                 $rq->session()->flash('error','No puede inscribir en esta corte');
+                return redirect()->route('incripcion',$rq->corte)->withInput();
             }
 
         } catch (\Exception $th) {
             DB::rollback();
             $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar'.$th->getMessage());
         }
-        return redirect()->route('incripcion',$rq->corte)->withInput();
+        
         
     }
 }

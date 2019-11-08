@@ -26,7 +26,9 @@ class InscritosCorteDataTable extends DataTable
             ->editColumn('user_id',function($query){
                 return $query->user->apellidos .' '.$query->user->nombres  ;
             })
-            ->addColumn('action', 'inscritoscorte.action');
+            ->addColumn('action', function($query){
+                return view('maestrias.cortes.accionesInscritos',['inscripcion'=>$query])->render();
+            })->rawColumns(['estado','action']);
     }
 
     /**

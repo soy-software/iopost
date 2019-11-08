@@ -1,6 +1,6 @@
-@extends('layouts.app',['title'=>'Listado de maestrias'])
+@extends('layouts.app',['title'=>'Listado de inscritos en la corte'])
 
-
+@section('breadcrumbs', Breadcrumbs::render('InscritoCortesMaestria',$corte))
 
 
 @section('content')
@@ -15,7 +15,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th colspan="2">Cortes de: <strong> {{$corte->nombre}} </strong>  
+                    <th colspan="2">Cortes número: <strong> {{$corte->numero}} </strong>  
                         Estado de la maestría: 
                         <span class="badge badge-light badge-striped badge-striped-right border-right-success">{{$corte->estado}}
                         </span>

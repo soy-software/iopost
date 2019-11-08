@@ -85,7 +85,7 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::post('/nuevo-corte', 'Cortes@guardarCortes')->name('guardarCortes');
 
     Route::get('/eliminar-corte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
-
+    Route::post('/cabiar-estado-corte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
     // A: Fabian Lopez
     //D:En estas rutas se encuentra todo lo relacionado con maestria materias
     Route::get('/materias-mestria/{id}', 'MateriasMaestrias@index')->name('materiaMaestria');

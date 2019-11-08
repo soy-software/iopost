@@ -20,7 +20,10 @@ class Cortes extends Controller
     }
     public function guardarCortes(Request $request)
     {
-        $numero=Corte::latest()->value('numero');
+        $request->validate([
+            'maestria'=>'required|exists:maestrias,id',           
+        ]);
+        $numero=Corte::where('maestria_id',$request->maestria)->latest()->value('numero');
         if($numero){
             $numero=$numero+1;
         }else{
@@ -42,14 +45,47 @@ class Cortes extends Controller
             $corte=Corte::findOrFail($idCorte);
             $corte->delete();
             DB::commit();
-            $request->session()->flash('success','Corte eliminada');
+            session()->flash('success','Corte eliminada');
             return redirect()->route('cortesMaestria',$corte->maestria_id);
 
         } catch (\Exception $th) {
             DB::rollBack();
-            $request->session()->flash('warn','El corte no puede ser eliminado');
+            session()->flash('warn','El corte no puede ser eliminado');
             return redirect()->route('cortesMaestria',$corte->maestria_id);
             
         }
     }
+    public function cambiarEstadoCorte(Request $request)
+    {
+        $corte=Corte::findOrFail($request->corte);
+        
+        $validacion=$this->validacionCorte($corte->id,$request->valor);
+        if($validacion=="ok"){
+            $corte->estado=$request->valor;
+            $corte->save();
+            session()->flash('success','La corte cambio de estado a: '.$request->valor);   
+        }else{
+            session()->flash('warn',$validacion);
+        }
+        
+    }
+    public function validacionCorte($corte,$estado)
+    {
+        $corte=Corte::findOrFail($corte);
+        $mensage="";
+        $cortetodos=Corte::where('estado','Inscripciones')
+                    ->where('maestria_id',$corte->maestria_id)
+                    ->where('id','!=',$corte->id)->count();
+        if($estado=="Inscripciones"){
+            if($cortetodos==0){
+                $mensage="ok";
+            }else{
+                $mensage="No se puede cambiar de estado existe un corte con una enscripción abierta";
+            }
+        }else{
+            $mensage="ok";
+        }
+        return $mensage;
+    }
+   
 }

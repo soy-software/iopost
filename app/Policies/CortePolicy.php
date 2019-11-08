@@ -55,9 +55,9 @@ class CortePolicy
      * @param  \App\Corte  $corte
      * @return mixed
      */
-    public function update(User $user, Corte $corte)
+    public function actualizarCorteEstado(User $user, Corte $corte)
     {
-        //
+       
     }
 
     /**

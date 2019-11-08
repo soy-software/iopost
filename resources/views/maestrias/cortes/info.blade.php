@@ -1,11 +1,11 @@
 <table class="table table-bordered">
     <tbody>
         <tr>
-            <th scope="row">
-                Corte número: <strong>{{ $corte->numero }}</strong>
-            </th>
             <td>
-                Estado: <strong>{{ $corte->estado }}</strong>
+                <strong>Corte número:</strong> {{ $corte->numero }}
+            </td>
+            <td>
+                <strong>Estado:</strong> {{ $corte->estado }}
             </td>
         </tr>
     </tbody>

@@ -2,17 +2,17 @@
     
     <tbody>
         <tr>
-            <th scope="row">
-                Fecha de inscripción: <strong>{{ $inscripcion->created_at }}</strong>
-            </th>
             <td>
-                Estado: <strong>{{ $inscripcion->estado }}</strong>
+                <strong>Fecha de inscripción:</strong> {{ $inscripcion->created_at }}
+            </td>
+            <td>
+                <strong>Estado:</strong>{{ $inscripcion->estado }}
             </td>
         </tr>
         <tr>
-            <th scope="row" colspan="2">
-                Comprobante: <strong>{{ $inscripcion->comprobante?'SUBIDO':'SIN SUBIR' }}</strong>
-            </th>
+            <td colspan="2">
+                <strong>Comprobante:</strong>{{ $inscripcion->comprobante?'SUBIDO':'SIN SUBIR' }}
+            </td>
         </tr>
     </tbody>
 </table>

@@ -1,44 +1,42 @@
 <table class="table table-bordered">
-        
-        <tbody>
-            
-            <tr>
-                <th>Nombre: <strong> {{$maestria->nombre}}</strong> 
-                <th>Campo Amplio: <strong> {{$maestria->campoAmplio}}</strong></th>                                  
-            </tr>
+    <tbody>
+        <tr>
+            <td> <strong>Nombre:</strong> {{ $maestria->nombre }} </td>
+            <td><strong>Campo Amplio:</strong> {{$maestria->campoAmplio}}</td>
+        </tr>
 
-            <tr>
-                <th scope="row">Campo Específico: <strong> {{$maestria->campoEspecifico}} </strong></th>
-                <th scope="row">Campo Detallado: <strong> {{$maestria->campoDetallado}} </strong></th>                                    
-            </tr>
-            <tr>
-                <th scope="row">Programa: <strong> {{$maestria->programa}} </strong></th>
-                <th scope="row">Título: <strong> {{$maestria->titulo}} </strong></th>                                    
-            </tr>
-            <tr>
-                <th scope="row">Codificación programa: <strong> {{$maestria->codificacionPrograma}} </strong></th>
-                <th scope="row">Lugar de ejecución: <strong> {{$maestria->lugarEjecucion}} </strong></th>                                    
-            </tr>
-            <tr>
-                <th scope="row">Duración: <strong> {{$maestria->duracion}} </strong></th>
-                <th scope="row">Tipo Periodo: <strong> {{$maestria->tipoPeriodo}} </strong></th>                                    
-            </tr>
-            <tr>
-                <th scope="row">Número de horas: <strong> {{$maestria->numeroHoras}} </strong></th>
-                <th scope="row">Resolución: <strong> {{$maestria->resolucion}} </strong></th>                                    
-            </tr>
+        <tr>
+            <td><strong>Campo Específico:</strong> {{ $maestria->campoEspecifico}}</td>
+            <td><strong>Campo Detallado:</strong> {{ $maestria->campoDetallado}} </td>
+        </tr>
+        <tr>
+            <td><strong>Programa:</strong> {{$maestria->programa}}</td>
+            <td><strong>Título:</strong>  {{$maestria->titulo}}</td>
+        </tr>
+        <tr>
+            <td><strong>Codificación programa:</strong>{{ $maestria->codificacionPrograma}}</td>
+            <td><strong>Lugar de ejecución:</strong> {{ $maestria->lugarEjecucion}}</td>
+        </tr>
+        <tr>
+            <td><strong>Duración:</strong> {{ $maestria->duracion}}</td>
+            <td><strong>Tipo Periodo:</strong>{{ $maestria->tipoPeriodo}}</td> 
+        </tr>
+        <tr>
+            <td><strong>Número de horas:</strong> {{$maestria->numeroHoras}}</td>
+            <td><strong>Resolución:</strong> {{ $maestria->resolucion}}</td>
+        </tr>
 
-            <tr>
-                <th scope="row">Modalidad: <strong> {{$maestria->modalidad}} </strong></th>
-                <th scope="row">Fecha de Resolución: <strong> {{$maestria->fechaResolucion}} </strong></th>                                    
-            </tr>
-            <tr>
-                <th scope="row">Paralelos: <strong> {{$maestria->paralelos}} </strong></th>
-                <th scope="row">Vigencia: <strong> {{$maestria->vigencia}} </strong></th>                                    
-            </tr>
-            <tr>
-                <th scope="row">Capacidad por Paralelos: <strong> {{$maestria->Capacidadparalelos}} </strong></th>
-                <th scope="row">Fecha Aprobación: <strong> {{$maestria->fechaAprobacion}} </strong> {{Carbon\Carbon::parse($maestria->fechaAprobacion)->age}} Años</th>                                    
-            </tr>
-        </tbody>
-    </table>
+        <tr>
+            <td><strong>Modalidad:</strong> {{ $maestria->modalidad}}</td>
+            <td><strong>Fecha de Resolución:</strong> {{$maestria->fechaResolucion}}</td>
+        </tr>
+        <tr>
+            <td><strong>Paralelos:</strong> {{$maestria->paralelos}}</td>
+            <td><strong>Vigencia:</strong> {{$maestria->vigencia}} </td>                                    
+        </tr>
+        <tr>
+            <td><strong>Capacidad por Paralelos:</strong> {{$maestria->Capacidadparalelos}}</td>
+            <td><strong>Fecha Aprobación:</strong> {{$maestria->fechaAprobacion}} </strong> {{Carbon\Carbon::parse($maestria->fechaAprobacion)->age}} Años</td>
+        </tr>
+    </tbody>
+</table>

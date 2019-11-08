@@ -1,115 +1,111 @@
 <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th colspan="2" class="text-center">Datos personales</th>
-        </tr>
-        <tr>
-            <th>
-                Email: <strong>{{ $usuario->email }}</strong>
-            </th>
-            <th>
-                Nombres y apelidos: <strong> {{ $usuario->nombres??'---' }} {{ $usuario->apellidos??'---' }}
-            </th>
-        </tr>
-    </thead>
+    
     <tbody>
         <tr>
-            
-            <th scope="row">Tipo identificación: <strong> {{$usuario->tipo_identificacion}} </strong></th> 
-            <th scope="row">Identificación: <strong> {{ $usuario->identificacion??'---'}}</strong></th>                                  
+            <th colspan="2" class="text-center" style="text-align: center;">Datos personales</th>
         </tr>
         <tr>
-            <th scope="row">Fecha nacimiento: 
-                <strong> {{ $usuario->fecha_nacimiento??'---' }} </strong>
-                Edad: <strong>  {{Carbon\Carbon::parse($usuario->fecha_nacimiento)->age }}</strong>
-            </th>                                    
-            <th scope="row">
-                    Sexo: <strong>  {{  $usuario->sexo }}</strong>
-            </th>
+            <td>
+                <strong>Email:</strong> {{ $usuario->email }}
+            </td>
+            <td>
+                <strong>Nombres y apelidos:</strong> {{ $usuario->nombres??'---' }} {{ $usuario->apellidos??'---' }}
+            </td>
         </tr>
         <tr>
-            <th scope="row">Estado Civil: <strong> {{$usuario->estado_civil}} </strong></th>
-            <th scope="row">Etnia: <strong> {{$usuario->etnia}} </strong></th>                                    
+            <td><strong>Tipo identificación:</strong> {{$usuario->tipo_identificacion}}</td>
+            <td><strong>Identificación:</strong> {{ $usuario->identificacion??'---'}}</td>
         </tr>
         <tr>
-            <th scope="row">Teléfono: <strong> {{$usuario->telefono??'---'}} </strong></th>
-            <th scope="row">Celular: <strong> {{$usuario->celular??'---'}} </strong></th>                                    
+            <td>
+                <strong>Fecha nacimiento:</strong>
+                {{ $usuario->fecha_nacimiento??'---' }}, 
+                <strong>Edad:</strong>  {{Carbon\Carbon::parse($usuario->fecha_nacimiento)->age }}
+            </td>                                    
+            <td>
+                <strong>Sexo:</strong> {{  $usuario->sexo }}
+            </td>
         </tr>
         <tr>
-            <th scope="row">País: <strong> {{$usuario->pais??'---'}} </strong></th>
-            <th scope="row">Provincia: <strong> {{$usuario->parroquia->canton->provincia->provincia??'---'}} </strong></th>                                    
+            <td><strong>Estado Civil:</strong> {{$usuario->estado_civil}}</td>
+            <td><strong>Etnia:</strong>{{$usuario->etnia}}</td>
+        </tr>
+        <tr>
+            <td><strong>Teléfono:</strong> {{$usuario->telefono??'---'}} </td>
+            <td><strong>Celular:</strong> {{$usuario->celular??'---'}} </td>
+        </tr>
+        <tr>
+            <td><strong>País:</strong> {{$usuario->pais??'---'}}</td>
+            <td><strong>Provincia:</strong>{{$usuario->parroquia->canton->provincia->provincia??'---'}}</td>
         </tr>
 
         <tr>
-            <th scope="row">Cantón: <strong> {{$usuario->parroquia->canton->canton??'---' }} </strong></th>
-            <th scope="row">Parroquia: <strong> {{$usuario->parroquia->parroquia??'---'}} </strong></th>                                    
+            <td><strong>Cantón:</strong> {{$usuario->parroquia->canton->canton??'---' }} </td>
+            <td><strong>Parroquia:</strong> {{$usuario->parroquia->parroquia??'---'}} </td>
         </tr>
         <tr>
-            <th scope="row">Dirección: <strong> {{$usuario->direccion??'---'}} </strong></th>
-            <th scope="row">Tiene Discapacidad: <strong> {{$usuario->tiene_discapacidad}} </strong></th>                                    
+            <td><strong>Dirección:</strong> {{$usuario->direccion??'---'}}</td>
+            <td><strong>Tiene Discapacidad:</strong> {{$usuario->tiene_discapacidad}}</td>
         </tr>
 
         <tr>
-            <th scope="row">Porcentaje discapacidad: <strong> {{$usuario->porcentaje_discapacidad}} </strong></th>
-            <th scope="row">Tiene carnet conadis: <strong> {{$usuario->tiene_carnet_conadis}} </strong></th>                                    
+            <td><strong>Porcentaje discapacidad:</strong> {{$usuario->porcentaje_discapacidad}}</td>
+            <td><strong>Tiene carnet conadis:</strong> {{$usuario->tiene_carnet_conadis}}</td>
         </tr>
         <tr>
-            <th scope="row">Porcentaje carnet conadis: <strong> {{$usuario->porcentaje_carnet_conadis}} </strong></th>
-            <th scope="row">
-                Roles:   @foreach ($usuario->getRoleNames() as $rol)
+            <td><strong>Porcentaje carnet conadis:</strong>{{$usuario->porcentaje_carnet_conadis}}</td>
+            <td>
+                <strong>Roles:</strong>   @foreach ($usuario->getRoleNames() as $rol)
                             {{ $rol }},
                         @endforeach
-            </th>
+            </td>
         </tr>
         
         
         @if ($usuario->informacionLaboral)
         @php($infoL=$usuario->informacionLaboral)
             <tr>
-                <th colspan="2" class="text-center">Información laboral</th>
+                <th colspan="2" class="text-center" style="text-align: center;">Información laboral</th>
             </tr>    
             <tr>
                 <td>
-                    Trabaja: <strong>{{ $infoL->trabaja }}</strong>
+                    <strong>Trabaja:</strong> {{ $infoL->trabaja }}
                 </td>
                 <td>
-                    Tipo de institución: <strong>{{ $infoL->tipo_institucion }}</strong>
+                    <strong>Tipo de institución:</strong> {{ $infoL->tipo_institucion }}
                 </td>
             </tr>
             <tr>
                 <td>
-                    Empresa: <strong>{{ $infoL->nombre_empresa }}</strong>
+                    <strong>Empresa:</strong>{{ $infoL->nombre_empresa }}
                 </td>
                 <td>
-                    Cargo: <strong>{{ $infoL->cargo }}</strong>
+                    <strong>Cargo:</strong> {{ $infoL->cargo }}
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    Dirección: 
-                    <strong>
+                    <strong>Dirección:</strong>
+                    
                         {{ $infoL->direccion??'' }} -
                         {{ $infoL->parroquia->parroquia??'' }} -
                         {{ $infoL->parroquia->canton->canton??'' }} -
                         {{ $infoL->parroquia->canton->provincia->provincia??'' }}
-                    </strong>
+                    
                 </td>
                 <td>
-                    Teléfono: <strong>{{ $infoL->telefono }}</strong>
+                    <strong>Teléfono:</strong>{{ $infoL->telefono }}
                     
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    Extención: <strong>{{ $infoL->extencion }}</strong>
+                    <strong>Extención:</strong>{{ $infoL->extencion }}
                 </td>
                 <td>
-                    Email: 
-                    <strong>
-                        {{ $infoL->email }}
-                    </strong>
+                    <strong>Email: </strong>{{ $infoL->email }}
                 </td>
             </tr>
         @endif
@@ -117,97 +113,97 @@
         @if ($usuario->registroAcademico)
         @php($regAcademico=$usuario->registroAcademico)
             <tr>
-                <td colspan="2" class="text-center">
-                    Registros académicos
+                <td colspan="2" class="text-center" style="text-align: center;">
+                    <strong>Registros académicos</strong>
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="text-center">
+                <td colspan="2" class="text-center" style="text-align: center;">
                     Pregrado
                 </td>
             </tr>
             <tr>
                 <td>
-                    Institución: <strong>{{ $regAcademico->institucion_pregrado }}</strong>
+                    <strong>Institución:</strong> {{ $regAcademico->institucion_pregrado }}
                 </td>
                 <td>
-                    Tipo de institución: <strong>{{ $regAcademico->tipo_pregrado }}</strong>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Título: <strong>{{ $regAcademico->titulo_pregrado }}</strong>
-                </td>
-                <td>
-                    Especialidad: <strong>{{ $regAcademico->especialidad_pregrado }}</strong>
+                    <strong>Tipo de institución:</strong> {{ $regAcademico->tipo_pregrado }}
                 </td>
             </tr>
             <tr>
                 <td>
-                    Duración (años): <strong>{{ $regAcademico->duracion_pregrado }}</strong>
+                    <strong>Título:</strong> {{ $regAcademico->titulo_pregrado }}
                 </td>
                 <td>
-                    Fecha graduación: <strong>{{ $regAcademico->fecha_graduacion_pregrado }}</strong>
+                    <strong>Especialidad:</strong>{{ $regAcademico->especialidad_pregrado }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Duración (años):</strong>{{ $regAcademico->duracion_pregrado }}
+                </td>
+                <td>
+                    <strong>Fecha graduación:</strong>{{ $regAcademico->fecha_graduacion_pregrado }}
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    Calificación: <strong>{{ $regAcademico->calificacion_grado_pregrado }}</strong>
+                    <strong>Calificación:</strong>{{ $regAcademico->calificacion_grado_pregrado }}
                 </td>
                 <td>
-                    País: <strong>{{ $regAcademico->pais_pregrado }}</strong>
+                    <strong>País:</strong>{{ $regAcademico->pais_pregrado }}
                 </td>
             </tr>
             <tr>
                 <td>
-                    Provincia: <strong>{{ $regAcademico->provincia_pregrado }}</strong>
+                    <strong>Provincia:</strong>{{ $regAcademico->provincia_pregrado }}
                 </td>
                 <td>
-                    Cantón: <strong>{{ $regAcademico->canton_pregrado }}</strong>
+                    <strong>Cantón:</strong>{{ $regAcademico->canton_pregrado }}
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="text-center">
+                <td colspan="2" class="text-center" style="text-align: center;">
                     Posgrado
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    Institución: <strong>{{ $regAcademico->institucion_posgrado }}</strong>
+                    <strong>Institución:</strong>{{ $regAcademico->institucion_posgrado }}
                 </td>
             </tr>
             <tr>
                 <td>
-                    Título: <strong>{{ $regAcademico->titulo_posgrado }}</strong>
+                    <strong>Título:</strong>{{ $regAcademico->titulo_posgrado }}
                 </td>
                 <td>
-                    Especialidad: <strong>{{ $regAcademico->especialidad_posgrado }}</strong>
+                    <strong>Especialidad:</strong>{{ $regAcademico->especialidad_posgrado }}
                 </td>
             </tr>
             <tr>
                 <td>
-                    Duración (años): <strong>{{ $regAcademico->duracion_posgrado }}</strong>
+                    <strong>Duración (años):</strong>{{ $regAcademico->duracion_posgrado }}
                 </td>
                 <td>
-                    Fecha graduación: <strong>{{ $regAcademico->fecha_graduacion_posgrado }}</strong>
+                    <strong>Fecha graduación:</strong>{{ $regAcademico->fecha_graduacion_posgrado }}
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    Calificación: <strong>{{ $regAcademico->calificacion_grado_posgrado }}</strong>
+                    <strong>Calificación:</strong> {{ $regAcademico->calificacion_grado_posgrado }}
                 </td>
                 <td>
-                    País: <strong>{{ $regAcademico->pais_posgrado }}</strong>
+                    <strong>País:</strong>{{ $regAcademico->pais_posgrado }}
                 </td>
             </tr>
             <tr>
                 <td>
-                    Provincia: <strong>{{ $regAcademico->provincia_posgrado }}</strong>
+                    <strong>Provincia:</strong>{{ $regAcademico->provincia_posgrado }}
                 </td>
                 <td>
-                    Cantón: <strong>{{ $regAcademico->canton_posgrado }}</strong>
+                    <strong>Cantón:</strong>{{ $regAcademico->canton_posgrado }}
                 </td>
             </tr>
 

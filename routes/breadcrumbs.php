@@ -74,6 +74,16 @@ Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {
     $trail->push('Cortes de '.$maestria->nombre, route('cortesMaestria',$maestria->id));
 });
 
+Breadcrumbs::for('InscritoCortesMaestria', function ($trail,$corte) {
+    $trail->parent('cortesMaestria',$corte->maestria);
+    $trail->push('Inscritos del corte '.$corte->numero, route('inscritosCorteMaestria',$corte->id));
+});
+
+Breadcrumbs::for('InformacionInscritoCortesMaestria', function ($trail,$inscripcion) {
+    $trail->parent('InscritoCortesMaestria',$inscripcion->corte);
+    $trail->push('Información de '.$inscripcion->user->apellidos, route('informacionInscritoCorteMaestria',$inscripcion->id));
+});
+
 //A:Deivid
 //D:Breadcrums de roles y permisos
 Breadcrumbs::for('roles', function ($trail) {

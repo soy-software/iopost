@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CortesDataTable;
+use App\DataTables\InscritosCorteDataTable;
 use App\Models\Corte;
+use App\Models\Inscripcion;
 use App\Models\Maestria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,5 +89,16 @@ class Cortes extends Controller
         }
         return $mensage;
     }
-   
+    public function inscritosCorte(InscritosCorteDataTable $dataTable,  $idCorte)
+    {
+        $corte=Corte::findOrFail($idCorte);
+        $data = array('corte' =>$corte , );
+        return  $dataTable->with('idCorte',$corte->id)->render('maestrias.cortes.inscritos',$data);
+    }
+    public function informacionInscritoCorte($idInscripcion)
+    {
+        $inscripciones=Inscripcion::findOrFail($idInscripcion);
+        $data = array('inscripcion' => $inscripciones );
+        return view('maestrias.cortes.informacionInscrito',$data);
+    }
 }

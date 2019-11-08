@@ -9,6 +9,7 @@ return array(
     'App\\Console\\Commands\\Pob_location' => $baseDir . '/app/Console/Commands/Pob_location.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\DataTables\\CortesDataTable' => $baseDir . '/app/DataTables/CortesDataTable.php',
+    'App\\DataTables\\InscritosCorteDataTable' => $baseDir . '/app/DataTables/InscritosCorteDataTable.php',
     'App\\DataTables\\MaestriasDataTable' => $baseDir . '/app/DataTables/MaestriasDataTable.php',
     'App\\DataTables\\MateriasMaestriasDataTable' => $baseDir . '/app/DataTables/MateriasMaestriasDataTable.php',
     'App\\DataTables\\Sistema\\RolesDataTable' => $baseDir . '/app/DataTables/Sistema/RolesDataTable.php',

@@ -65,8 +65,6 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\User' => $baseDir . '/app/User.php',
-<<<<<<< HEAD
-=======
     'Barryvdh\\Snappy\\Facades\\SnappyImage' => $vendorDir . '/barryvdh/laravel-snappy/src/Facades/SnappyImage.php',
     'Barryvdh\\Snappy\\Facades\\SnappyPdf' => $vendorDir . '/barryvdh/laravel-snappy/src/Facades/SnappyPdf.php',
     'Barryvdh\\Snappy\\IlluminateSnappyImage' => $vendorDir . '/barryvdh/laravel-snappy/src/IlluminateSnappyImage.php',
@@ -76,7 +74,6 @@ return array(
     'Barryvdh\\Snappy\\PdfFaker' => $vendorDir . '/barryvdh/laravel-snappy/src/PdfFaker.php',
     'Barryvdh\\Snappy\\PdfWrapper' => $vendorDir . '/barryvdh/laravel-snappy/src/PdfWrapper.php',
     'Barryvdh\\Snappy\\ServiceProvider' => $vendorDir . '/barryvdh/laravel-snappy/src/ServiceProvider.php',
->>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
     'Carbon\\CarbonInterface' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterface.php',
@@ -1736,14 +1733,11 @@ return array(
     'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => $vendorDir . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
     'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => $vendorDir . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-<<<<<<< HEAD
-=======
     'Knp\\Snappy\\AbstractGenerator' => $vendorDir . '/knplabs/knp-snappy/src/Knp/Snappy/AbstractGenerator.php',
     'Knp\\Snappy\\Exception\\FileAlreadyExistsException' => $vendorDir . '/knplabs/knp-snappy/src/Knp/Snappy/Exception/FileAlreadyExistsException.php',
     'Knp\\Snappy\\GeneratorInterface' => $vendorDir . '/knplabs/knp-snappy/src/Knp/Snappy/GeneratorInterface.php',
     'Knp\\Snappy\\Image' => $vendorDir . '/knplabs/knp-snappy/src/Knp/Snappy/Image.php',
     'Knp\\Snappy\\Pdf' => $vendorDir . '/knplabs/knp-snappy/src/Knp/Snappy/Pdf.php',
->>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
     'Laravel\\Tinker\\ClassAliasAutoloader' => $vendorDir . '/laravel/tinker/src/ClassAliasAutoloader.php',
     'Laravel\\Tinker\\Console\\TinkerCommand' => $vendorDir . '/laravel/tinker/src/Console/TinkerCommand.php',
     'Laravel\\Tinker\\TinkerCaster' => $vendorDir . '/laravel/tinker/src/TinkerCaster.php',
@@ -4319,10 +4313,7 @@ return array(
     'Yajra\\DataTables\\Utilities\\Config' => $vendorDir . '/yajra/laravel-datatables-oracle/src/Utilities/Config.php',
     'Yajra\\DataTables\\Utilities\\Helper' => $vendorDir . '/yajra/laravel-datatables-oracle/src/Utilities/Helper.php',
     'Yajra\\DataTables\\Utilities\\Request' => $vendorDir . '/yajra/laravel-datatables-oracle/src/Utilities/Request.php',
-<<<<<<< HEAD
-=======
     'h4cc\\WKHTMLToPDF\\WKHTMLToPDF' => $vendorDir . '/h4cc/wkhtmltopdf-amd64/WKHTMLToPDF.php',
->>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
     'phpDocumentor\\Reflection\\DocBlock' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
     'phpDocumentor\\Reflection\\DocBlockFactory' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
     'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',

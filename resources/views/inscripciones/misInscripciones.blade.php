@@ -21,20 +21,21 @@
                         
                         @foreach ($inscripciones as $inscripcion)
                         
+                        @php($inscri=$inscripcion->obtenerInscripcion($inscripcion->inscripcion->id))
+                        
                             <tr>
                                 <th scope="row">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        @can('subirComprobante', $inscripcion->inscripcion)
-                                            <a href="" class="btn btn-dark"  data-toggle="tooltip" data-placement="top" title="Subir comprobante de pago">
-                                                <i class="fas fa-eye"></i>
+
+                                        <a href="" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Ver documento de inscripción">
+                                            <i class="fas fa-file-alt fa-2x"></i>
+                                        </a>
+
+                                        @can('subirComprobante', $inscri)
+                                            <a href="{{ route('subirComprobantePago',$inscri->id) }}" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Subir comprobante de pago">
+                                                <i class="fas fa-money-check-alt fa-2x"></i>
                                             </a>    
                                         @endcan
-                                        {{ $inscripcion->inscripcion }}
-                                        
-                                        
-                                        <button type="button" onclick="eliminar(this);" data-url=""  class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-title="">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
                                         
                                     </div>
                                 </th>
@@ -47,8 +48,16 @@
                                 <td>
                                     <strong>
                                         <ul>
-                                            <li class="text-{{ $inscripcion->inscripcion->estado=='Inscrito'?'success':'dark' }}">Inscrito</li>
-                                            <li class="text-{{ $inscripcion->inscripcion->estado=='Subir comprobante de pago'?'success':'dark' }}">Subir comprobante de pago</li>
+                                            <li class="text-{{ $inscri->estado=='Inscrito'?'success':'dark' }}">Inscrito</li>
+                                            <li class="text-{{ $inscri->estado=='Subir comprobante de pago'?'warning':'dark' }}">
+
+                                                Subir comprobante de pago  
+                                                @if (Storage::exists($inscri->comprobante))
+                                                    <i class="fas fa-check text-success"></i>
+                                                @else
+                                                    <i class="fas fa-ban text-warning"></i>
+                                                @endif
+                                            </li>
                                             <li class="text-{{ $inscripcion->inscripcion->estado=='Aprobado'?'success':'dark' }}">Aprobado</li>
                                         </ul>
                                     </strong>

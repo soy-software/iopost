@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa
+class ComposerStaticInita6f31a1a1a210f19f8311c187dcb2a32
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -560,6 +560,7 @@ class ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa
         'App\\Console\\Commands\\Pob_location' => __DIR__ . '/../..' . '/app/Console/Commands/Pob_location.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\DataTables\\CortesDataTable' => __DIR__ . '/../..' . '/app/DataTables/CortesDataTable.php',
+        'App\\DataTables\\InscritosCorteDataTable' => __DIR__ . '/../..' . '/app/DataTables/InscritosCorteDataTable.php',
         'App\\DataTables\\MaestriasDataTable' => __DIR__ . '/../..' . '/app/DataTables/MaestriasDataTable.php',
         'App\\DataTables\\MateriasMaestriasDataTable' => __DIR__ . '/../..' . '/app/DataTables/MateriasMaestriasDataTable.php',
         'App\\DataTables\\Sistema\\RolesDataTable' => __DIR__ . '/../..' . '/app/DataTables/Sistema/RolesDataTable.php',
@@ -3615,6 +3616,7 @@ class ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa
         'PhpParser\\Node\\Stmt\\UseUse' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/UseUse.php',
         'PhpParser\\Node\\Stmt\\Use_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/Use_.php',
         'PhpParser\\Node\\Stmt\\While_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Stmt/While_.php',
+        'PhpParser\\Node\\UnionType' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/UnionType.php',
         'PhpParser\\Node\\VarLikeIdentifier' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/VarLikeIdentifier.php',
         'PhpParser\\Parser' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Parser.php',
         'PhpParser\\ParserAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/ParserAbstract.php',
@@ -4940,10 +4942,10 @@ class ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit79069065e810961ed9a53e7a82e0d0fa::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita6f31a1a1a210f19f8311c187dcb2a32::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita6f31a1a1a210f19f8311c187dcb2a32::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita6f31a1a1a210f19f8311c187dcb2a32::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInita6f31a1a1a210f19f8311c187dcb2a32::$classMap;
 
         }, null, ClassLoader::class);
     }

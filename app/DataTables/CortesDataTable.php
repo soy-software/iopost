@@ -28,11 +28,14 @@ class CortesDataTable extends DataTable
                 $sql = "CONCAT('Corte',' ',cortes.numero)  like ?";
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->editColumn('estado', function($query){
+                return view('maestrias.cortes.estado',['corte'=>$query])->render();
+            })
 
             ->addColumn('action', function($query){
                 return view('maestrias.cortes.acciones',['corte'=>$query])->render();
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['estado','action']);
     }
 
     /**

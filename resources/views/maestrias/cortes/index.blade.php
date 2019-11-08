@@ -25,18 +25,14 @@
                         <div class="float-right">
                             <button onclick="cerarCorte(this)"  data-id="{{$maestria->id}}" class="btn btn-default border-dark" data-title="Crear nueva corte de {{$maestria->nombre}}"><i class="icon-plus3"></i></button>                           
                         </div>                            
-                        @endcan
-                       
-                    </th>                                    
-                    
+                        @endcan                       
+                    </th>                   
                 </tr>
             </thead>            
         </table>
         <div class="table-responsive mt-2">
             {!! $dataTable->table()  !!}
-        </div>
-
-        
+        </div>      
     </div>
 </div>
 @push('linksCabeza')
@@ -49,9 +45,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuMaestria').addClass('active');   
-
-
+    $('#menuMaestria').addClass('active');
     	function cerarCorte(arg){
 			var url='{{route("cortesMaestria",$maestria->id)}}';
 			var msg=$(arg).data('title');
@@ -60,7 +54,7 @@
 				content: msg,
 				theme: 'modern',
 				type:'dark',
-				icon:'far fa-sad-cry',
+				icon:'fas fa-smile-beam',
 				closeIcon:true,
 				buttons: {
 					confirmar: function () {
@@ -79,6 +73,36 @@
 				}
 			});
 		} 
+
+        // programacion  para el cambio de estado
+      function estadoCorte(arg) {
+            var url='{{route("cortesMaestria",$maestria->id)}}';
+			var msg=$(arg).data('title');
+			$.confirm({
+				title: 'Confirme!',
+				content: msg,
+				theme: 'modern',
+				type:'dark',
+				icon:'fas fa-smile-beam',
+				closeIcon:true,
+				buttons: {
+					confirmar: function () {
+                        // alert('id'+$(arg).data('id')+'valor'+$(arg).val())
+                        $.blockUI({message:'<h1>Espere por favor.!</h1>'});
+                        $.post( "{{ route('cambiarEstadoCorte') }}", { corte: $(arg).data('id'),valor:$(arg).val() })
+                        .done(function( data ) {
+                        location.replace(url);
+                        console.log(data)
+                        }).always(function(){
+                            $.unblockUI();
+                        }).fail(function(error){
+                            console.log(error);
+                        });
+                           					
+					}
+				}
+			});
+      }
     </script>
     {!! $dataTable->scripts() !!}
     

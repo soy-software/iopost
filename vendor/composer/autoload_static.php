@@ -4,7 +4,11 @@
 
 namespace Composer\Autoload;
 
+<<<<<<< HEAD
+class ComposerStaticInitad8fa58de682b761e4dd10eab0a2f733
+=======
 class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -91,10 +95,13 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+<<<<<<< HEAD
+=======
         'h' => 
         array (
             'h4cc\\WKHTMLToPDF\\' => 17,
         ),
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'Y' => 
         array (
             'Yajra\\DataTables\\' => 17,
@@ -176,10 +183,13 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
             'Laravel\\Ui\\' => 11,
             'Laravel\\Tinker\\' => 15,
         ),
+<<<<<<< HEAD
+=======
         'K' => 
         array (
             'Knp\\Snappy\\' => 11,
         ),
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'J' => 
         array (
             'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
@@ -217,10 +227,13 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
             'Collective\\Html\\' => 16,
             'Carbon\\' => 7,
         ),
+<<<<<<< HEAD
+=======
         'B' => 
         array (
             'Barryvdh\\Snappy\\' => 16,
         ),
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'A' => 
         array (
             'App\\' => 4,
@@ -234,10 +247,13 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+<<<<<<< HEAD
+=======
         'h4cc\\WKHTMLToPDF\\' => 
         array (
             0 => __DIR__ . '/..' . '/h4cc/wkhtmltopdf-amd64',
         ),
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'Yajra\\DataTables\\' => 
         array (
             0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
@@ -434,10 +450,13 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
+<<<<<<< HEAD
+=======
         'Knp\\Snappy\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy',
         ),
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'JakubOnderka\\PhpConsoleHighlighter\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
@@ -514,10 +533,13 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
+<<<<<<< HEAD
+=======
         'Barryvdh\\Snappy\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src',
         ),
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -616,6 +638,8 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+<<<<<<< HEAD
+=======
         'Barryvdh\\Snappy\\Facades\\SnappyImage' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/Facades/SnappyImage.php',
         'Barryvdh\\Snappy\\Facades\\SnappyPdf' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/Facades/SnappyPdf.php',
         'Barryvdh\\Snappy\\IlluminateSnappyImage' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/IlluminateSnappyImage.php',
@@ -625,6 +649,7 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         'Barryvdh\\Snappy\\PdfFaker' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfFaker.php',
         'Barryvdh\\Snappy\\PdfWrapper' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfWrapper.php',
         'Barryvdh\\Snappy\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/ServiceProvider.php',
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
         'Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',
@@ -2284,11 +2309,14 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+<<<<<<< HEAD
+=======
         'Knp\\Snappy\\AbstractGenerator' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/AbstractGenerator.php',
         'Knp\\Snappy\\Exception\\FileAlreadyExistsException' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Exception/FileAlreadyExistsException.php',
         'Knp\\Snappy\\GeneratorInterface' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/GeneratorInterface.php',
         'Knp\\Snappy\\Image' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Image.php',
         'Knp\\Snappy\\Pdf' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Pdf.php',
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -4864,7 +4892,10 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
         'Yajra\\DataTables\\Utilities\\Config' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Config.php',
         'Yajra\\DataTables\\Utilities\\Helper' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Helper.php',
         'Yajra\\DataTables\\Utilities\\Request' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Request.php',
+<<<<<<< HEAD
+=======
         'h4cc\\WKHTMLToPDF\\WKHTMLToPDF' => __DIR__ . '/..' . '/h4cc/wkhtmltopdf-amd64/WKHTMLToPDF.php',
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',
@@ -4940,10 +4971,17 @@ class ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+<<<<<<< HEAD
+            $loader->prefixLengthsPsr4 = ComposerStaticInitad8fa58de682b761e4dd10eab0a2f733::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitad8fa58de682b761e4dd10eab0a2f733::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitad8fa58de682b761e4dd10eab0a2f733::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitad8fa58de682b761e4dd10eab0a2f733::$classMap;
+=======
             $loader->prefixLengthsPsr4 = ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitc1fc52e90e775ca93412fa1a8cd0440a::$classMap;
+>>>>>>> 5cb4f9f6b6f1d997669d593924062a1c1969b005
 
         }, null, ClassLoader::class);
     }

@@ -7,7 +7,7 @@ use App\Models\Inscripcion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Utilities\Request;
-
+use PDF;
 class Inscripciones extends Controller
 {
     public function __construct()
@@ -52,8 +52,15 @@ class Inscripciones extends Controller
     public function verMiInscripcion($idInscripcion)
     {
         $inscripcion=Inscripcion::findOrFail($idInscripcion);
-        
-        $pdf = PDF::loadView('pdf.invoice', $data);
-        return $pdf->inline('invoice.pdf');
+        $data = array('inscripcion' => $inscripcion );
+        return view('inscripciones.verMiInscripcion',$data);
+    }
+
+    public function inscripcionPdf($idInscripcion)
+    {
+        $inscripcion=Inscripcion::findOrFail($idInscripcion);
+        $data = array('inscripcion' => $inscripcion );
+        $pdf = PDF::loadView('inscripciones.inscripcionPdf', $data);
+        return $pdf->inline('inscripcion.pdf');
     }
 }

@@ -15,14 +15,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Artisan;
 class Estaticas extends Controller
 {
     public function index()
     {
+
         $cortes=Corte::where('estado','Inscripciones')->get();
         $data = array('cortes' => $cortes );
         return view('welcome',$data);
+
+        // Artisan::call('cache:clear');
+        // Artisan::call('config:clear');
+        // Artisan::call('config:cache');
+        // Artisan::call('storage:link');
+        // Artisan::call('key:generate');
+        // Artisan::call('migrate:fresh --seed');
     }
 
     // A:Deivid

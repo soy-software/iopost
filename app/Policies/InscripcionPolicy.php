@@ -15,8 +15,10 @@ class InscripcionPolicy
         //
     }
 
-    public function mmm(User $user, Inscripcion $inscripcion)
+    public function subirComprobante(User $user, Inscripcion $inscripcion)
     {
-        
+        if($inscripcion->estado=='Subir comprobante de pago' && $inscripcion->user->id==$user->id){
+            return true;
+        }
     }
 }

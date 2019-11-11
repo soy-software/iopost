@@ -61,6 +61,6 @@ class Inscripciones extends Controller
         $inscripcion=Inscripcion::findOrFail($idInscripcion);
         $data = array('inscripcion' => $inscripcion );
         $pdf = PDF::loadView('inscripciones.inscripcionPdf', $data);
-        return $pdf->inline('inscripcion.pdf');
+        return $pdf->download('inscripcion.pdf');
     }
 }

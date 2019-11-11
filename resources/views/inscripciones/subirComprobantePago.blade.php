@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.app',['title'=>'Subir comprobante de pago'])
+@section('breadcrumbs', Breadcrumbs::render('subirComprobantePago',$inscripcion))
 @section('content')
 
 <form action="{{ route('guardarComprobantePago') }}" enctype="multipart/form-data" method="POST">
@@ -22,7 +22,7 @@
 </form>
 @prepend('linksPie')
     <script>
-    $('#menuHome').addClass('active');  
+    $('#menuMisInscripciones').addClass('active');  
     </script>
 @endprepend
 

@@ -17,7 +17,7 @@ class InscripcionPolicy
 
     public function subirComprobante(User $user, Inscripcion $inscripcion)
     {
-        if($inscripcion->estado=='Subir comprobante de pago' && $inscripcion->user->id==$user->id){
+        if($inscripcion->estado!='Aprobado' && $inscripcion->user->id==$user->id){
             return true;
         }
     }

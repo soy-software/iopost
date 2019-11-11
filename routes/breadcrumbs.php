@@ -27,6 +27,19 @@ Breadcrumbs::for('incripcion', function ($trail,$corte) {
     $trail->parent('inicio');
     $trail->push('Inscripción en línea', route('incripcion',$corte->id));
 });
+Breadcrumbs::for('misInscripciones', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Mis inscripciones', route('misInscripciones'));
+});
+Breadcrumbs::for('subirComprobantePago', function ($trail,$inscripcion) {
+    $trail->parent('misInscripciones');
+    $trail->push('Subir comprobante de pago', route('subirComprobantePago',$inscripcion->id));
+});
+Breadcrumbs::for('verMiInscripcion', function ($trail,$inscripcion) {
+    $trail->parent('misInscripciones');
+    $trail->push('Ver mi inscripción', route('verMiInscripcion',$inscripcion->id));
+});
+
 // usuarios
 Breadcrumbs::for('usuarios', function ($trail) {
     $trail->parent('home');

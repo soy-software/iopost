@@ -321,8 +321,16 @@
     <script>
     $('#menuUsuarios').addClass('active');   
     
+        
+    var provincia=$("#provincia option:selected").val();
+    var provincia_laboral=$("#provincia_laboral option:selected").val();
+    obtenerCantones(provincia);
+    obtenerCantonesLaboral(provincia_laboral);
     function cargarCantones(arg){
         var id=$(arg).val();
+        obtenerCantones(id);
+    }
+    function obtenerCantones(id){
         var fila;
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
         $.post( "{{ route('obtenerCantonesXprovincia') }}", { id: id })
@@ -332,15 +340,22 @@
                 fila+='<option value="'+item.id+'">'+item.canton+'</option>';
             });
             $('#canton').append(fila);
+
+            //cargar cantones
+            var canton=$("#canton option:selected").val();
+            obtenerParroquias(canton);
         }).always(function(){
             $.unblockUI();
         }).fail(function(){
-            notificar("error","Ocurrio un error");
+            $.notify("Ocurrio un error vuelva intentar.!", "error");
         });
     }
-
+    //obtener parrquias x canton
     function cargarParroquias(arg){
         var id=$(arg).val();
+        obtenerParroquias(id);
+    }
+    function obtenerParroquias(id){
         var fila;
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
         $.post( "{{ route('obtenerParroquiasXcanton') }}", { id: id })
@@ -353,7 +368,7 @@
         }).always(function(){
             $.unblockUI();
         }).fail(function(){
-            notificar("error","Ocurrio un error");
+            $.notify("Ocurrio un error vuelva intentar.!", "error");
         });
     }
 

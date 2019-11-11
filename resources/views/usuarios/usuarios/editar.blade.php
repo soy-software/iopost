@@ -344,11 +344,13 @@
     <script>
     $('#menuUsuarios').addClass('active');   
     
+    
+    var provincia=$("#provincia option:selected").val();
+    obtenerCantones(provincia);
     function cargarCantones(arg){
         var id=$(arg).val();
         obtenerCantones(id);
     }
-
     function obtenerCantones(id){
         var fila;
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
@@ -356,27 +358,29 @@
         .done(function( data ) {
             $('#canton').html('');
             $.each(data, function(i, item) {
+                
                 if(item.id=={{ $usuario->parroquia->canton->id??0 }}){
                     fila+='<option value="'+item.id+'" selected>'+item.canton+'</option>';
                 }else{
                     fila+='<option value="'+item.id+'">'+item.canton+'</option>';
                 }
-                
             });
             $('#canton').append(fila);
+
+            //cargar cantones
+            var canton=$("#canton option:selected").val();
+            obtenerParroquias(canton);
         }).always(function(){
             $.unblockUI();
         }).fail(function(){
-            notificar("error","Ocurrio un error");
+            $.notify("Ocurrio un error vuelva intentar.!", "error");
         });
     }
-
+    //obtener parrquias x canton
     function cargarParroquias(arg){
         var id=$(arg).val();
         obtenerParroquias(id);
-        
     }
-    
     function obtenerParroquias(id){
         var fila;
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
@@ -389,20 +393,16 @@
                 }else{
                     fila+='<option value="'+item.id+'">'+item.parroquia+'</option>';
                 }
-                
             });
             $('#parroquia').append(fila);
         }).always(function(){
             $.unblockUI();
-        }).fail(function(err){
-            $.notify('Parroquia no cargado, vuelva intentar', "error");
+        }).fail(function(){
+            $.notify("Ocurrio un error vuelva intentar.!", "error");
         });
     }
 
-    @if ($usuario->parroquia)
-        obtenerCantones({{ $usuario->parroquia->canton->provincia->id }});
-        obtenerParroquias({{ $usuario->parroquia->canton->id }});    
-    @endif
+
     
 
     </script>

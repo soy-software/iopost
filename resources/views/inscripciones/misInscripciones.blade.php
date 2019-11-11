@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.app',['title'=>'Mis incripciones'])
+@section('breadcrumbs', Breadcrumbs::render('misInscripciones'))
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -73,9 +73,6 @@
             <strong>No tiene ninguna isncripciones</strong>
         </div>
         @endif
-    </div>
-    <div class="card-footer text-muted">
-        Footer
     </div>
 </div>
 

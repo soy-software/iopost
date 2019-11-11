@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.app',['title'=>'Ver mi inscripción'])
+@section('breadcrumbs', Breadcrumbs::render('verMiInscripcion',$inscripcion))
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -15,7 +15,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuHome').addClass('active');  
+    $('#menuMisInscripciones').addClass('active');  
     </script>
 @endprepend
 

@@ -682,8 +682,8 @@
 
 
             //obtener cantones por provincia
-            var provincia=$("#provincia option:first").val();
-            var provincia_laboral=$("#provincia_laboral option:first").val();
+            var provincia=$("#provincia option:selected").val();
+            var provincia_laboral=$("#provincia_laboral option:selected").val();
             obtenerCantones(provincia);
             obtenerCantonesLaboral(provincia_laboral);
             function cargarCantones(arg){
@@ -702,7 +702,7 @@
                     $('#canton').append(fila);
 
                     //cargar cantones
-                    var canton=$("#canton option:first").val();
+                    var canton=$("#canton option:selected").val();
                     obtenerParroquias(canton);
                 }).always(function(){
                     $.unblockUI();
@@ -728,7 +728,7 @@
                     $('#canton_laboral').append(fila);
 
                     //cargar cantones
-                    var canton=$("#canton_laboral option:first").val();
+                    var canton=$("#canton_laboral option:selected").val();
                     obtenerParroquiasLaboral(canton);
                 }).always(function(){
                     $.unblockUI();

@@ -10,8 +10,11 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td>
                 <strong>Comprobante:</strong>{{ $inscripcion->comprobante?'SUBIDO':'SIN SUBIR' }}
+            </td>
+            <td>
+                <strong>Valor a cancelar:</strong> {{ $inscripcion->valorMatricula }}
             </td>
         </tr>
     </tbody>

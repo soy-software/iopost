@@ -15,7 +15,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuHome').addClass('active');  
+   $('#menuMaestria').addClass('active');
     </script>
 @endprepend
 

@@ -140,9 +140,10 @@ class Estaticas extends Controller
                     $inscripcion=new Inscripcion();
                     $inscripcion->user_id=$user->id;
                     $inscripcion->corte_id=$corte->id;
+                    $inscripcion->valorMatricula=$corte->maestria->valorMatricula;
                     $inscripcion->save();
                 }
-    
+                
                 $user->notify(new NotificacionInscripcion($inscripcion));
                 DB::commit();
                 $rq->session()->flash('success','Inscripción procesado exitosamente');

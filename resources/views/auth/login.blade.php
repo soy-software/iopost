@@ -1,10 +1,11 @@
-@extends('layouts.app')
-
+@extends('layouts.app',['title'=>'Accerder'])
+@section('breadcrumbs', Breadcrumbs::render('login'))
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card border border-info">
+                <img src="{{ asset('img/maestria.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-header">
                     {{ __('Login') }}
                     

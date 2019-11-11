@@ -51,6 +51,7 @@ class Maestrias extends Controller
         $maestria->capacidadParalelo=$request->capacidadParalelo;
         $maestria->descripcionGeneral=$request->descripcionGeneral;
         $maestria->usuarioCreado=Auth::id();
+        $maestria->valorMatricula=$request->valorMatricula;
         $maestria->save();
         if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
@@ -95,6 +96,7 @@ class Maestrias extends Controller
         $maestria->capacidadParalelo=$request->capacidadParalelo;
         $maestria->descripcionGeneral=$request->descripcionGeneral;
         $maestria->usuarioActualizado=Auth::id();        
+        $maestria->valorMatricula=$request->valorMatricula;
         $maestria->save();
         if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {

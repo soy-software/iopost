@@ -3,6 +3,19 @@
 Breadcrumbs::for('inicio', function ($trail) {
     $trail->push('Inicio', url('/'));
 });
+// authenticacion
+Breadcrumbs::for('login', function ($trail) {
+    $trail->parent('inicio');
+    $trail->push('Acceder a sistema', route('login'));
+});
+Breadcrumbs::for('restablecerContrasena', function ($trail) {
+    $trail->parent('login');
+    $trail->push('Restablecer contraseña', url('/password/reset'));
+});
+Breadcrumbs::for('confirmarCorreo', function ($trail) {
+    $trail->parent('inicio');
+    $trail->push('Confirma tu correo electrónico', url('/email/verify'));
+});
 // Home
 Breadcrumbs::for('home', function ($trail) {
     $trail->push('Administración', route('home'));

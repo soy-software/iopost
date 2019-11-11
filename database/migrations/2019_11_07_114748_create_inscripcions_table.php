@@ -25,6 +25,7 @@ class CreateInscripcionsTable extends Migration
 
             $table->enum('estado',['Inscrito','Subir comprobante de pago','Aprobado'])->default('Inscrito');
             $table->string('comprobante')->nullable();
+            $table->decimal('valorMatricula',19,2)->default(0);
             
         });
     }

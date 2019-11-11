@@ -85,13 +85,13 @@
                 </li>
                 @endrole
 
-                <li class="nav-item nav-item-submenu">
+                {{--  <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Layouts">
                         <li class="nav-item"><a href="" class="nav-link active">Default layout</a></li>
                         <li class="nav-item"><a href="" class="nav-link">Layout 2</a></li>
                     </ul>
-                </li>
+                </li>  --}}
             
             </ul>
         </div>

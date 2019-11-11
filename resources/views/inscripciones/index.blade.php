@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="telefono">Teléfono<i class="text-danger">*</i></label>
-                                    <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" value="{{ old('telefono') }}" name="telefono" required placeholder="Ingrese teléfono...">
+                                    <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" value="{{ old('telefono','0000000000') }}" name="telefono" required placeholder="Ingrese teléfono...">
                                     @error('telefono')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -170,7 +170,7 @@
                                 
                                 <div class="form-group col-md-3">
                                     <label for="pais">País<i class="text-danger">*</i></label>
-                                    <input type="text" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais" value="{{ old('pais') }}" required placeholder="Ingrese país...">
+                                    <input type="text" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais" value="{{ old('pais','ECUADOR') }}" required placeholder="Ingrese país...">
                                     @error('pais')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -203,7 +203,16 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label for="valorMatricula">Valor de la matricula<i class="text-danger">*</i></label>
+                    <input type="number" class="form-control @error('valorMatricula') is-invalid @enderror" value="{{ old('valorMatricula',$maestria->valorMatricula) }}" name="valorMatricula" id="valorMatricula" required placeholder="50">
+                    @error('valorMatricula')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
                     <label for="foto">Seleciona foto</label>
                     <input type="file" class="form-control-file @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/*">
                     @error('foto')
@@ -212,7 +221,7 @@
                         </span>
                     @enderror
                 </div>  
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="descripcionGeneral">Descripción General</label>
                     <textarea class="form-control @error('descripcionGeneral') is-invalid @enderror"  name="descripcionGeneral" id="descripcionGeneral" required placeholder="Descripción General" >{{ old('descripcionGeneral',$maestria->descripcionGeneral) }}</textarea>
                     @error('descripcionGeneral')

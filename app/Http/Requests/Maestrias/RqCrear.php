@@ -23,6 +23,7 @@ class RqCrear extends FormRequest
      */
     public function rules()
     {
+        $rg_decimal="/^[0-9,]+(\.\d{0,2})?$/";
         return [
             'nombre'=>'required|string|max:255',
             'tipoPrograma'=>'required|string|max:255',
@@ -43,6 +44,7 @@ class RqCrear extends FormRequest
             'vigencia'=>'required|string|max:255',
             'fechaAprobacion'=>'required|string|date',
             'capacidadParalelo'=>'required|numeric',
+            'valorMatricula'=>'required|regex:'.$rg_decimal
         ];
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app',['title'=>'Bienvenido'])
-
+@section('breadcrumbs', Breadcrumbs::render('inicio'))
 @section('content')
 @if (count($cortes)>0)
   <div class="card">

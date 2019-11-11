@@ -37,6 +37,7 @@ class CreateMaestriasTable extends Migration
             $table->text('descripcionGeneral')->nullable();
             $table->string('foto')->nullable();
             $table->enum('estado',['Activo','Inactivo'])->default('Activo');
+            $table->decimal('valorMatricula',19,2)->default(0);
             $table->timestamps();
             $table->bigInteger('usuarioCreado')->nullable();
             $table->bigInteger('usuarioActualizado')->nullable();

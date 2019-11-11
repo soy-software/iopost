@@ -23,6 +23,7 @@ class RqEditar extends FormRequest
      */
     public function rules()
     {
+        $rg_decimal="/^[0-9,]+(\.\d{0,2})?$/";
         return [
             'maestria'=>'required|numeric',
             'nombre'=>'required|string|max:255',
@@ -44,6 +45,7 @@ class RqEditar extends FormRequest
             'vigencia'=>'required|string|max:255',
             'fechaAprobacion'=>'required|string|date',
             'capacidadParalelo'=>'required|numeric',
+            'valorMatricula'=>'required|regex:'.$rg_decimal
         ];
     }
 }

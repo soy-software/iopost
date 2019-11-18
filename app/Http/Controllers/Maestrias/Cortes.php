@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Maestrias;
 
 use App\DataTables\CortesDataTable;
 use App\DataTables\InscritosCorteDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Corte;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
@@ -11,9 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
 class Cortes extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role_or_permission:Administrador|G. Maestrías']);
+    }
+
     public function index(CortesDataTable $dataTable,  $idMaestria)
     {
         $maestria=Maestria::findOrFail($idMaestria);
@@ -42,20 +47,18 @@ class Cortes extends Controller
     }
     public function eliminarCorte(Request $request,$idCorte)
     {
-       try {
+        $corte=Corte::findOrFail($idCorte);
+        try {
             DB::beginTransaction();
-            $corte=Corte::findOrFail($idCorte);
             $corte->delete();
             DB::commit();
             session()->flash('success','Corte eliminada');
-            return redirect()->route('cortesMaestria',$corte->maestria_id);
 
         } catch (\Exception $th) {
             DB::rollBack();
             session()->flash('warn','El corte no puede ser eliminado');
-            return redirect()->route('cortesMaestria',$corte->maestria_id);
-            
         }
+        return redirect()->route('cortesMaestria',$corte->maestria_id);
     }
     public function cambiarEstadoCorte(Request $request)
     {
@@ -82,7 +85,7 @@ class Cortes extends Controller
             if($cortetodos==0){
                 $mensage="ok";
             }else{
-                $mensage="No se puede cambiar de estado existe un corte con una enscripción abierta";
+                $mensage="Estado de la corte no actualizada, ya que existe un corte en estado de Inscripción";
             }
         }else{
             $mensage="ok";

@@ -12,7 +12,13 @@ class RolePolicy
 
     public function eliminar(User $user, Role $role)
     {
-        if($role->name=='Administrador' || $role->name=='Estudiante'){
+        $data = array(
+            'Administrador',
+            'Coordinador de maestría',
+            'Aspirante' 
+        );
+        
+        if(in_array($role->name,$data)){
             return false;
         }else{
             return true;

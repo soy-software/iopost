@@ -13,6 +13,11 @@
     </a> 
     <a  href="{{ route('materiaMaestria', $maestria->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Materias de {{ $maestria->nombre }}">
         <i class="icon-paste"></i>
-    </a>   
+    </a>
+
+    <a  href="{{ route('asignarCoordinadores', $maestria->id) }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Coordinadores de {{ $maestria->nombre }}">
+        <i class="fas fa-chalkboard-teacher"></i>
+    </a>
+
 </div>
 

@@ -20,7 +20,7 @@ class Inscripciones extends Controller
         $data = array('inscripciones' => $inscripciones );
         return view('inscripciones.misInscripciones',$data);
     }
-
+    
     public function subirComprobantePago(Request $request,$idInscripcion)
     {
         $inscripcion=Inscripcion::findOrFail($idInscripcion);

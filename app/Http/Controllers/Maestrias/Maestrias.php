@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Maestrias;
 
 use App\DataTables\MaestriasDataTable;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Maestrias\RqCrear;
 use App\Http\Requests\Maestrias\RqEditar;
 use App\Models\Maestria;
@@ -15,7 +16,7 @@ class Maestrias extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role_or_permission:Administrador|G. Maestrias']);
+        $this->middleware(['role_or_permission:Administrador|G. Maestrías']);
     }
 
     public function index(MaestriasDataTable $dataTable)
@@ -63,7 +64,7 @@ class Maestrias extends Controller
                 $maestria->save();
             }
         }
-        $request->session()->flash('success','Maestria creada');
+        $request->session()->flash('success','Maestría creada');
         return redirect()->route('maestrias');
     }
     public function editarMaestria($idMaestria)
@@ -109,7 +110,7 @@ class Maestrias extends Controller
                 $maestria->save();
             }
         }
-        $request->session()->flash('success','Maestria actualizada');
+        $request->session()->flash('success','Maestría actualizada');
         return redirect()->route('maestrias');
     }
     public function informacionMaestria($idMaestria)
@@ -124,17 +125,16 @@ class Maestrias extends Controller
         try {
             DB::beginTransaction();
             $maestria=Maestria::findOrFail($idMaestria);
-            if ($maestria->foto) {              
-                Storage::delete($maestria->foto);               
+            $fotoUrl=$maestria->foto;
+            if($maestria->delete()){
+                Storage::delete($fotoUrl);  
             }
-            $maestria->delete();
             DB::commit();
-            $request->session()->flash('success','Maestria eliminada');
+            $request->session()->flash('success','Maestría eliminada');
         } catch (\Exception $th) {
             DB::rollBack();
-            $request->session()->flash('warn','La maestria no puede ser eliminado');      
+            $request->session()->flash('warn','La maestría no puede ser eliminado');      
         }
         return redirect()->route('maestrias');      
     }
-
 }

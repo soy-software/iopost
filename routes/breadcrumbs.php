@@ -110,6 +110,15 @@ Breadcrumbs::for('InformacionInscritoCortesMaestria', function ($trail,$inscripc
     $trail->push('Información de '.$inscripcion->user->apellidos, route('informacionInscritoCorteMaestria',$inscripcion->id));
 });
 
+
+// A:deivid
+// D:asigmacion de coordinadores
+Breadcrumbs::for('asignarCoordinadores', function ($trail,$maestria) {
+    $trail->parent('maestrias');
+    $trail->push('Asignación de coordinadores', route('asignarCoordinadores',$maestria->id));
+});
+
+
 //A:Deivid
 //D:Breadcrums de roles y permisos
 Breadcrumbs::for('roles', function ($trail) {

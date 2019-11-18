@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Maestrias;
 
 use App\DataTables\MateriasMaestriasDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Maestria;
 use App\Models\MateriaMaestria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MateriasMaestrias extends Controller
+class Materias extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware(['role_or_permission:Administrador|G. Maestrías']);
+    }
     public function index(MateriasMaestriasDataTable $dataTable,  $idMaestria)
     {
         $maestria=Maestria::findOrFail($idMaestria);

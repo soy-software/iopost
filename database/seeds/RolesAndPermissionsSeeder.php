@@ -18,11 +18,12 @@ class RolesAndPermissionsSeeder extends Seeder
          
         // permisos
         Permission::firstOrCreate(['name' => 'G. Usuarios']);
-        Permission::firstOrCreate(['name' => 'G. Maestrias']);
+        Permission::firstOrCreate(['name' => 'G. Maestrías']);
 
         // roles
         $role = Role::firstOrCreate(['name' => 'Administrador']);
-        Role::firstOrCreate(['name' => 'Estudiante']);
+        Role::firstOrCreate(['name' => 'Coordinador de maestría']);
+        Role::firstOrCreate(['name' => 'Aspirante']);
         $role->givePermissionTo(Permission::all());
 
     }

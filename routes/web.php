@@ -45,15 +45,49 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/actualizar-usuario', 'Usuarios@actualizar')->name('actualizarUsuario');
         Route::get('/eliminar-usuario/{id}', 'Usuarios@eliminar')->name('eliminarUsuario');
     });
-    // A: Fabian Lopez
-    //D:En estas rutas se encuentra todo lo relacionado a maestrias
-    Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
-    Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
-    Route::post('/guardar-mestria', 'Maestrias@guardarMaestria')->name('guardarMaestria');
-    Route::get('/editar-mestria/{id}', 'Maestrias@editarMaestria')->name('editarMaestria');
-    Route::post('/actualizar-mestria', 'Maestrias@actualizarMaestria')->name('actualizarMaestria');
-    Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
-    Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
+    
+
+    // A:deivid
+    // maestrias
+    Route::namespace('Maestrias')->group(function () {
+        // A: Fabian Lopez
+        //D:En estas rutas se encuentra todo lo relacionado a maestrias
+        Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
+        Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
+        Route::post('/guardar-mestria', 'Maestrias@guardarMaestria')->name('guardarMaestria');
+        Route::get('/editar-mestria/{id}', 'Maestrias@editarMaestria')->name('editarMaestria');
+        Route::post('/actualizar-mestria', 'Maestrias@actualizarMaestria')->name('actualizarMaestria');
+        Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
+        Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
+
+        // A: Fabian Lopez
+        //D:En estas rutas se encuentra todo lo relacionado con cortes
+        Route::get('/cortes-mestria/{id}', 'Cortes@index')->name('cortesMaestria');
+        Route::post('/nuevo-corte', 'Cortes@guardarCortes')->name('guardarCortes');
+        Route::get('/eliminar-corte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
+        Route::post('/cabiar-estado-corte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
+        Route::get('/inscritos-corte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
+        Route::get('/informacion-inscritos-corte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
+    
+        
+        
+        // A: Fabian Lopez
+        //D:En estas rutas se encuentra todo lo relacionado con maestria materias
+        Route::get('/materias-maestria/{id}', 'Materias@index')->name('materiaMaestria');
+        Route::get('/nueva-materias-mestria/{id}', 'Materias@nuevaMateria')->name('nuevaMateriaMaestria');
+        Route::post('/guardar-materias-mestria', 'Materias@guardarMateria')->name('guardarMateriaMaestria');
+        Route::get('/editar-materias-mestria/{id}', 'Materias@editarMateriaMaestria')->name('editarmateriaMaestria');
+        Route::post('/actualizar-materias-mestria', 'Materias@actualizarMateriaMaestria')->name('actualizarMateriaMaestrias');
+        Route::get('/eliminar-materias-mestria/{id}', 'Materias@eliminarMateriaMaestria')->name('eliminarMateriaMaestria'); 
+
+
+        // A:deivid
+        // D:asignar coordinadores a maestrias
+        Route::get('/asignar-coordinares/{maestria}', 'Coordinadores@index')->name('asignarCoordinadores');
+        Route::post('/sincronizar-coordinares', 'Coordinadores@sincronizar')->name('sincronizarCoordinadores');
+        
+    });
+
 
 
     // A:deivid
@@ -65,10 +99,6 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/guardar-comprobante-pago', 'Inscripciones@guardarComprobantePago')->name('guardarComprobantePago');
         Route::get('/ver-mi-inscripcion/{id}', 'Inscripciones@verMiInscripcion')->name('verMiInscripcion');
         Route::get('/ver-mi-inscripcion-pdf/{id}', 'Inscripciones@inscripcionPdf')->name('inscripcionPdf');
-        
-        
-        
-        
     });
     
 
@@ -85,26 +115,8 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/permisos-sincronizar', 'Permisos@sincronizar')->name('sincronizarPermiso');
     });
     
-    // A: Fabian Lopez
-    //D:En estas rutas se encuentra todo lo relacionado con cortes
-    Route::get('/cortes-mestria/{id}', 'Cortes@index')->name('cortesMaestria');
-    Route::post('/nuevo-corte', 'Cortes@guardarCortes')->name('guardarCortes');
+   
 
-    Route::get('/eliminar-corte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
-    Route::post('/cabiar-estado-corte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
-    Route::get('/inscritos-corte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
-    Route::get('/informacion-inscritos-corte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
- 
-    
-    
-    // A: Fabian Lopez
-    //D:En estas rutas se encuentra todo lo relacionado con maestria materias
-    Route::get('/materias-mestria/{id}', 'MateriasMaestrias@index')->name('materiaMaestria');
-    Route::get('/nueva-materias-mestria/{id}', 'MateriasMaestrias@nuevaMateria')->name('nuevaMateriaMaestria');
-    Route::post('/guardar-materias-mestria', 'MateriasMaestrias@guardarMateria')->name('guardarMateriaMaestria');
-    Route::get('/editar-materias-mestria/{id}', 'MateriasMaestrias@editarMateriaMaestria')->name('editarmateriaMaestria');
-    Route::post('/actualizar-materias-mestria', 'MateriasMaestrias@actualizarMateriaMaestria')->name('actualizarMateriaMaestrias');
-    Route::get('/eliminar-materias-mestria/{id}', 'MateriasMaestrias@eliminarMateriaMaestria')->name('eliminarMateriaMaestria');
     
     
 });

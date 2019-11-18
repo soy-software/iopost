@@ -89,7 +89,7 @@ class Estaticas extends Controller
                     $user->parroquia_id=$rq->parroquia;
                     $user->direccion=$rq->direccion;
                     $user->save();
-                    $user->assignRole('Estudiante');
+                    $user->assignRole('Aspirante');
                 }
                 $infoLaboral=$user->informacionLaboral;
                 if(!$infoLaboral){

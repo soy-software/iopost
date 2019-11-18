@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Corte;
+use App\User;
 
 class Maestria extends Model
 {
@@ -12,15 +13,14 @@ class Maestria extends Model
         return $this->hasMany(Corte::class,'maestria_id');
     }
 
+    
+
+
     // A:deivid
-    // D:consulta de una inscripcion por id
-    public function obtenerInscripcion($id)
+    // D:una maestria tiene varios usuarios coordinadores asignados
+    public function coordinadores()
     {
-        $inscripcion=Inscripcion::find($id);
-        if($inscripcion){
-            return $inscripcion;
-        }
-        return null;
-    }
+        return $this->belongsToMany(User::class, 'coordinador_maestrias', 'maestria_id', 'user_id');
+    }    
 
 }

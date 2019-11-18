@@ -325,7 +325,7 @@
     var provincia=$("#provincia option:selected").val();
     var provincia_laboral=$("#provincia_laboral option:selected").val();
     obtenerCantones(provincia);
-    obtenerCantonesLaboral(provincia_laboral);
+    
     function cargarCantones(arg){
         var id=$(arg).val();
         obtenerCantones(id);

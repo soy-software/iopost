@@ -71,10 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail
     // D:un estudiante puede tener varias incripciones
     public function inscripciones()
     {
-        return $this->belongsToMany(Maestria::class, 'inscripcions', 'user_id', 'corte_id')
+        return $this->belongsToMany(Corte::class, 'inscripcions', 'user_id', 'corte_id')
         ->as('inscripcion')
         ->withPivot('id','estado','comprobante')
         ->withTimestamps();
+        
     }
 
 }

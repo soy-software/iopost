@@ -40,7 +40,7 @@
                                     </div>
                                 </th>
                                 <td>
-                                    {{ $inscripcion->nombre }}
+                                    {{ $inscripcion->maestria->nombre }}
                                 </td>
                                 <td>
                                     {{ $inscripcion->inscripcion->created_at }}
@@ -70,7 +70,7 @@
             </div>
         @else
         <div class="alert alert-dark" role="alert">
-            <strong>No tiene ninguna isncripciones</strong>
+            <strong>No tiene ninguna inscripción</strong>
         </div>
         @endif
     </div>

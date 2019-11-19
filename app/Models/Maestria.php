@@ -13,9 +13,6 @@ class Maestria extends Model
         return $this->hasMany(Corte::class,'maestria_id');
     }
 
-    
-
-
     // A:deivid
     // D:una maestria tiene varios usuarios coordinadores asignados
     public function coordinadores()

@@ -23,12 +23,15 @@ class InscritosCorteDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('user_id',function($query){
-                return $query->user->apellidos .' '.$query->user->nombres  ;
+            ->editColumn('user_id',function($inscri){
+                return $inscri->user->apellidos .' '.$inscri->user->nombres  ;
             })
-            ->addColumn('action', function($query){
-                return view('maestrias.cortes.accionesInscritos',['inscripcion'=>$query])->render();
-            })->rawColumns(['estado','action']);
+            ->editColumn('comprobante',function($inscri){
+                return view('maestrias.cortes.comprobante',['inscripcion'=>$inscri])->render();
+            })
+            ->addColumn('action', function($inscri){
+                return view('maestrias.cortes.accionesInscritos',['inscripcion'=>$inscri])->render();
+            })->rawColumns(['comprobante','estado','action']);
     }
 
     /**
@@ -78,10 +81,13 @@ class InscritosCorteDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
+                  ->title('Acciones')
                   ->addClass('text-center'),
             
-            Column::make('user_id')->title('Inscrito'),
-            Column::make('comprobante'),
+            Column::make('user_id')->title('Aspirante'),
+            Column::make('comprobante')
+                ->exportable(false)
+                ->printable(false),
             Column::make('estado'),
             Column::make('created_at')->title('Inscrito el'),
             

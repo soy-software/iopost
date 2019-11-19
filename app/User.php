@@ -75,7 +75,14 @@ class User extends Authenticatable implements MustVerifyEmail
         ->as('inscripcion')
         ->withPivot('id','estado','comprobante')
         ->withTimestamps();
-        
     }
+
+    // A:deivid
+    // D:un usuario coordinador tiene asignado maestrias
+    public function maestrias()
+    {
+        return $this->belongsToMany(Maestria::class, 'coordinador_maestrias', 'user_id', 'maestria_id');
+    }
+
 
 }

@@ -119,6 +119,27 @@ Breadcrumbs::for('asignarCoordinadores', function ($trail,$maestria) {
 });
 
 
+// A:deivid
+// D:Mis maestrías asignadas a usuario coordinador
+Breadcrumbs::for('misMaestrias', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Mis maestrías asignados', route('misMaestrias'));
+});
+Breadcrumbs::for('cortesEnMisMaestrias', function ($trail,$maestria) {
+    $trail->parent('misMaestrias');
+    $trail->push('Cortes en '.$maestria->nombre, route('cortesEnMisMaestrias',$maestria->id));
+});
+Breadcrumbs::for('inscritosEnCorteMiMaestrias', function ($trail,$corte) {
+    $trail->parent('cortesEnMisMaestrias',$corte->maestria);
+    $trail->push('Inscripciones en corte '.$corte->numero, route('inscritosEnCorteMiMaestrias',$corte->id));
+});
+Breadcrumbs::for('informacionAspirante', function ($trail,$inscripcion) {
+    $trail->parent('inscritosEnCorteMiMaestrias',$inscripcion->corte);
+    $trail->push('Información de inscripción', route('informacionAspirante',$inscripcion->id));
+});
+
+
+
 //A:Deivid
 //D:Breadcrums de roles y permisos
 Breadcrumbs::for('roles', function ($trail) {

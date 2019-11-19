@@ -22,5 +22,12 @@ class Corte extends Model
         }
         return null;
     }
+
+    // A:deiviud
+    // D: una corte tiene incripciones
+    public function inscripciones()
+    {
+        return $this->hasMany(Inscripcion::class);
+    }
     
 }

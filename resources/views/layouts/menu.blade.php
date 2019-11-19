@@ -46,7 +46,8 @@
                 @endcan
 
                 {{-- menu para la administracion de maestrias --}}
-                @can('G. Maestrias')
+                @can('G. Maestrías')
+
                 <li class="nav-item">
                     <a href="{{ route('maestrias') }}" class="nav-link" id="menuMaestria">
                         <i class="icon-newspaper"></i>

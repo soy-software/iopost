@@ -52,7 +52,7 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::namespace('Maestrias')->group(function () {
         // A: Fabian Lopez
         //D:En estas rutas se encuentra todo lo relacionado a maestrias
-        Route::get('/mestrias', 'Maestrias@index')->name('maestrias');
+        Route::get('/maestrias', 'Maestrias@index')->name('maestrias');
         Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
         Route::post('/guardar-mestria', 'Maestrias@guardarMaestria')->name('guardarMaestria');
         Route::get('/editar-mestria/{id}', 'Maestrias@editarMaestria')->name('editarMaestria');

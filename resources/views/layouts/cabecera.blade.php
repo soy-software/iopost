@@ -157,7 +157,7 @@
 						</li>
 					@endif
 				@else
-					<li class="nav-item dropdown dropdown-user">
+					<li class="nav-item dropdown dropdown-user" id="menuEmail">
 						<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 							@if (Storage::exists(Auth::user()->foto))
 								<img src="{{ Storage::url(Auth::user()->foto) }}" class="rounded-circle mr-2" height="34" alt="">
@@ -165,15 +165,13 @@
 							<img src="{{ asset('img/face.jpg') }}" class="rounded-circle mr-2" height="34" alt="">
 							@endif
 							
-							{{ Auth::user()->name }} <span class="caret"></span>
+							{{ Auth::user()->email }} <span class="caret"></span>
 						</a>
 
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-							<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-							<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
+							<a href="{{ route('miPerfil') }}" class="dropdown-item"><i class="icon-user-plus"></i> Mi perfil</a>
 							<div class="dropdown-divider"></div>
-							<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
+							{{--  <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Configuración</a>  --}}
 							<a class="dropdown-item" href="{{ route('logout') }}"
 							onclick="event.preventDefault();
 											document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> Salir</a>

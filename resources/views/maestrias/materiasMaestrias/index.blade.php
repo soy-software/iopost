@@ -1,4 +1,4 @@
-@extends('layouts.app',['title'=>'Listado de materias maestrias'])
+@extends('layouts.app',['title'=>'Listado de materias'])
 
 @section('breadcrumbs', Breadcrumbs::render('listadoMateriaMaestria',$maestria))
 @section('barraLateral')
@@ -14,19 +14,13 @@
 
 @section('content')
 <div class="card">
-        <div class="card-header">Administración de Materias Maestrías</div>
-
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-            <div class="table-responsive">
-                {!! $dataTable->table()  !!}
-            </div>
+    <div class="card-header">Administración de Materias</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            {!! $dataTable->table()  !!}
         </div>
     </div>
+</div>
 @push('linksCabeza')
 {{--  datatable  --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>

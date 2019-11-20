@@ -29,6 +29,12 @@ Auth::routes(['register' => false,'verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// perfil de suario
+Route::get('/mi-perfil', 'HomeController@miPerfil')->name('miPerfil');
+Route::post('/mi-perfil-actualizar-datos', 'HomeController@miPerfilActualizarDatos')->name('miPerfilActualizarDatos');
+Route::post('/mi-perfil-actualizar-laboral', 'HomeController@actualizarInformacionLaboral')->name('miPerfilActualizarLaboral');
+Route::post('/mi-perfil-actualizar-academico', 'HomeController@actualizarRegistroAcademico')->name('miPerfilActualizarAcademico');
+
 
 Route::middleware(['estado','verified', 'auth'])->group(function () {
     

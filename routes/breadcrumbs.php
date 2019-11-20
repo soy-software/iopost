@@ -21,6 +21,12 @@ Breadcrumbs::for('home', function ($trail) {
     $trail->push('Administración', route('home'));
 });
 
+// mi perfil
+
+Breadcrumbs::for('miPerfil', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Mi perfil', route('miPerfil'));
+});
 // inscripcion
 
 Breadcrumbs::for('incripcion', function ($trail,$corte) {
@@ -62,12 +68,12 @@ Breadcrumbs::for('informacionUsuario', function ($trail,$usuario) {
 //maestrias
 Breadcrumbs::for('maestrias', function ($trail) {
     $trail->parent('home');
-    $trail->push('Listado de Mestrias', route('maestrias'));
+    $trail->push('Listado de maestrías', route('maestrias'));
 });
 
 Breadcrumbs::for('nuevaMaestria', function ($trail) {
     $trail->parent('maestrias');
-    $trail->push('Nueva Mestría', route('nuevaMaestria'));
+    $trail->push('Nueva maestría', route('nuevaMaestria'));
 });
 Breadcrumbs::for('editarMaestria', function ($trail,$maestria) {
     $trail->parent('maestrias');
@@ -87,7 +93,7 @@ Breadcrumbs::for('listadoMateriaMaestria', function ($trail,$maestria) {
 });
 Breadcrumbs::for('nuevaMateriaMaestria', function ($trail,$maestria) {
     $trail->parent('listadoMateriaMaestria',$maestria);
-    $trail->push('Nueva Materia '. $maestria->nombre, route('materiaMaestria',$maestria->id));
+    $trail->push('Nueva materia '. $maestria->nombre, route('materiaMaestria',$maestria->id));
 });
 Breadcrumbs::for('editarMateriaMaestria', function ($trail,$materiaMaestria) {
     $trail->parent('listadoMateriaMaestria',$materiaMaestria->maestria);

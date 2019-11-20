@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app',['title'=>'Bienvenido'])
 
 @section('content')
 <div class="card">
-    <div class="card-header">Dashboard</div>
+    <div class="card-header">Bienvenido</div>
 
     <div class="card-body">
         @if (session('status'))

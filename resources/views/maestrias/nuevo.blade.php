@@ -1,15 +1,15 @@
-@extends('layouts.app',['title'=>'nueva de maestría'])
+@extends('layouts.app',['title'=>'Nueva maestría'])
 
 @section('breadcrumbs', Breadcrumbs::render('nuevaMaestria'))
 
 @section('content')
-<div class="card">
+<form action="{{ route('guardarMaestria') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="card">
         <div class="card-header">Nueva Maestría </div>
 
         <div class="card-body">
-            {{-- inicio del formulario --}}
-            <form action="{{ route('guardarMaestria') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+            
                 <div class="form-group">
                     <label for="nombre">Nombre de la Maestría:<i class="text-danger">*</i></label>
                     <input type="text" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" name="nombre" id="nombre" required placeholder="Maestría en desarrollo local">
@@ -227,13 +227,14 @@
                     </div>
                     
 
-                </div>                   
-                
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
-         {{-- fin del formulario  --}}
+                </div>
+        </div>
+        <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </div>
+    
+</form>
 @prepend('linksPie')
     <script>
     $('#menuMaestria').addClass('active');    

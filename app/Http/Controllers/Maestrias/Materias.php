@@ -39,7 +39,7 @@ class Materias extends Controller
         $materiaMaestria->nombre=$request->nombre;
         $materiaMaestria->descripcion=$request->descripcion;
         $materiaMaestria->save();
-        $request->session()->flash('success','Materia Maestria creada');
+        $request->session()->flash('success','Matería creada');
         return redirect()->route('materiaMaestria',$request->maestria);
     }
     public function editarMateriaMaestria($idMateriaMaestria)
@@ -61,7 +61,7 @@ class Materias extends Controller
         $materiaMaestria->descripcion=$request->descripcion;
         $materiaMaestria->estado=$request->estado;
         $materiaMaestria->save();
-        $request->session()->flash('success','Materia Maestria actualizada');
+        $request->session()->flash('success','Matería actualizada');
         return redirect()->route('materiaMaestria',$materiaMaestria->maestria_id);
     }
     public function eliminarMateriaMaestria(Request $request,$idMateriaMaestria)
@@ -71,10 +71,10 @@ class Materias extends Controller
             $materiaMaestria=MateriaMaestria::findOrFail($idMateriaMaestria);          
             $materiaMaestria->delete();
             DB::commit();
-            $request->session()->flash('success','Materia Maestria eliminada');
+            $request->session()->flash('success','Matería eliminada');
         } catch (\Exception $th) {
             DB::rollBack();
-            $request->session()->flash('warn','La Materia Maestria no puede ser eliminado');      
+            $request->session()->flash('warn','Matería no puede ser eliminado');      
         }
         return redirect()->route('materiaMaestria',$materiaMaestria->maestria_id);      
     }

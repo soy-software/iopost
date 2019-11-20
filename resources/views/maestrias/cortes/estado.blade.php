@@ -1,5 +1,5 @@
 
-<select class="form-control form-control-sm" onclick="estadoCorte(this)"  data-id="{{$corte->id}}" data-title="Cambiar estado de la corte {{$corte->numero}}">
+<select class="form-control form-control-sm" onchange="estadoCorte(this)"  data-id="{{$corte->id}}" data-title="Cambiar estado de la corte {{$corte->numero}}">
     <option value="Promoción"  {{$corte->estado=='Promoción'?'selected':''}}>Promoción</option>
     <option value="Inscripciones" {{$corte->estado=='Inscripciones'?'selected':''}} >Inscripciones</option>
     <option value="Proceso" {{$corte->estado=='Proceso'?'selected':''}}>Proceso</option>

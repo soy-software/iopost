@@ -43,6 +43,9 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/informacion-usuario/{id}', 'Usuarios@informacionUsuario')->name('informacionUsuario');   
         Route::get('/editar-usuario/{id}', 'Usuarios@editarUsuario')->name('editarUsuario');
         Route::post('/actualizar-usuario', 'Usuarios@actualizar')->name('actualizarUsuario');
+        Route::post('/actualizar-informacion-laboral-usuario', 'Usuarios@actualizarInformacionLaboral')->name('actualizarInformacionLaboral');
+        Route::post('/actualizar-registro-academico-usuario', 'Usuarios@actualizarRegistroAcademico')->name('actualizarRegistroAcademico');
+        
         Route::get('/eliminar-usuario/{id}', 'Usuarios@eliminar')->name('eliminarUsuario');
     });
     

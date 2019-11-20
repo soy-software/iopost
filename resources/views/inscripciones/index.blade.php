@@ -232,6 +232,7 @@
                     </section>
                     <h3>Información laboral </h3>
                     <section>
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="">Trabaja actualmente<i class="text-danger">*</i></label>
@@ -585,6 +586,7 @@
                                 @enderror
                             </div>
                         </div>
+                        
                     </section>
                     <h3>Finalizar</h3>
                     <section>

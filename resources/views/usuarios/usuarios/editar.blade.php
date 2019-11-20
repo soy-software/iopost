@@ -9,8 +9,8 @@
     @csrf
     <input type="hidden" name="usuario" id="usuario" value="{{ $usuario->id }}" required>
     <div class="card">
-        <div class="card-header">
-            Complete información 
+        <div class="card-header bg-secondary">
+            Datos personales
         </div>
         <div class="card-body">
             
@@ -332,7 +332,467 @@
             
         </div>
         <div class="card-footer text-muted">
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button type="submit" class="btn btn-primary">Actualizar datos personales</button>
+        </div>
+    </div>
+</form>
+
+
+<hr>
+
+{{--  informacion laboral  --}}
+
+@php($infoLab=$usuario->informacionLaboral)
+    <form action="{{ route('actualizarInformacionLaboral') }}" method="POST">
+        @csrf
+        <input type="hidden" name="usuario" id="" value="{{ $usuario->id }}" required>
+        <div class="card">
+            <div class="card-header bg-secondary">
+                Información laboral
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Trabaja actualmente<i class="text-danger">*</i></label>
+                        <div class="form-check form-check-inline ml-2">
+                            <input class="form-check-input @error('trabaja') is-invalid @enderror" type="radio" name="trabaja" id="trabaja_si" value="SI" {{ old('trabaja',$infoLab->trabaja??'')=='SI'?'checked':'' }}>
+                            <label class="form-check-label" for="trabaja_si">SI</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trabaja" id="trabaja_no" value="NO" {{ old('trabaja',$infoLab->trabaja??'')=='NO'?'checked':'' }}>
+                            <label class="form-check-label" for="trabaja_no">NO</label>
+                        </div>
+                        @error('trabaja')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="tipo_institucion">Tipo de institución</label>
+                        <select id="tipo_institucion" class="form-control @error('tipo_institucion') is-invalid @enderror" name="tipo_institucion">
+                            
+                            <option value="PÚBLICA" {{ old('tipo_institucion',$infoLab->tipo_institucion??'')=='PÚBLICA'?'selected':'' }}>PÚBLICA</option>
+                            <option value="PRIVADA" {{ old('tipo_institucion',$infoLab->tipo_institucion??'')=='PRIVADA'?'selected':'' }}>PRIVADA</option>
+                            <option value="MIXTA" {{ old('tipo_institucion',$infoLab->tipo_institucion??'')=='MIXTA'?'selected':'' }}>MIXTA</option>
+                            
+                        </select>
+                        @error('tipo_institucion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nombre_empresa">Nombre de la empresa</label>
+                        <input type="text" class="form-control @error('nombre_empresa') is-invalid @enderror" id="nombre_empresa" name="nombre_empresa" value="{{ old('nombre_empresa',$infoLab->nombre_empresa??'') }}" placeholder="Ingrese nombre de la empresa..">
+                        @error('nombre_empresa')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cargo">Cargo</label>
+                        <input type="text" class="form-control @error('cargo') is-invalid @enderror" id="cargo" name="cargo" value="{{ old('cargo',$infoLab->cargo??'') }}" placeholder="Ingrese cargo...">
+                        @error('cargo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-row">
+                        
+                    
+                    <div class="form-group col-md-3">
+                        <label for="provincia_laboral">Provincia</label>
+                        <select id="provincia_laboral" class="form-control @error('provincia_laboral') is-invalid @enderror" name="provincia_laboral" required onchange="cargarCantonesLaboral(this);">
+                            @foreach ($provincias as $provincia)
+                            
+                            <option value="{{ $provincia->id }}" {{ old('provincia_laboral',$infoLab->parroquia->canton->provincia->id??0)==$provincia->id?'selected':'' }}>
+                                {{ $provincia->provincia }}
+                            </option>
+                        
+
+
+                            @endforeach
+                        </select>
+                        @error('provincia_laboral')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="canton_laboral">Cantón</label>
+                        <select id="canton_laboral" class="form-control @error('canton_laboral') is-invalid @enderror" name="canton_laboral" onchange="cargarParroquiasLaboral(this);">
+                            
+                        </select>
+                        @error('canton_laboral')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="parroquia_laboral">Parroquia</label>
+                        <select id="parroquia_laboral" class="form-control @error('parroquia_laboral') is-invalid @enderror" name="parroquia_laboral">
+
+                        </select>
+                        @error('parroquia_laboral')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="direccion_laboral">Dirección</label>
+                        <input type="text" class="form-control @error('direccion_laboral') is-invalid @enderror" id="direccion_laboral" name="direccion_laboral" value="{{ old('direccion_laboral',$infoLab->direccion??'') }}" placeholder="Ingrese dirección laboral...">
+                        @error('direccion_laboral')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="telefono_laboral">Número de teléfono</label>
+                        <input type="text" class="form-control @error('telefono_laboral') is-invalid @enderror" id="telefono_laboral" name="telefono_laboral" value="{{ old('telefono_laboral',$infoLab->telefono??'') }}" placeholder="Ingrese # de teléfono laboral..">
+                        @error('telefono_laboral')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="extencion">Extención</label>
+                        <input type="text" class="form-control @error('extencion') is-invalid @enderror" id="extencion" name="extencion" value="{{ old('extencion',$infoLab->extencion??'') }}" placeholder="Ingrese extención...">
+                        @error('extencion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email_laboral">Email</label>
+                        <input type="email" class="form-control @error('email_laboral') is-invalid @enderror" id="email_laboral" name="email_laboral" value="{{ old('email_laboral',$infoLab->email??'') }}" placeholder="Ingrese email laboral...">
+                        @error('email_laboral')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-primary">Actualizar información laboral</button>
+            </div>
+        </div>
+    </form>
+
+
+
+@prepend('linksPie')
+    <script>
+        var provincia_l=$("#provincia_laboral option:selected").val();
+        obtenerCantonesLaboral(provincia_l);
+        function cargarCantonesLaboral(arg){
+            var id=$(arg).val();
+            obtenerCantonesLaboral(id);
+        }
+        function obtenerCantonesLaboral(id){
+            var fila;
+            $.blockUI({message:'<h1>Espere por favor.!</h1>'});
+            $.post( "{{ route('obtenerCantonesXprovincia') }}", { id: id })
+            .done(function( data ) {
+                $('#canton_laboral').html('');
+                $.each(data, function(i, item) {
+                    
+                    if(item.id=={{ $infoLab->parroquia->canton->id??0 }}){
+                        fila+='<option value="'+item.id+'" selected>'+item.canton+'</option>';
+                    }else{
+                        fila+='<option value="'+item.id+'">'+item.canton+'</option>';
+                    }
+                });
+                $('#canton_laboral').append(fila);
+    
+                //cargar cantones
+                var canton=$("#canton_laboral option:selected").val();
+                obtenerParroquiasLaboral(canton);
+            }).always(function(){
+                $.unblockUI();
+            }).fail(function(){
+                $.notify("Ocurrio un error vuelva intentar.!", "error");
+            });
+        }
+
+        function cargarParroquiasLaboral(arg){
+            var id=$(arg).val();
+            obtenerParroquiasLaboral(id);
+        }
+        function obtenerParroquiasLaboral(id){
+            var fila;
+            $.blockUI({message:'<h1>Espere por favor.!</h1>'});
+            $.post( "{{ route('obtenerParroquiasXcanton') }}", { id: id })
+            .done(function( data ) {
+                $('#parroquia_laboral').html('');
+                $.each(data, function(i, item) {
+                    if(item.id=={{ $infoLab->parroquia->id??0 }}){
+                        fila+='<option value="'+item.id+'" selected>'+item.parroquia+'</option>';
+                    }else{
+                        fila+='<option value="'+item.id+'">'+item.parroquia+'</option>';
+                    }
+                });
+                $('#parroquia_laboral').append(fila);
+            }).always(function(){
+                $.unblockUI();
+            }).fail(function(){
+                $.notify("Ocurrio un error vuelva intentar.!", "error");
+            });
+        }
+
+    </script>
+@endprepend
+
+
+
+
+<hr>
+
+{{--  información academica  --}}
+@php($regAca=$usuario->registroAcademico)
+<form action="{{ route('actualizarRegistroAcademico') }}" method="POST">
+    @csrf
+    <input type="hidden" name="usuario" value="{{ $usuario->id }}" required>
+    <div class="card">
+        <div class="card-header bg-secondary">
+            Registro académicos
+        </div>
+        <div class="card-body">
+            <p class="text-danger"> <strong>Información Pregrado</strong></p>
+                    
+            <div class="form-row">
+                
+                <div class="form-group col-md-6">
+                    <label for="institucion_pregrado">Institución<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('institucion_pregrado') is-invalid @enderror" id="institucion_pregrado" name="institucion_pregrado" value="{{ old('institucion_pregrado',$regAca->institucion_pregrado??'') }}" placeholder="Ingrese institución..." required>
+                    @error('institucion_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tipo_pregrado">Tipo de universidad<i class="text-danger">*</i> </label>
+                    <select id="tipo_pregrado" class="form-control @error('tipo_pregrado') is-invalid @enderror" name="tipo_pregrado" required>
+                        
+                        <option value="PÚBLICA" {{ old('tipo_pregrado',$regAca->tipo_pregrado??'')=='PÚBLICA'?'selected':'' }}>PÚBLICA</option>
+                        <option value="PRIVADA" {{ old('tipo_pregrado',$regAca->tipo_pregrado??'')=='PRIVADA'?'selected':'' }}>PRIVADA</option>
+                        <option value="MIXTA" {{ old('tipo_pregrado',$regAca->tipo_pregrado??'')=='MIXTA'?'selected':'' }}>MIXTA</option>
+                        
+                    </select>
+                    @error('tipo_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row">    
+                <div class="form-group col-md-6">
+                    <label for="titulo_pregrado">Título<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('titulo_pregrado') is-invalid @enderror" id="titulo_pregrado" name="titulo_pregrado" value="{{ old('titulo_pregrado',$regAca->titulo_pregrado??'') }}" placeholder="Ingrese título de pregrado..." required>
+                    @error('titulo_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="especialidad_pregrado">Especialidad<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('especialidad_pregrado') is-invalid @enderror" id="especialidad_pregrado" name="especialidad_pregrado" value="{{ old('especialidad_pregrado',$regAca->especialidad_pregrado??'') }}" placeholder="Ingrese especialidad de pregrado..." required>
+                    @error('especialidad_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="duracion_pregrado">Duración (años)</label>
+                    <input type="number" class="form-control @error('duracion_pregrado') is-invalid @enderror" id="duracion_pregrado" name="duracion_pregrado" value="{{ old('duracion_pregrado',$regAca->duracion_pregrado??'') }}" placeholder="Ingrese duración pregrado...">
+                    @error('duracion_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fecha_graduacion_pregrado">Fecha de graduación</label>
+                    <input type="date" class="form-control @error('fecha_graduacion_pregrado') is-invalid @enderror" id="fecha_graduacion_pregrado" name="fecha_graduacion_pregrado" value="{{ old('fecha_graduacion_pregrado',$regAca->fecha_graduacion_pregrado??'') }}" placeholder="Ingrese fecha graduación de pregrado...">
+                    @error('fecha_graduacion_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="calificacion_grado_pregrado">Calificación de grado</label>
+                    <input type="text" class="form-control @error('calificacion_grado_pregrado') is-invalid @enderror" id="calificacion_grado_pregrado" name="calificacion_grado_pregrado" value="{{ old('calificacion_grado_pregrado',$regAca->calificacion_grado_pregrado??'') }}" placeholder="Ingrese fecha graduación de pregrado...">
+                    @error('calificacion_grado_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="pais_pregrado">País</label>
+                    <input type="text" class="form-control @error('pais_pregrado') is-invalid @enderror" id="pais_pregrado" name="pais_pregrado" value="{{ old('pais_pregrado',$regAca->pais_pregrado??'') }}" placeholder="Ingrese país...">
+                    @error('pais_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="provincia_pregrado">Provincia</label>
+                    <input type="text" class="form-control @error('provincia_pregrado') is-invalid @enderror" id="provincia_pregrado" name="provincia_pregrado" value="{{ old('provincia_pregrado',$regAca->provincia_pregrado??'') }}" placeholder="Ingrese provincia...">
+                    @error('provincia_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="canton_pregrado">Cantón</label>
+                    <input type="text" class="form-control @error('canton_pregrado') is-invalid @enderror" id="canton_pregrado" name="canton_pregrado" value="{{ old('canton_pregrado',$regAca->canton_pregrado??'') }}" placeholder="Ingrese cantón...">
+                    @error('canton_pregrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+
+
+
+            <hr>
+            <p class="text-danger"> <strong>Información Posgrado</strong></p>
+
+            
+            <div class="form-group">
+                <label for="institucion_posgrado">Institución</label>
+                <input type="text" class="form-control @error('institucion_posgrado') is-invalid @enderror" id="institucion_posgrado" name="institucion_posgrado" value="{{ old('institucion_posgrado',$regAca->institucion_posgrado??'') }}" placeholder="Ingrese institución...">
+                @error('institucion_posgrado')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            
+
+            <div class="form-row">    
+                <div class="form-group col-md-6">
+                    <label for="titulo_posgrado">Título</label>
+                    <input type="text" class="form-control @error('titulo_posgrado') is-invalid @enderror" id="titulo_posgrado" name="titulo_posgrado" value="{{ old('titulo_posgrado',$regAca->titulo_posgrado??'') }}" placeholder="Ingrese título de posgrado...">
+                    @error('titulo_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="especialidad_posgrado">Especialidad</label>
+                    <input type="text" class="form-control @error('especialidad_posgrado') is-invalid @enderror" id="especialidad_posgrado" name="especialidad_posgrado" value="{{ old('especialidad_posgrado',$regAca->especialidad_posgrado??'') }}" placeholder="Ingrese especialidad de posgrado...">
+                    @error('especialidad_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="duracion_posgrado">Duración (años)</label>
+                    <input type="number" class="form-control @error('duracion_posgrado') is-invalid @enderror" id="duracion_posgrado" name="duracion_posgrado" value="{{ old('duracion_posgrado',$regAca->duracion_posgrado??'') }}" placeholder="Ingrese duración posgrado...">
+                    @error('duracion_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fecha_graduacion_posgrado">Fecha de graduación</label>
+                    <input type="date" class="form-control @error('fecha_graduacion_posgrado') is-invalid @enderror" id="fecha_graduacion_posgrado" name="fecha_graduacion_posgrado" value="{{ old('fecha_graduacion_posgrado',$regAca->fecha_graduacion_posgrado??'') }}" placeholder="Ingrese fecha graduación de posgrado...">
+                    @error('fecha_graduacion_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="calificacion_grado_posgrado">Calificación de grado</label>
+                    <input type="text" class="form-control @error('calificacion_grado_posgrado') is-invalid @enderror" id="calificacion_grado_posgrado" name="calificacion_grado_posgrado" value="{{ old('calificacion_grado_posgrado',$regAca->calificacion_grado_posgrado??'') }}" placeholder="Ingrese fecha graduación de posgrado...">
+                    @error('calificacion_grado_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="pais_posgrado">País</label>
+                    <input type="text" class="form-control @error('pais_posgrado') is-invalid @enderror" id="pais_posgrado" name="pais_posgrado" value="{{ old('pais_posgrado',$regAca->pais_posgrado??'') }}" placeholder="Ingrese país...">
+                    @error('pais_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="provincia_posgrado">Provincia</label>
+                    <input type="text" class="form-control @error('provincia_posgrado') is-invalid @enderror" id="provincia_posgrado" name="provincia_posgrado" value="{{ old('provincia_posgrado',$regAca->provincia_posgrado??'') }}" placeholder="Ingrese provincia...">
+                    @error('provincia_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="canton_posgrado">Cantón</label>
+                    <input type="text" class="form-control @error('canton_posgrado') is-invalid @enderror" id="canton_posgrado" name="canton_posgrado" value="{{ old('canton_posgrado',$regAca->canton_posgrado??'') }}" placeholder="Ingrese cantón...">
+                    @error('canton_posgrado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-primary">
+                Actualizar registros académicos
+            </button>
         </div>
     </div>
 </form>
@@ -376,6 +836,7 @@
             $.notify("Ocurrio un error vuelva intentar.!", "error");
         });
     }
+
     //obtener parrquias x canton
     function cargarParroquias(arg){
         var id=$(arg).val();

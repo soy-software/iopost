@@ -8,8 +8,6 @@
     <div class="card">
         <div class="card-header">
             Inscribir en: <strong>{{ $corte->maestria->nombre }}</strong>
-
-            
         </div>
         <div class="card-body">
             <form id="example-form" action="{{ route('procesarInscripcion') }}" method="POST">
@@ -602,24 +600,24 @@
 
     <!-- Modal terminosCondicionesInscripcion -->
     <div class="modal fade" id="terminosCondicionesInscripcion" tabindex="-1" role="dialog" aria-labelledby="terminosCondicionesInscripcionLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="terminosCondicionesInscripcion">Términos y condiciones</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="terminosCondicionesInscripcion">Términos y condiciones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre class="text-justify">
+                    Con el fin de publicar, cargar o descargar materiales, comunicarse a través de esta página web o acceder a ella, así como a los Servicios, recursos y determinado o todo el Contenido de la página web (tal como se define a continuación), puede pedirse al Usuario que proporcione los datos de registro e inicie sesión. Se trata de una condición para el uso de esta página web, los Servicios y el Contenido de la página web que todos los datos del registro que proporcione el Usuario sean y se mantengan verídicos, correctos, actualizados y completos.
+                </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <pre class="text-justify">
-                Con el fin de publicar, cargar o descargar materiales, comunicarse a través de esta página web o acceder a ella, así como a los Servicios, recursos y determinado o todo el Contenido de la página web (tal como se define a continuación), puede pedirse al Usuario que proporcione los datos de registro e inicie sesión. Se trata de una condición para el uso de esta página web, los Servicios y el Contenido de la página web que todos los datos del registro que proporcione el Usuario sean y se mantengan verídicos, correctos, actualizados y completos.
-            </pre>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-        </div>
-        </div>
-    </div>
     </div>
 
     @push('linksCabeza')

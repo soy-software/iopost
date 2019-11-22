@@ -16,6 +16,7 @@
       
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <form action="{{ route('miPerfilActualizarDatos') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">        
                     <div class="form-row">
                         <div class="form-group col-md-6">

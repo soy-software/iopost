@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Artisan;
+use PDF;
 class Estaticas extends Controller
 {
     public function index()
@@ -70,11 +71,14 @@ class Estaticas extends Controller
             $corte=Corte::findOrFail($rq->corte);
 
             if($corte->estado=='Inscripciones'){
+                $pass='La contraseña, sigue siendo la misma.';
+
                 if(!$user){
                     $user=new User();
                     $user->name=$rq->email;
                     $user->email=$rq->email;
-                    $user->password=Hash::make(Str::random(15));
+                    $pass=Str::random(15);
+                    $user->password=Hash::make($pass);
                     $user->nombres=$rq->nombres;
                     $user->apellidos=$rq->apellidos;
                     $user->sexo=$rq->sexo;
@@ -91,50 +95,7 @@ class Estaticas extends Controller
                     $user->save();
                     $user->assignRole('Aspirante');
                 }
-                $infoLaboral=$user->informacionLaboral;
-                if(!$infoLaboral){
-                    $infoLaboral=new InformacionLaboral();
-                    $infoLaboral->trabaja=$rq->trabaja;
-                    $infoLaboral->tipo_institucion=$rq->tipo_institucion;
-                    $infoLaboral->nombre_empresa=$rq->nombre_empresa;
-                    $infoLaboral->cargo=$rq->cargo;
-                    $infoLaboral->parroquia_id=$rq->parroquia_laboral;
-                    $infoLaboral->direccion=$rq->direccion_laboral;
-                    $infoLaboral->telefono=$rq->telefono_laboral;
-                    $infoLaboral->extencion=$rq->extencion;
-                    $infoLaboral->email=$rq->email_laboral;
-                    $infoLaboral->user_id=$user->id;
-                    $infoLaboral->save();
-                }
-                
-                $regAcademico=$user->registroAcademico;
-                if(!$regAcademico){
-                    $regAcademico=new RegistroAcademico();
-    
-                    $regAcademico->institucion_pregrado=$rq->institucion_pregrado;
-                    $regAcademico->tipo_pregrado=$rq->tipo_pregrado;
-                    $regAcademico->titulo_pregrado=$rq->titulo_pregrado;
-                    $regAcademico->especialidad_pregrado=$rq->especialidad_pregrado;
-                    $regAcademico->duracion_pregrado=$rq->duracion_pregrado;
-                    $regAcademico->fecha_graduacion_pregrado=$rq->fecha_graduacion_pregrado;
-                    $regAcademico->calificacion_grado_pregrado=$rq->calificacion_grado_pregrado;
-                    $regAcademico->pais_pregrado=$rq->pais_pregrado;
-                    $regAcademico->provincia_pregrado=$rq->provincia_pregrado;
-                    $regAcademico->canton_pregrado=$rq->canton_pregrado;
-                    
-                    $regAcademico->institucion_posgrado=$rq->institucion_posgrado;
-                    $regAcademico->titulo_posgrado=$rq->titulo_posgrado;
-                    $regAcademico->especialidad_posgrado=$rq->especialidad_posgrado;
-                    $regAcademico->duracion_posgrado=$rq->duracion_posgrado;
-                    $regAcademico->fecha_graduacion_posgrado=$rq->fecha_graduacion_posgrado;
-                    $regAcademico->calificacion_grado_posgrado=$rq->calificacion_grado_posgrado;
-                    $regAcademico->pais_posgrado=$rq->pais_posgrado;
-                    $regAcademico->provincia_posgrado=$rq->provincia_posgrado;
-                    $regAcademico->canton_posgrado=$rq->canton_posgrado;
-                    $regAcademico->user_id=$user->id;
-                    $regAcademico->save();
-                }
-    
+
                 $inscripcion=Inscripcion::where(['user_id'=>$user->id,'corte_id'=>$corte->id])->first();
                 if(!$inscripcion){
                     $inscripcion=new Inscripcion();
@@ -144,20 +105,31 @@ class Estaticas extends Controller
                     $inscripcion->save();
                 }
                 
-                $user->notify(new NotificacionInscripcion($inscripcion));
+                $user->notify(new NotificacionInscripcion($inscripcion,$pass));
                 DB::commit();
                 $rq->session()->flash('success','Inscripción procesado exitosamente');
                 $rq->session()->flash('inscripcionOk',$inscripcion);
-                return redirect()->route('login');
             }else{
                 $rq->session()->flash('error','No puede inscribir en esta corte');
             }
 
         } catch (\Exception $th) {
             DB::rollback();
-            $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar'.$th->getMessage());
+            $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar');
+            return redirect()->route('incripcion',$rq->corte)->withInput();
         }
-        return redirect()->route('incripcion',$rq->corte)->withInput();
+        return redirect()->route('incripcion',$rq->corte);
         
+    }
+
+
+    // A:deivid
+    // D:descargar pdf registro de maestria
+    public function descargarRegistroPdf($idInscripcion)
+    {
+        $inscripcion=Inscripcion::findOrFail($idInscripcion);
+        $data = array('inscripcion' => $inscripcion );
+        $pdf = PDF::loadView('inscripciones.inscripcionPdf', $data);
+        return $pdf->inline('Registro de maestría '.$inscripcion->id.'.pdf');
     }
 }

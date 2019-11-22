@@ -22,6 +22,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // roles
         $role = Role::firstOrCreate(['name' => 'Administrador']);
+        Role::firstOrCreate(['name' => 'Tesorero']);
         Role::firstOrCreate(['name' => 'Coordinador de maestría']);
         Role::firstOrCreate(['name' => 'Aspirante']);
         $role->givePermissionTo(Permission::all());

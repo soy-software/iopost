@@ -15,7 +15,8 @@ class RolePolicy
         $data = array(
             'Administrador',
             'Coordinador de maestría',
-            'Aspirante' 
+            'Aspirante',
+            'Tesorero'
         );
         
         if(in_array($role->name,$data)){

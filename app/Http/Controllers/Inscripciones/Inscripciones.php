@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inscripcion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Yajra\DataTables\Utilities\Request;
+use Illuminate\Http\Request;
 use PDF;
 class Inscripciones extends Controller
 {
@@ -31,6 +31,10 @@ class Inscripciones extends Controller
 
     public function guardarComprobantePago(Request $request)
     {
+        $request->validate([
+            'foto' => 'mimes:jpeg,jpg,png,pdf|required|max:10000',
+            'inscripcion' => 'required|exists:inscripcions,id',
+        ]);
         $inscripcion=Inscripcion::findOrFail($request->inscripcion);
         $this->authorize('subirComprobante', $inscripcion);
         if ($request->hasFile('foto')) {
@@ -41,6 +45,7 @@ class Inscripciones extends Controller
                     'public/comprobantes', $request->file('foto'), $inscripcion->id.'.'.$extension
                 );
                 $inscripcion->comprobante=$path;
+                $inscripcion->estado='Subir comprobante de registro';
                 $inscripcion->save();
             }
         }
@@ -49,12 +54,6 @@ class Inscripciones extends Controller
     }
 
 
-    public function verMiInscripcion($idInscripcion)
-    {
-        $inscripcion=Inscripcion::findOrFail($idInscripcion);
-        $data = array('inscripcion' => $inscripcion );
-        return view('inscripciones.verMiInscripcion',$data);
-    }
 
     public function inscripcionPdf($idInscripcion)
     {

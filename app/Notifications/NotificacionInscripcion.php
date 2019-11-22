@@ -12,14 +12,16 @@ class NotificacionInscripcion extends Notification implements ShouldQueue
 {
     use Queueable;
     protected $inscripcion;
+    protected $password;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($insc)
+    public function __construct($insc,$passw)
     {
         $this->inscripcion=$insc;
+        $this->password=$passw;
     }
 
     /**
@@ -41,14 +43,17 @@ class NotificacionInscripcion extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $url=route('verMiInscripcion',$this->inscripcion->id);
+        $url=route('subirComprobantePago',$this->inscripcion->id);
         
         return (new MailMessage)
             ->greeting('Hola! '.$this->inscripcion->user->nombres.' '.$this->inscripcion->user->apellidos)
-            ->subject('INSCRIPCIÓN UTC-POSGRADOS')
-            ->line('Inscripción registrado exitosamente en '.$this->inscripcion->corte->maestria->nombre)
-            ->action('Ver mi inscripción', $url)
-            ->line('Gracias por inscribir a nuestro programa de maestría');
+            ->subject('REGISTRO GENERADO EXITOSAMENTE EN '.$this->inscripcion->corte->maestria->nombre)
+            ->line('Sus credenciales para ingresar al sistema son:')
+            ->line('Email: '.$this->inscripcion->user->email)
+            ->line('Contraseña: '.$this->password)
+            ->line('Recuerde cambiar la contraseña en perfil de usuario.')
+            ->action('SUBIR COMPROBANTE DE REGISTRO', $url)
+            ->line('Gracias por registrar a nuestro programa de maestría');
     }
 
     /**

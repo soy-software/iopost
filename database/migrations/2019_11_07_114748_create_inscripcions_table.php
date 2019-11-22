@@ -23,7 +23,8 @@ class CreateInscripcionsTable extends Migration
             $table->unsignedBigInteger('corte_id');
             $table->foreign('corte_id')->references('id')->on('cortes');
 
-            $table->enum('estado',['Inscrito','Subir comprobante de pago','Aprobado'])->default('Inscrito');
+            $table->enum('estado',['Registro','Subir comprobante de registro','Aprobado'])->default('Registro');
+            $table->string('numero_factura')->nullable();
             $table->string('comprobante')->nullable();
             $table->decimal('valorMatricula',19,2)->default(0);
             

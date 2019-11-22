@@ -17,8 +17,10 @@ Route::get('/', 'Estaticas@index')->name('welcome');
 Route::post('/obtener-cantones-x-provincia', 'Estaticas@obtenerCantonesXprovincia')->name('obtenerCantonesXprovincia');
 Route::post('/obtener-parroquias-x-canton', 'Estaticas@obtenerParroquiasXcanton')->name('obtenerParroquiasXcanton');
 // inscripciones
-Route::get('/inscripcion-en-linea/{corte}', 'Estaticas@inscripcion')->name('incripcion');
-Route::post('/inscripcion-procesar', 'Estaticas@procesarInscripcion')->name('procesarInscripcion');
+Route::get('/registro-en-linea/{corte}', 'Estaticas@inscripcion')->name('incripcion');
+Route::post('/registro-procesar', 'Estaticas@procesarInscripcion')->name('procesarInscripcion');
+Route::get('/descargar-mi-registro-maestria/{inscripcion}', 'Estaticas@descargarRegistroPdf')->name('descargarRegistroPdf');
+
 
 // A:Deivid
 // D:inscripcion en linea
@@ -116,10 +118,14 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     Route::namespace('Inscripciones')->group(function () {
 
         Route::get('/mis-inscripciones', 'Inscripciones@misInscripciones')->name('misInscripciones');
-        Route::get('/subir-comprobante-pago/{inscripcion}', 'Inscripciones@subirComprobantePago')->name('subirComprobantePago');
+        Route::get('/subir-comprobante-de-registro/{inscripcion}', 'Inscripciones@subirComprobantePago')->name('subirComprobantePago');
         Route::post('/guardar-comprobante-pago', 'Inscripciones@guardarComprobantePago')->name('guardarComprobantePago');
-        Route::get('/ver-mi-inscripcion/{id}', 'Inscripciones@verMiInscripcion')->name('verMiInscripcion');
         Route::get('/ver-mi-inscripcion-pdf/{id}', 'Inscripciones@inscripcionPdf')->name('inscripcionPdf');
+        
+        Route::get('/aprobar-registro-maestrias', 'Registros@index')->name('aprobarRegistroMaestrias');
+        Route::post('/aprobar-registro-maestrias-factura', 'Registros@aprobarRegistroFactura')->name('aprobarRegistroFactura');
+        
+        
     });
     
 

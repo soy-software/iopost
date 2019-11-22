@@ -5,7 +5,7 @@
   <div class="card">
     <div class="card-header text-center">
       <strong>UNIVERSIDAD TÉCNICA DE COTOPAXI - POSGRADOS</strong>
-      <h1><span class="badge badge-primary">Inscripciones disponibles</span></h1>
+      <h1><span class="badge badge-primary">Registros disponibles</span></h1>
     </div>
     <div class="card-body">
       
@@ -38,8 +38,8 @@
 
                 <div class="card-footer d-flex justify-content-between">
                   <a href="{{ route('incripcion',$corte->id) }}" class="btn btn-dark btn-block btn-lg">
-                    Inscribirme
-                    <i class="fas fa-user-edit fa-2x"></i>
+                    Registrar
+                    <i class="fas fa-sign-in-alt"></i>
                   </a>
                 </div>
               </div>

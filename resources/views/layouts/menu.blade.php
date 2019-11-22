@@ -80,6 +80,16 @@
                     </a>
                 </li>
 
+                @role('Tesorero')
+                    <li class="nav-item">
+                        <a href="{{ route('aprobarRegistroMaestrias') }}" class="nav-link" id="menuaprobarRegistroMaestrias">
+                            <i class="fas fa-user-check"></i>
+                            <span>
+                                Aprobar registros de maestrías
+                            </span>
+                        </a>
+                    </li>
+                @endrole
 
                 @role('Administrador')
                 <li class="nav-item-header">

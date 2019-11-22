@@ -114,12 +114,9 @@ class HomeController extends Controller
     public function actualizarRegistroAcademico(RqActualizarRegAcademicosPerfi $rq)
     {
         $user=Auth::user();
-        $regAcademico=$user->registroAcademico;
-        if(!$regAcademico){
-            $regAcademico=new RegistroAcademico();
-        }
-
+        $regAcademico=new RegistroAcademico();
         $regAcademico->institucion_pregrado=$rq->institucion_pregrado;
+        $regAcademico->nivel=$rq->nivel;
         $regAcademico->tipo_pregrado=$rq->tipo_pregrado;
         $regAcademico->titulo_pregrado=$rq->titulo_pregrado;
         $regAcademico->especialidad_pregrado=$rq->especialidad_pregrado;
@@ -130,21 +127,59 @@ class HomeController extends Controller
         $regAcademico->provincia_pregrado=$rq->provincia_pregrado;
         $regAcademico->canton_pregrado=$rq->canton_pregrado;
         
-        $regAcademico->institucion_posgrado=$rq->institucion_posgrado;
-        $regAcademico->titulo_posgrado=$rq->titulo_posgrado;
-        $regAcademico->especialidad_posgrado=$rq->especialidad_posgrado;
-        $regAcademico->duracion_posgrado=$rq->duracion_posgrado;
-        $regAcademico->fecha_graduacion_posgrado=$rq->fecha_graduacion_posgrado;
-        $regAcademico->calificacion_grado_posgrado=$rq->calificacion_grado_posgrado;
-        $regAcademico->pais_posgrado=$rq->pais_posgrado;
-        $regAcademico->provincia_posgrado=$rq->provincia_posgrado;
-        $regAcademico->canton_posgrado=$rq->canton_posgrado;
         $regAcademico->user_id=$user->id;
+        $regAcademico->save();
+
+        $rq->session()->flash('success','Registro académico ingresado');
+        return redirect()->route('miPerfil');
+    }
+
+    public function eliminarMiRegistroAcademico(Request $request, $idRegistroAcademico)
+    {
+        try {
+            $registroAcademico=RegistroAcademico::findOrFail($idRegistroAcademico);
+            $this->authorize('eliminar',$registroAcademico);
+            $registroAcademico->delete();
+            $request->session()->flash('success','Registro académico eliminado');
+        } catch (\Exception $th) {
+            $request->session()->flash('info','Registro académico no eliminado');
+        }
+        return redirect()->route('miPerfil');
+    }
+
+    public function editarMiRegistroAcademico($idRegistroAcademico)
+    {
+        $registroAcademico=RegistroAcademico::findOrFail($idRegistroAcademico);
+        $this->authorize('editar',$registroAcademico);
+        $data = array('ra' => $registroAcademico );
+        return view('auth.editarRegistroAcademico',$data);
+    }
+
+  
+    public function actualizarMiRegistroAcademico(RqActualizarRegAcademicosPerfi $rq)
+    {
+        
+        $regAcademico=RegistroAcademico::findOrFail($rq->ra);
+        $this->authorize('editar',$regAcademico);
+        $regAcademico->institucion_pregrado=$rq->institucion_pregrado;
+        $regAcademico->nivel=$rq->nivel;
+        $regAcademico->tipo_pregrado=$rq->tipo_pregrado;
+        $regAcademico->titulo_pregrado=$rq->titulo_pregrado;
+        $regAcademico->especialidad_pregrado=$rq->especialidad_pregrado;
+        $regAcademico->duracion_pregrado=$rq->duracion_pregrado;
+        $regAcademico->fecha_graduacion_pregrado=$rq->fecha_graduacion_pregrado;
+        $regAcademico->calificacion_grado_pregrado=$rq->calificacion_grado_pregrado;
+        $regAcademico->pais_pregrado=$rq->pais_pregrado;
+        $regAcademico->provincia_pregrado=$rq->provincia_pregrado;
+        $regAcademico->canton_pregrado=$rq->canton_pregrado;
         $regAcademico->save();
 
         $rq->session()->flash('success','Registro académico actualizado');
         return redirect()->route('miPerfil');
     }
+
+
+
 
 
 }

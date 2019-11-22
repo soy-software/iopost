@@ -22,10 +22,10 @@ class CortesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('numero', function($query){
-                return "Corte" .$query->numero ;
+                return "Corte " .$query->numero ;
             })
             ->filterColumn('numero', function($query, $keyword) {
-                $sql = "CONCAT('Corte',' ',cortes.numero)  like ?";
+                $sql = "CONCAT('Corte ',cortes.numero)  like ?";
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('estado', function($query){
@@ -87,10 +87,9 @@ class CortesDataTable extends DataTable
                   ->width(60)
                   ->title('Acciones')
                   ->addClass('text-center'),
-            Column::make('numero')->title('Número'),
+            Column::make('numero')->title('Corte'),
             Column::make('estado'),
-            Column::make('created_at')->title('Creado el'),
-            Column::make('updated_at')->title('Actualizado el'),
+            Column::make('created_at')->title('Fecha de creación'),
         ];
     }
 

@@ -17,7 +17,7 @@ class CreateCortesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->integer('numero');
-            $table->enum('estado',['Promoción','Cancelada','Inscripciones','Proceso','finalizado'])->default('Promoción');
+            $table->enum('estado',['Promoción','Registro','Proceso académico','Finalizado'])->default('Promoción');
             $table->string('detalle');
             $table->unsignedBigInteger('maestria_id');
             $table->foreign('maestria_id')->references('id')->on('maestrias');

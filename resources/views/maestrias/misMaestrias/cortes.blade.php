@@ -22,8 +22,8 @@
                             <tr>
                                 <th scope="row">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                        <a href="{{ route('inscritosEnCorteMiMaestrias',$corte->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Inscritos en corte {{ $corte->numero }}">
-                                            <i class="fa fa-users"></i> Inscripciones
+                                        <a href="{{ route('inscritosEnCorteMiMaestrias',$corte->id) }}" class="btn btn-primary">
+                                            <i class="fa fa-users"></i> Inscritos
                                         </a>
                                     </div>
                                 </th>

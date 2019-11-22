@@ -79,9 +79,7 @@ class MaestriasDataTable extends DataTable
                   ->addClass('text-center'),
            
             Column::make('nombre')->title('Nombre'),
-            Column::make('tipoPrograma')->title('Tipo Programa'),
             Column::make('titulo')->title('Título'),
-            Column::make('estado'),
         ];
     }
 

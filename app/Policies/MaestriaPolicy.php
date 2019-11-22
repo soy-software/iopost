@@ -17,7 +17,7 @@ class MaestriaPolicy
     // D_deivid: crear cortes en la maestria cuando no existe auno en estado de Inscripciones
     public function crearCortesMaestria(User $user, Maestria $maestria)
     {
-        $maes=$maestria->cortes()->where('cortes.estado','=','Inscripciones')->count();
+        $maes=$maestria->cortes()->where('cortes.estado','=','Registro')->count();
         if($maes>0){
             return false;
         }else{

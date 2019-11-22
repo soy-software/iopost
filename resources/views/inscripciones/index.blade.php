@@ -3,7 +3,7 @@
 @section('breadcrumbs', Breadcrumbs::render('incripcion',$corte))
 
 @section('content')
-@if ($corte->estado=='Inscripciones')
+@if ($corte->estado=='Registro')
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">

@@ -35,7 +35,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mi-perfil', 'HomeController@miPerfil')->name('miPerfil');
 Route::post('/mi-perfil-actualizar-datos', 'HomeController@miPerfilActualizarDatos')->name('miPerfilActualizarDatos');
 Route::post('/mi-perfil-actualizar-laboral', 'HomeController@actualizarInformacionLaboral')->name('miPerfilActualizarLaboral');
-Route::post('/mi-perfil-actualizar-academico', 'HomeController@actualizarRegistroAcademico')->name('miPerfilActualizarAcademico');
+Route::post('/mi-perfil-guardar-academico', 'HomeController@actualizarRegistroAcademico')->name('miPerfilActualizarAcademico');
+Route::get('/mi-perfil-eliminar-academico/{registroAcademico}', 'HomeController@eliminarMiRegistroAcademico')->name('eliminarMiRegistroAcademico');
+Route::get('/mi-perfil-editar-academico/{registroAcademico}', 'HomeController@editarMiRegistroAcademico')->name('editarMiRegistroAcademico');
+Route::post('/mi-perfil-actualizar-academico', 'HomeController@actualizarMiRegistroAcademico')->name('actualizarMiRegistroAcademico');
+
 
 
 Route::middleware(['estado','verified', 'auth'])->group(function () {
@@ -76,9 +80,10 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/cortes-mestria/{id}', 'Cortes@index')->name('cortesMaestria');
         Route::post('/nuevo-corte', 'Cortes@guardarCortes')->name('guardarCortes');
         Route::get('/eliminar-corte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
-        Route::post('/cabiar-estado-corte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
-        Route::get('/inscritos-corte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
-        Route::get('/informacion-inscritos-corte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
+        Route::post('/cambiar-estado-corte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
+        Route::get('/registros-corte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
+        Route::get('/informacion-registro-corte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
+        Route::post('/cambiar-estado--de-inscripcion', 'Cortes@cambiarEstadoInscripcion')->name('cambiarEstadoInscripcion');
     
         
         

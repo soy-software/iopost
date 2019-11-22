@@ -7,10 +7,7 @@
     </a>
     <button type="button" onclick="eliminar(this);" data-url="{{ route('eliminarMaestria', $maestria->id) }}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-title="Eliminar {{ $maestria->nombre }}" title="Eliminar {{ $maestria->nombre }}">
         <i class="fas fa-trash-alt"></i>
-    </button> 
-    <a  href="{{ route('cortesMaestria', $maestria->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cortes de {{ $maestria->nombre }}">
-        <i class="icon-reading"></i>
-    </a> 
+    </button>  
     <a  href="{{ route('materiaMaestria', $maestria->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Materias de {{ $maestria->nombre }}">
         <i class="icon-paste"></i>
     </a>
@@ -18,6 +15,8 @@
     <a  href="{{ route('asignarCoordinadores', $maestria->id) }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Coordinadores de {{ $maestria->nombre }}">
         <i class="fas fa-chalkboard-teacher"></i>
     </a>
-
+    <a  href="{{ route('cortesMaestria', $maestria->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cortes de {{ $maestria->nombre }}">
+        <i class="fas fa-border-all"></i>
+    </a>
 </div>
 

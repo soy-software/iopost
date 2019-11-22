@@ -62,9 +62,9 @@ class User extends Authenticatable
 
     // A:Deivid
     // D: un usuario estudiante tiene un registro académmico
-    public function registroAcademico()
+    public function registrosAcademicos()
     {
-        return $this->hasOne(RegistroAcademico::class);
+        return $this->hasMany(RegistroAcademico::class);
     }
 
     // A:deivid

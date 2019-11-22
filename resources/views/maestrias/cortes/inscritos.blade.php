@@ -5,30 +5,37 @@
 
 @section('content')
 <div class="card">
+    <div class="card-header">
+        Listado de registros
+    </div>
     <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th colspan="2">Cortes número: <strong> {{$corte->numero}} </strong>  
-                        Estado de la maestría: 
-                        <span class="badge badge-light badge-striped badge-striped-right border-right-success">{{$corte->estado}}
-                        </span>
-                                             
-                    </th>                   
-                </tr>
-            </thead>            
-        </table>
-        <div class="table-responsive mt-2">
+        <div class="table-responsive">
             {!! $dataTable->table()  !!}
-        </div>      
+        </div>
     </div>
 </div>
+
+<div class="modal fade bd-example-modal-lg" id="modalComprobanteRegistro" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Comprobante de pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="" id="iframeComprobanteRegistro" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('linksCabeza')
 {{--  datatable  --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
@@ -40,6 +47,36 @@
 @prepend('linksPie')
     <script>
     $('#menuMaestria').addClass('active');
+
+    function verCompropbanteRegistro(arg){
+        $('#modalComprobanteRegistro').modal('show');
+        $('#iframeComprobanteRegistro').attr('src',$(arg).data('url'));
+    }
+
+    $('#modalComprobanteRegistro').on('hidden.bs.modal', function (e) {
+        $('#iframeComprobanteRegistro').attr('src','');
+      })
+
+
+      function cambiarEstadoRegistro(arg){
+        
+        $.blockUI({message:'<h1>Espere por favor.!</h1>'});
+        $.post("{{ route('cambiarEstadoInscripcion') }}", { inscripcion: $(arg).data('id'),estado:$(arg).val() })
+        .done(function( data ) {
+            if(data.success){
+                $('#inscritoscorte-table').DataTable().draw(false);
+                $.notify(data.success, "success");
+            }
+            if(data.info){
+                $.notify(data.info, "info");   
+            }
+        }).always(function(){
+            $.unblockUI();
+        }).fail(function(){
+            $.notify("Ocurrio un error, vuelva intentar.", "error");
+        });
+
+      }
     </script>
    
     {!! $dataTable->scripts() !!}

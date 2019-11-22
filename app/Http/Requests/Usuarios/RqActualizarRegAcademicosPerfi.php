@@ -28,6 +28,7 @@ class RqActualizarRegAcademicosPerfi extends FormRequest
         return [
             
             'institucion_pregrado'=>'required|string|max:255',
+            'nivel'=>'required|in:TÉCNOLOGICO SUPERIOR,LICENCIATURA,TERCER NIVEL,CUARTO NIVEL,DOCTORADO',
             'tipo_pregrado'=>'required|in:PÚBLICA,PRIVADA,MIXTA',
             'titulo_pregrado'=>'required|max:255|string',
             'especialidad_pregrado'=>'required|max:255|string',
@@ -37,16 +38,6 @@ class RqActualizarRegAcademicosPerfi extends FormRequest
             'pais_pregrado'=>'nullable|string|max:255',
             'provincia_pregrado'=>'nullable|string|max:255',
             'canton_pregrado'=>'nullable|string|max:255',
-
-            'institucion_posgrado'=>'nullable|max:255|string',
-            'titulo_posgrado'=>'nullable|max:255|string',
-            'especialidad_posgrado'=>'nullable|max:255|string',
-            'duracion_posgrado'=>'nullable|integer|min:0',
-            'fecha_graduacion_posgrado'=>'nullable|date',
-            'calificacion_grado_posgrado'=>'nullable|regex:'.$rg_decimal,
-            'pais_posgrado'=>'nullable|string|max:255',
-            'provincia_posgrado'=>'nullable|string|max:255',
-            'canton_posgrado'=>'nullable|string|max:255',
         ];
     }
 }

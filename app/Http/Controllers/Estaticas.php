@@ -22,7 +22,7 @@ class Estaticas extends Controller
     public function index()
     {
 
-        $cortes=Corte::where('estado','Inscripciones')->get();
+        $cortes=Corte::where('estado','Registro')->get();
         $data = array('cortes' => $cortes );
         return view('welcome',$data);
 
@@ -70,7 +70,7 @@ class Estaticas extends Controller
             $user=User::where('email',$rq->email)->orWhere('identificacion',$rq->identificacion)->first();
             $corte=Corte::findOrFail($rq->corte);
 
-            if($corte->estado=='Inscripciones'){
+            if($corte->estado=='Registro'){
                 $pass='La contraseña, sigue siendo la misma.';
 
                 if(!$user){

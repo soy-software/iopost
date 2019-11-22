@@ -5,26 +5,16 @@
 
 @section('content')
 <div class="card">
+    <div class="card-header">
+        Cortes de {{ $maestria->nombre }}
+        @can('crearCortesMaestria',$maestria)
+            <button type="button" onclick="cerarCorte(this)" class="btn btn-primary float-right"  data-id="{{$maestria->id}}" data-toggle="tooltip" data-placement="top" data-title="Crear corte en {{$maestria->nombre}}">
+                <i class="icon-plus3"></i>
+            </button>                           
+        @endcan                       
+    </div>
     <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th colspan="2">Cortes de: <strong> {{$maestria->nombre}} </strong>  
-                        Estado de la maestría: 
-                        <span class="badge badge-light badge-striped badge-striped-right border-right-{{$maestria->estado=='Activo'?'success':'danger'}}">{{$maestria->estado=='Activo'?'Activo':'Inactivo'}}
-                        </span>
-                      
-                        @can('crearCortesMaestria',$maestria)
-                            
-                        <div class="float-right">
-                            <button onclick="cerarCorte(this)"  data-id="{{$maestria->id}}" class="btn btn-default border-dark" data-title="Crear nueva corte de {{$maestria->nombre}}"><i class="icon-plus3"></i></button>                           
-                        </div>                            
-                        @endcan                       
-                    </th>                   
-                </tr>
-            </thead>            
-        </table>
-        <div class="table-responsive mt-2">
+        <div class="table-responsive">
             {!! $dataTable->table()  !!}
         </div>      
     </div>
@@ -55,12 +45,17 @@
                         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
                         $.post( "{{ route('guardarCortes') }}", { maestria: $(arg).data('id') })
                         .done(function( data ) {
-                        location.replace(url);
-                        console.log(data)
+                            if(data.success){
+                                $('#cortes-table').DataTable().draw(false);
+                                $.notify(data.success, "success");
+                            }
+                            if(data.info){
+                                $.notify(data.info, "info");
+                            }
                         }).always(function(){
                             $.unblockUI();
                         }).fail(function(error){
-                            console.log(error);
+                            $.notify("Ocurrio un error, vuelva intentar", "error");
                         });
                            					
 					}
@@ -81,16 +76,21 @@
 				closeIcon:true,
 				buttons: {
 					confirmar: function () {
-                        // alert('id'+$(arg).data('id')+'valor'+$(arg).val())
                         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
                         $.post( "{{ route('cambiarEstadoCorte') }}", { corte: $(arg).data('id'),valor:$(arg).val() })
                         .done(function( data ) {
-                        location.replace(url);
-                        console.log(data)
+                            if(data.success){
+                                $('#cortes-table').DataTable().draw(false);
+                                $.notify(data.success, "success");
+                            }
+                            if(data.info){
+                                $.notify(data.info, "info");
+                            }
+                            
                         }).always(function(){
                             $.unblockUI();
                         }).fail(function(error){
-                            console.log(error);
+                            $.notify("Ocurrio un error, vuelva intentar", "error");
                         });
                            					
 					}

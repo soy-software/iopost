@@ -60,13 +60,13 @@
                         @endforeach
             </td>
         </tr>
-        
-        
+    </tbody>
+</table>
+<h1 class="text-danger">Información laboral</h1>
+<table class="table table-bordered">
         @if ($usuario->informacionLaboral)
         @php($infoL=$usuario->informacionLaboral)
-            <tr>
-                <th colspan="2" class="text-center" style="text-align: center;">Información laboral</th>
-            </tr>    
+               
             <tr>
                 <td>
                     <strong>Trabaja:</strong> {{ $infoL->trabaja }}
@@ -109,106 +109,67 @@
                 </td>
             </tr>
         @endif
-        
-        @if ($usuario->registroAcademico)
-        @php($regAcademico=$usuario->registroAcademico)
-            <tr>
-                <td colspan="2" class="text-center" style="text-align: center;">
-                    <strong>Registros académicos</strong>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center" style="text-align: center;">
-                    Pregrado
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Institución:</strong> {{ $regAcademico->institucion_pregrado }}
-                </td>
-                <td>
-                    <strong>Tipo de institución:</strong> {{ $regAcademico->tipo_pregrado }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Título:</strong> {{ $regAcademico->titulo_pregrado }}
-                </td>
-                <td>
-                    <strong>Especialidad:</strong>{{ $regAcademico->especialidad_pregrado }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Duración (años):</strong>{{ $regAcademico->duracion_pregrado }}
-                </td>
-                <td>
-                    <strong>Fecha graduación:</strong>{{ $regAcademico->fecha_graduacion_pregrado }}
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <strong>Calificación:</strong>{{ $regAcademico->calificacion_grado_pregrado }}
-                </td>
-                <td>
-                    <strong>País:</strong>{{ $regAcademico->pais_pregrado }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Provincia:</strong>{{ $regAcademico->provincia_pregrado }}
-                </td>
-                <td>
-                    <strong>Cantón:</strong>{{ $regAcademico->canton_pregrado }}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center" style="text-align: center;">
-                    Posgrado
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <strong>Institución:</strong>{{ $regAcademico->institucion_posgrado }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Título:</strong>{{ $regAcademico->titulo_posgrado }}
-                </td>
-                <td>
-                    <strong>Especialidad:</strong>{{ $regAcademico->especialidad_posgrado }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Duración (años):</strong>{{ $regAcademico->duracion_posgrado }}
-                </td>
-                <td>
-                    <strong>Fecha graduación:</strong>{{ $regAcademico->fecha_graduacion_posgrado }}
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <strong>Calificación:</strong> {{ $regAcademico->calificacion_grado_posgrado }}
-                </td>
-                <td>
-                    <strong>País:</strong>{{ $regAcademico->pais_posgrado }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>Provincia:</strong>{{ $regAcademico->provincia_posgrado }}
-                </td>
-                <td>
-                    <strong>Cantón:</strong>{{ $regAcademico->canton_posgrado }}
-                </td>
-            </tr>
-
-        @endif
-
-        
-    </tbody>
 </table>
+
+<h1 class="text-danger">Información laboral</h1>
+@if (count($usuario->registrosAcademicos)>0)
+                        
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Institución</th>
+                <th scope="col">Nivel</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Título</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Duración</th>
+                <th scope="col">Fecha de graduación</th>
+                <th scope="col">Calificación</th>
+                <th scope="col">País</th>
+                <th scope="col">Provincia</th>
+                <th scope="col">Cantón</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($usuario->registrosAcademicos as $ra)
+                <tr>
+                    
+                    <th scope="row">
+                        {{ $ra->institucion_pregrado }}
+                    </th>
+                    <td>
+                        {{ $ra->nivel }}
+                    </td>
+                    <td>
+                        {{ $ra->tipo_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->titulo_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->especialidad_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->duracion_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->fecha_graduacion_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->calificacion_grado_pregrado }} 
+                    </td>
+                    <td>
+                        {{ $ra->pais_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->provincia_pregrado }}
+                    </td>
+                    <td>
+                        {{ $ra->canton_pregrado }}
+                    </td>
+                </tr>    
+            @endforeach
+            
+        </tbody>
+    </table>
+@endif

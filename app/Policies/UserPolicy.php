@@ -15,7 +15,7 @@ class UserPolicy
     }
     public function editar(User $user, User $model)
     {
-        if($model->id!=$user->id){
+        if($user->can('G. Usuarios') && $model->id!=$user->id){
             return true;
         }
     }

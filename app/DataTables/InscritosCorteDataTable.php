@@ -24,10 +24,34 @@ class InscritosCorteDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('user_id',function($inscri){
-                return $inscri->user->apellidos .' '.$inscri->user->nombres  ;
+                return $inscri->user->nombres .' '.$inscri->user->apellidos;
             })
-            ->editColumn('comprobante',function($inscri){
-                return view('maestrias.cortes.comprobante',['inscripcion'=>$inscri])->render();
+            ->editColumn('updated_at',function($inscripcion){
+                return $inscripcion->user->identificacion;
+            })
+            ->editColumn('corte_id',function($inscripcion){
+                return $inscripcion->user->email;
+            })
+            ->filterColumn('user_id',function($query, $keyword){
+                $query->whereHas('user', function($query) use ($keyword) {
+                    $query->whereRaw("concat(nombres,' ',apellidos) like ?", ["%{$keyword}%"]);
+                });            
+            })
+            ->filterColumn('updated_at',function($query, $keyword){
+                $query->whereHas('user', function($query) use ($keyword) {
+                    $query->whereRaw("identificacion like ?", ["%{$keyword}%"]);
+                });            
+            })
+            
+            ->filterColumn('corte_id',function($query, $keyword){
+                $query->whereHas('user', function($query) use ($keyword) {
+                    $query->whereRaw("email like ?", ["%{$keyword}%"]);
+                });            
+            })
+            
+            
+            ->editColumn('estado',function($inscripcion){
+                return view('maestrias.cortes.estadoRegistro',['inscripcion'=>$inscripcion])->render();
             })
             ->addColumn('action', function($inscri){
                 return view('maestrias.cortes.accionesInscritos',['inscripcion'=>$inscri])->render();
@@ -43,7 +67,7 @@ class InscritosCorteDataTable extends DataTable
     public function query(Inscripcion $model)
     {
         $idCorte=$this->idCorte;
-        return $model->where('corte_id',$idCorte)->select();
+        return $model->where('corte_id',$idCorte);
     }
 
     /**
@@ -81,15 +105,17 @@ class InscritosCorteDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
-                  ->title('Acciones')
-                  ->addClass('text-center'),
+                  ->addClass('text-center')
+                  ->title('Acciones'),
             
+            Column::make('estado')->title('Estado'),      
+            Column::make('id')
+            ->title('# de registro'),
             Column::make('user_id')->title('Aspirante'),
-            Column::make('comprobante')
-                ->exportable(false)
-                ->printable(false),
-            Column::make('estado'),
-            Column::make('created_at')->title('Inscrito el'),
+            Column::make('updated_at')->title('Identificación'),
+            Column::make('corte_id')->title('Email'),
+            Column::make('numero_factura')->title('# factura'),
+            Column::make('created_at')->title('Fecha de registro'),
             
         ];
     }

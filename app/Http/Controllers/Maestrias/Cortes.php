@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Corte;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
+use App\Notifications\NotificacionRegistroComprobante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,23 +28,28 @@ class Cortes extends Controller
     }
     public function guardarCortes(Request $request)
     {
-        $request->validate([
-            'maestria'=>'required|exists:maestrias,id',           
-        ]);
-        $numero=Corte::where('maestria_id',$request->maestria)->latest()->value('numero');
-        if($numero){
-            $numero=$numero+1;
-        }else{
-            $numero=1;
+        try {
+            $request->validate([
+                'maestria'=>'required|exists:maestrias,id',           
+            ]);
+            $numero=Corte::where('maestria_id',$request->maestria)->latest()->value('numero');
+            if($numero){
+                $numero=$numero+1;
+            }else{
+                $numero=1;
+            }
+            $maestria=Maestria::findOrFail($request->maestria);
+            $this->authorize('crearCortesMaestria',$maestria);
+            $corte= new Corte();
+            $corte->numero=$numero;
+            $corte->maestria_id=$request->maestria;
+            $corte->detalle="S/D";
+            $corte->usuarioCreado=Auth::id();
+            $corte->save();
+            return response()->json(['success'=>'Nueva corte creado exitosamente']);
+        } catch (\Exception $th) {
+            return response()->json(['info'=>'Ocurrio un error, vuelva intentar. Verifique que no exista un corte en estado Registro']);
         }
-        $corte= new Corte();
-        $corte->numero=$numero;
-        $corte->maestria_id=$request->maestria;
-        $corte->detalle="S/D";
-        $corte->usuarioCreado=Auth::id();
-        $corte->save();
-        $request->session()->flash('success','Corte creado');
-        return redirect()->route('cortesMaestria',$request->maestria);
     }
     public function eliminarCorte(Request $request,$idCorte)
     {
@@ -62,36 +68,26 @@ class Cortes extends Controller
     }
     public function cambiarEstadoCorte(Request $request)
     {
+        $request->validate([
+            'corte' => 'required|exists:cortes,id',
+            'valor' => 'required|in:Promoción,Registro,Proceso académico,Finalizado',
+        ]);
+
         $corte=Corte::findOrFail($request->corte);
-        
-        $validacion=$this->validacionCorte($corte->id,$request->valor);
-        if($validacion=="ok"){
+
+        $cortetodos=Corte::where('estado','Registro')
+            ->where('maestria_id',$corte->maestria_id)
+            ->where('id','!=',$corte->id)->count();
+        if($cortetodos>0){
+            return response()->json(['info'=>'Corte no actualizado, ya que existe otra corte en estado Registro']);
+        }else{
             $corte->estado=$request->valor;
             $corte->save();
-            session()->flash('success','La corte cambio de estado a: '.$request->valor);   
-        }else{
-            session()->flash('warn',$validacion);
+            return response()->json(['success'=>'La corte cambio de estado a: '.$request->valor]);
         }
         
     }
-    public function validacionCorte($corte,$estado)
-    {
-        $corte=Corte::findOrFail($corte);
-        $mensage="";
-        $cortetodos=Corte::where('estado','Inscripciones')
-                    ->where('maestria_id',$corte->maestria_id)
-                    ->where('id','!=',$corte->id)->count();
-        if($estado=="Inscripciones"){
-            if($cortetodos==0){
-                $mensage="ok";
-            }else{
-                $mensage="Estado de la corte no actualizada, ya que existe un corte en estado de Inscripción";
-            }
-        }else{
-            $mensage="ok";
-        }
-        return $mensage;
-    }
+    
     public function inscritosCorte(InscritosCorteDataTable $dataTable,  $idCorte)
     {
         $corte=Corte::findOrFail($idCorte);
@@ -103,5 +99,22 @@ class Cortes extends Controller
         $inscripciones=Inscripcion::findOrFail($idInscripcion);
         $data = array('inscripcion' => $inscripciones );
         return view('maestrias.cortes.informacionInscrito',$data);
+    }
+
+
+    public function cambiarEstadoInscripcion(Request $request)
+    {
+        $request->validate([
+            'inscripcion' => 'required|exists:inscripcions,id',
+            'estado' => 'required|in:Registro,Subir comprobante de registro,Aprobado,Inscrito',
+        ]);
+        $inscripcion=Inscripcion::findOrFail($request->inscripcion);
+        if($request->estado=='Aprobado'){
+            $inscripcion->user->notify(new NotificacionRegistroComprobante($inscripcion));
+        }
+        $inscripcion->estado=$request->estado;
+
+        $inscripcion->save();
+        return response()->json(['success'=>'Estado del registro cambiado exitosamente']);
     }
 }

@@ -29,22 +29,23 @@ class RegistrosAprobarDataTable extends DataTable
                     $query->whereRaw("concat(nombres,' ',apellidos) like ?", ["%{$keyword}%"]);
                 });            
             })
-            ->editColumn('identificacion',function($inscripcion){
+            ->editColumn('updated_at',function($inscripcion){
                 return $inscripcion->user->identificacion;
             })
-            ->filterColumn('user_id',function($query, $keyword){
+            ->filterColumn('updated_at',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("identificacion like ?", ["%{$keyword}%"]);
                 });            
             })
-            ->filterColumn('user_id',function($query, $keyword){
+            ->editColumn('estado',function($inscripcion){
+                return $inscripcion->user->email;
+            })
+            ->filterColumn('estado',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("email like ?", ["%{$keyword}%"]);
                 });            
             })
-            ->editColumn('email',function($inscripcion){
-                return $inscripcion->user->email;
-            })
+            
             ->editColumn('maestria',function($inscripcion){
                 return $inscripcion->corte->maestria->nombre;
             })
@@ -114,13 +115,13 @@ class RegistrosAprobarDataTable extends DataTable
             Column::make('id')
             ->title('# de registro'),
             Column::make('user_id')->title('Aspirante'),
-            Column::computed('identificacion')->title('Identificación'),
-            Column::computed('email')->title('Email'),
-           
-
+            Column::make('updated_at')->title('Identificación'),
+            Column::make('estado')->title('Email'),
+            Column::make('numero_factura')->title('# factura'),
             Column::make('created_at')->title('Fecha de registro'),
             Column::computed('maestria')->title('Maestría'),
             Column::make('corte_id')->title('Corte'),
+            
             
             
         ];

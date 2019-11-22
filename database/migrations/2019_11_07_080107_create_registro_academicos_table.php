@@ -18,6 +18,7 @@ class CreateRegistroAcademicosTable extends Migration
             $table->timestamps();
             // datos pregrado
             $table->string('institucion_pregrado');
+            $table->enum('nivel',['TÉCNOLOGICO SUPERIOR','LICENCIATURA','TERCER NIVEL','CUARTO NIVEL','DOCTORADO'])->default('TERCER NIVEL');
             $table->enum('tipo_pregrado',['PÚBLICA','PRIVADA','MIXTA'])->default('PÚBLICA');
             $table->string('titulo_pregrado');
             $table->string('especialidad_pregrado')->nullable();
@@ -27,17 +28,6 @@ class CreateRegistroAcademicosTable extends Migration
             $table->string('pais_pregrado')->nullable();
             $table->string('provincia_pregrado')->nullable();
             $table->string('canton_pregrado')->nullable();
-
-            // datos posgrado
-            $table->string('institucion_posgrado')->nullable();
-            $table->string('titulo_posgrado')->nullable();
-            $table->string('especialidad_posgrado')->nullable();
-            $table->integer('duracion_posgrado')->nullable();
-            $table->date('fecha_graduacion_posgrado')->nullable();
-            $table->decimal('calificacion_grado_posgrado',8,2)->nullable();
-            $table->string('pais_posgrado')->nullable();
-            $table->string('provincia_posgrado')->nullable();
-            $table->string('canton_posgrado')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

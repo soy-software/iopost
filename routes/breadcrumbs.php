@@ -27,6 +27,11 @@ Breadcrumbs::for('miPerfil', function ($trail) {
     $trail->parent('home');
     $trail->push('Mi perfil', route('miPerfil'));
 });
+Breadcrumbs::for('actualizarMiRegistroAcademico', function ($trail,$ra) {
+    $trail->parent('miPerfil');
+    $trail->push('Actualizar mi registro académico', route('actualizarMiRegistroAcademico',$ra->id));
+});
+
 // inscripcion
 
 Breadcrumbs::for('incripcion', function ($trail,$corte) {
@@ -105,7 +110,7 @@ Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {
 
 Breadcrumbs::for('InscritoCortesMaestria', function ($trail,$corte) {
     $trail->parent('cortesMaestria',$corte->maestria);
-    $trail->push('Inscritos del corte '.$corte->numero, route('inscritosCorteMaestria',$corte->id));
+    $trail->push('Registros del corte '.$corte->numero, route('inscritosCorteMaestria',$corte->id));
 });
 
 Breadcrumbs::for('InformacionInscritoCortesMaestria', function ($trail,$inscripcion) {

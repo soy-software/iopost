@@ -28,7 +28,7 @@ class Maestrias extends Controller
     {
         return view('maestrias.nuevo');
     }
-    public function guardarMaestria(RqCrear $request)
+    public function guardar(RqCrear $request)
     {
         $maestria=new Maestria();
         $maestria->nombre=$request->nombre;
@@ -52,7 +52,6 @@ class Maestrias extends Controller
         $maestria->capacidadParalelo=$request->capacidadParalelo;
         $maestria->descripcionGeneral=$request->descripcionGeneral;
         $maestria->usuarioCreado=Auth::id();
-        $maestria->valorMatricula=$request->valorMatricula;
         $maestria->save();
         if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
@@ -67,13 +66,13 @@ class Maestrias extends Controller
         $request->session()->flash('success','Maestría creada');
         return redirect()->route('maestrias');
     }
-    public function editarMaestria($idMaestria)
+    public function editar($idMaestria)
     {
         $maestria=Maestria::findOrFail($idMaestria);
         $data = array('maestria' =>$maestria);
         return view('maestrias.editar',$data);
     }
-    public function actualizarMaestria(RqEditar $request)
+    public function actualizar(RqEditar $request)
     {
         $maestria=Maestria::findOrFail($request->maestria);
         $maestria->nombre=$request->nombre;
@@ -96,8 +95,7 @@ class Maestrias extends Controller
         $maestria->fechaAprobacion=$request->fechaAprobacion;
         $maestria->capacidadParalelo=$request->capacidadParalelo;
         $maestria->descripcionGeneral=$request->descripcionGeneral;
-        $maestria->usuarioActualizado=Auth::id();        
-        $maestria->valorMatricula=$request->valorMatricula;
+        $maestria->usuarioActualizado=Auth::id();
         $maestria->save();
         if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
@@ -113,14 +111,14 @@ class Maestrias extends Controller
         $request->session()->flash('success','Maestría actualizada');
         return redirect()->route('maestrias');
     }
-    public function informacionMaestria($idMaestria)
+    public function informacion($idMaestria)
     {
         $maestria=Maestria::findOrFail($idMaestria);
         $data = array('maestria' =>$maestria);
         return view('maestrias.informacion',$data);
     }
     
-    public function eliminarMaestria(Request $request,$idMaestria)
+    public function eliminar(Request $request,$idMaestria)
     {
         try {
             DB::beginTransaction();

@@ -1,4 +1,4 @@
-@extends('layouts.app',['title'=>'Editar de maestría'])
+@extends('layouts.app',['title'=>'Editar maestría'])
 
 @section('breadcrumbs', Breadcrumbs::render('editarMaestria',$maestria))
 
@@ -92,7 +92,13 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lugarEjecucion">Lugar de Ejecución:<i class="text-danger">*</i></label>
-                        <textarea class="form-control @error('lugarEjecucion') is-invalid @enderror"  name="lugarEjecucion" id="lugarEjecucion" required placeholder="Latacunga" >{{ old('lugarEjecucion',$maestria->lugarEjecucion) }}</textarea>
+                        
+                        <select class="form-control @error('lugarEjecucion') is-invalid @enderror" name="lugarEjecucion" id="lugarEjecucion" required>
+                            <option value="La matríz" {{ old('lugarEjecucion',$maestria->lugarEjecucion)=='La matríz'?'selected':'' }}>La matríz</option>
+                            <option value="Salache" {{ old('lugarEjecucion',$maestria->lugarEjecucion)=='Salache'?'selected':'' }}>Salache</option>
+                            <option value="La mana" {{ old('lugarEjecucion',$maestria->lugarEjecucion)=='La mana'?'selected':'' }}>La mana</option>
+                        </select>
+
                         @error('lugarEjecucion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -197,15 +203,7 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="valorMatricula">Valor de la matricula:<i class="text-danger">*</i><i class="text-danger">*</i></label>
-                        <input type="number" class="form-control @error('valorMatricula') is-invalid @enderror" value="{{ old('valorMatricula',$maestria->valorMatricula) }}" name="valorMatricula" id="valorMatricula" required placeholder="50">
-                        @error('valorMatricula')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                   
                     <div class="form-group col-md-4">
                         <label for="foto">Seleciona foto</label>
                         <input type="file" class="form-control-file @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/*">
@@ -214,8 +212,15 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+
+                        @if (Storage::exists($maestria->foto))
+                            <a href="{{ Storage::url($maestria->foto) }}" class="btn btn-link mt-1" data-toggle="tooltip" data-placement="top" title="Ver foto">
+                                <img src="{{ Storage::url($maestria->foto) }}" alt="" class="img-fluid" width="45px;">
+                            </a>
+                        @endif
+                        
                     </div>  
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-8">
                         <label for="descripcionGeneral">Descripción General:<i class="text-danger">*</i></label>
                         <textarea class="form-control @error('descripcionGeneral') is-invalid @enderror"  name="descripcionGeneral" id="descripcionGeneral" required placeholder="Descripción General" >{{ old('descripcionGeneral',$maestria->descripcionGeneral) }}</textarea>
                         @error('descripcionGeneral')

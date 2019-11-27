@@ -91,7 +91,12 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lugarEjecucion">Lugar de Ejecución:<i class="text-danger">*</i></label>
-                        <textarea class="form-control @error('lugarEjecucion') is-invalid @enderror"  name="lugarEjecucion" id="lugarEjecucion" required placeholder="Latacunga" >{{ old('lugarEjecucion') }}</textarea>
+                        <select class="form-control @error('lugarEjecucion') is-invalid @enderror" name="lugarEjecucion" id="lugarEjecucion" required>
+                            <option value="La matríz" {{ old('lugarEjecucion')=='La matríz'?'selected':'' }}>La matríz</option>
+                            <option value="Salache" {{ old('lugarEjecucion')=='Salache'?'selected':'' }}>Salache</option>
+                            <option value="La mana" {{ old('lugarEjecucion')=='La mana'?'selected':'' }}>La mana</option>
+                        </select>
+
                         @error('lugarEjecucion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -196,15 +201,7 @@
                     </div>
                 </div> 
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="valorMatricula">Valor de la matricula<i class="text-danger">*</i></label>
-                        <input type="number" class="form-control @error('valorMatricula') is-invalid @enderror" value="{{ old('valorMatricula') }}" name="valorMatricula" id="valorMatricula" required placeholder="50">
-                        @error('valorMatricula')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                   
 
                     <div class="form-group col-md-4">
                         <label for="foto">Seleciona foto<i class="text-danger">*</i></label>
@@ -214,9 +211,9 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>  
+                    </div>
                     
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-8">
                         <label for="descripcionGeneral">Descripción General<i class="text-danger">*</i></label>
                         <textarea class="form-control @error('descripcionGeneral') is-invalid @enderror"  name="descripcionGeneral" id="descripcionGeneral" required placeholder="Descripción General" >{{ old('descripcionGeneral') }}</textarea>
                         @error('descripcionGeneral')

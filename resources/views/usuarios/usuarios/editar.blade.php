@@ -320,9 +320,7 @@
                     </span>
                 @enderror
 
-                <a href="">
-                    <img src="" alt="">
-                </a>
+                
                 @if (Storage::exists($usuario->foto))
                     <a href="{{ Storage::url($usuario->foto) }}" class="btn-link float-right" data-toggle="tooltip" data-placement="top" title="Ver foto">
                         <img src="{{ Storage::url($usuario->foto) }}" alt="" class="img-fluid" width="45px;">

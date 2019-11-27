@@ -70,11 +70,11 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         //D:En estas rutas se encuentra todo lo relacionado a maestrias
         Route::get('/maestrias', 'Maestrias@index')->name('maestrias');
         Route::get('/nueva-mestria', 'Maestrias@nuevo')->name('nuevaMaestria');
-        Route::post('/guardar-mestria', 'Maestrias@guardarMaestria')->name('guardarMaestria');
-        Route::get('/editar-mestria/{id}', 'Maestrias@editarMaestria')->name('editarMaestria');
-        Route::post('/actualizar-mestria', 'Maestrias@actualizarMaestria')->name('actualizarMaestria');
-        Route::get('/informacion-mestria/{id}', 'Maestrias@informacionMaestria')->name('informacionMaestria');   
-        Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminarMaestria')->name('eliminarMaestria');   
+        Route::post('/guardar-mestria', 'Maestrias@guardar')->name('guardarMaestria');
+        Route::get('/editar-mestria/{id}', 'Maestrias@editar')->name('editarMaestria');
+        Route::post('/actualizar-mestria', 'Maestrias@actualizar')->name('actualizarMaestria');
+        Route::get('/informacion-mestria/{id}', 'Maestrias@informacion')->name('informacionMaestria');   
+        Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminar')->name('eliminarMaestria');   
 
         // A: Fabian Lopez
         //D:En estas rutas se encuentra todo lo relacionado con cortes

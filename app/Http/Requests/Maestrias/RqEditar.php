@@ -23,10 +23,10 @@ class RqEditar extends FormRequest
      */
     public function rules()
     {
-        $rg_decimal="/^[0-9,]+(\.\d{0,2})?$/";
+        
         return [
-            'maestria'=>'required|numeric',
-            'nombre'=>'required|string|max:255',
+            'maestria'=>'required|exists:maestrias,id',
+            'nombre'=>'required|string|max:255|unique:maestrias,nombre,'.$this->input('maestria'),
             'tipoPrograma'=>'required|string|max:255',
             'campoAmplio'=>'required|string|max:255',
             'campoEspecifico'=>'required|string|max:255',
@@ -34,7 +34,7 @@ class RqEditar extends FormRequest
             'programa'=>'required|string|max:255',
             'titulo'=>'required|string|max:255',
             'codificacionPrograma'=>'required|string|',
-            'lugarEjecucion'=>'required|string|max:255',
+            'lugarEjecucion'=>'required|in:La matríz,Salache,La mana',
             'duracion'=>'required|string|max:255',
             'tipoPeriodo'=>'required|string|max:255',
             'numeroHoras'=>'required|numeric',
@@ -44,8 +44,7 @@ class RqEditar extends FormRequest
             'paralelos'=>'required|numeric',
             'vigencia'=>'required|string|max:255',
             'fechaAprobacion'=>'required|string|date',
-            'capacidadParalelo'=>'required|numeric',
-            'valorMatricula'=>'required|regex:'.$rg_decimal
+            'capacidadParalelo'=>'required|numeric'
         ];
     }
 }

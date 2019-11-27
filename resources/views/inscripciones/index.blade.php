@@ -31,7 +31,7 @@
                     </div>
                 @endif
 
-                <form id="example-form" action="{{ route('procesarInscripcion') }}" method="POST">
+                <form id="loginForm" action="{{ route('procesarInscripcion') }}" method="POST">
                     @csrf
                     <input type="hidden" name="corte" value="{{ $corte->id }}" required>
                     <div class="card border border-secondary">
@@ -185,7 +185,7 @@
                             <div class="form-row">
                                 
                                 <div class="form-group col-md-3">
-                                    <label for="pais">País<i class="text-danger">*</i></label>
+                                    <label for="pais">País de procedencia<i class="text-danger">*</i></label>
                                     <input type="text" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais" value="{{ old('pais','ECUADOR') }}" required placeholder="Ingrese país...">
                                     @error('pais')
                                         <span class="invalid-feedback" role="alert">
@@ -194,7 +194,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="provincia">Provincia<i class="text-danger">*</i></label>
+                                    <label for="provincia">Provincia de procedencia<i class="text-danger">*</i></label>
                                     <select id="provincia" class="form-control @error('provincia') is-invalid @enderror" name="provincia" required onchange="cargarCantones(this);">
                                         @foreach ($provincias as $provincia)
                                         <option value="{{ $provincia->id }}" {{ old('provincia')==$provincia->id?'selected':'' }}>
@@ -209,7 +209,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="canton">Cantón<i class="text-danger">*</i></label>
+                                    <label for="canton">Cantón de procedencia<i class="text-danger">*</i></label>
                                     <select id="canton" class="form-control @error('canton') is-invalid @enderror" name="canton" onchange="cargarParroquias(this);" required>
                                         
                                     </select>
@@ -220,7 +220,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="parroquia">Parroquia<i class="text-danger">*</i></label>
+                                    <label for="parroquia">Parroquia de procedencia<i class="text-danger">*</i></label>
                                     <select id="parroquia" class="form-control @error('parroquia') is-invalid @enderror" name="parroquia"  required>
 
                                     </select>
@@ -233,7 +233,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="direccion">Dirección<i class="text-danger">*</i></label>
+                                <label for="direccion">Dirección de procedencia<i class="text-danger">*</i></label>
                                 <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="direccion" name="direccion" value="{{ old('direccion') }}" placeholder="Ingrese dirección..." required>
                                 @error('direccion')
                                     <span class="invalid-feedback" role="alert">
@@ -245,7 +245,7 @@
                         </div>
                         <div class="card-footer text-muted">
                             <button type="submit" class="btn btn-dark btn-lg">
-                                Registrar
+                                Registrar <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
                     </div>
@@ -271,6 +271,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <i id="loading"></i>
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
             </div>
             </div>
@@ -278,7 +279,8 @@
     </div>
 
     @push('linksCabeza')
-        
+        <script src="{{ asset('vendor/validate/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('vendor/validate/messages_es.min.js') }}"></script>
     @endpush
 
     @prepend('linksPie')
@@ -336,13 +338,41 @@
             }
 
             function abrirModalRegistro(arg){
+                $('#loading').addClass('fas fa-spinner fa-pulse');
                 $('#documentoRegistro').modal('show');
-                $('#documentoRegistroPdf').attr('src',$(arg).data('url'))
+                $('#documentoRegistroPdf').attr('src',$(arg).data('url'));
+                $('#loading').removeClass('fas fa-spinner fa-pulse');
             }
 
            $('#documentoRegistro').on('hidden.bs.modal', function (e) {
                 $('#documentoRegistroPdf').attr('src','')
             });
+
+            $( "#loginForm" ).validate({
+                submitHandler: function(form) {
+                    $.blockUI({message:'<h1>Espere por favor.!</h1>'});
+                    form.submit();
+                },
+                errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `invalid-feedback` class to the error element
+					error.addClass( "invalid-feedback" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.next( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+				}
+			} );
+
+
 
         </script>
     @endprepend

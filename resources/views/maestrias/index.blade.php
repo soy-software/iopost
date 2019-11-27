@@ -1,4 +1,4 @@
-@extends('layouts.app',['title'=>'Listado de maestrias'])
+@extends('layouts.app',['title'=>'Listado de maestrías'])
 
 @section('breadcrumbs', Breadcrumbs::render('maestrias'))
 @section('barraLateral')

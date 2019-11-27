@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Maestrias;
 use App\DataTables\CortesDataTable;
 use App\DataTables\InscritosCorteDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Maestrias\Cortes\RqActualizar;
+use App\Http\Requests\Maestrias\Cortes\RqCrear;
 use App\Models\Corte;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
@@ -26,12 +28,26 @@ class Cortes extends Controller
         $data = array('maestria' =>$maestria , );
         return  $dataTable->with('idMaestria',$maestria->id)->render('maestrias.cortes.index',$data);
     }
-    public function guardarCortes(Request $request)
+
+    public function nuevo($idMaestria)
+    {
+        $maestria=Maestria::findOrFail($idMaestria);
+
+        $numero=Corte::where('maestria_id',$idMaestria)->latest()->value('numero');
+        if($numero){
+            $numero=$numero+1;
+        }else{
+            $numero=1;
+        }
+
+        $data = array('maestria' => $maestria,'numero'=>$numero );
+        
+        return view('maestrias.cortes.nuevo',$data);
+    }
+
+    public function guardar(RqCrear $request)
     {
         try {
-            $request->validate([
-                'maestria'=>'required|exists:maestrias,id',           
-            ]);
             $numero=Corte::where('maestria_id',$request->maestria)->latest()->value('numero');
             if($numero){
                 $numero=$numero+1;
@@ -40,16 +56,63 @@ class Cortes extends Controller
             }
             $maestria=Maestria::findOrFail($request->maestria);
             $this->authorize('crearCortesMaestria',$maestria);
-            $corte= new Corte();
+            $corte=new Corte();
             $corte->numero=$numero;
-            $corte->maestria_id=$request->maestria;
-            $corte->detalle="S/D";
+            $corte->valorRegistro=$request->valorRegistro;
+            $corte->valorMatricula=$request->valorMatricula;
+            $corte->valorColegiatura=$request->valorColegiatura;
+            $corte->fechaInicioDocumentos=$request->fechaInicioDocumentos;
+            $corte->fechaFinDocumentos=$request->fechaFinDocumentos;
+            $corte->fechaAdmision=$request->fechaAdmision;
+            $corte->horaAdmision=$request->horaAdmision;
+            $corte->entrevistaEnsayo=$request->entrevistaEnsayo;
+            $corte->presentacionInformes=$request->presentacionInformes;
+            $corte->resolucionProcesoAdmitidos=$request->resolucionProcesoAdmitidos;
+            $corte->publicacionAdmitidos=$request->publicacionAdmitidos;
+            $corte->inicioClases=$request->inicioClases;
+            $corte->fechaInicioMatricula=$request->fechaInicioMatricula;
+            $corte->fechaFinMatricula=$request->fechaFinMatricula;
+            $corte->maestria_id=$maestria->id;
             $corte->usuarioCreado=Auth::id();
             $corte->save();
             return response()->json(['success'=>'Nueva corte creado exitosamente']);
         } catch (\Exception $th) {
-            return response()->json(['info'=>'Ocurrio un error, vuelva intentar. Verifique que no exista un corte en estado Registro']);
+            return $th->getMessage();
         }
+    }
+
+    public function editar($idCorte)
+    {
+        $corte=Corte::findOrFail($idCorte);
+        $data = array('corte'=>$corte);
+        return view('maestrias.cortes.editar',$data);
+    }
+
+    public function actualizar(RqActualizar $request) 
+    {
+        $corte=Corte::findOrFail($request->corte);
+        try {
+            $corte->valorRegistro=$request->valorRegistro;
+            $corte->valorMatricula=$request->valorMatricula;
+            $corte->valorColegiatura=$request->valorColegiatura;
+            $corte->fechaInicioDocumentos=$request->fechaInicioDocumentos;
+            $corte->fechaFinDocumentos=$request->fechaFinDocumentos;
+            $corte->fechaAdmision=$request->fechaAdmision;
+            $corte->horaAdmision=$request->horaAdmision;
+            $corte->entrevistaEnsayo=$request->entrevistaEnsayo;
+            $corte->presentacionInformes=$request->presentacionInformes;
+            $corte->resolucionProcesoAdmitidos=$request->resolucionProcesoAdmitidos;
+            $corte->publicacionAdmitidos=$request->publicacionAdmitidos;
+            $corte->inicioClases=$request->inicioClases;
+            $corte->fechaInicioMatricula=$request->fechaInicioMatricula;
+            $corte->fechaFinMatricula=$request->fechaFinMatricula;
+            $corte->usuarioActualizado=Auth::id();
+            $corte->save();
+            $request->session()->flash('success','Corte actualizado');
+        } catch (\Exception $th) {
+            $request->session()->flash('success','Corte no actualizado, vuelva intentar');
+        }
+        return redirect()->route('cortesMaestria',$corte->maestria->id);
     }
     public function eliminarCorte(Request $request,$idCorte)
     {

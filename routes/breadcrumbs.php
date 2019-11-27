@@ -105,12 +105,22 @@ Breadcrumbs::for('editarMateriaMaestria', function ($trail,$materiaMaestria) {
 //d:Breadcrums de cortes
 Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {
     $trail->parent('maestrias');
-    $trail->push('Cortes de '.$maestria->nombre, route('cortesMaestria',$maestria->id));
+    $trail->push('Cohorte de '.$maestria->nombre, route('cortesMaestria',$maestria->id));
 });
+Breadcrumbs::for('nuevoCohorte', function ($trail,$maestria) {
+    $trail->parent('cortesMaestria',$maestria);
+    $trail->push('Nueva cohorte', route('nuevoCohorte',$maestria->id));
+});
+
+Breadcrumbs::for('editarCorte', function ($trail,$corte) {
+    $trail->parent('cortesMaestria',$corte->maestria);
+    $trail->push('Editar cohorte', route('editarCorte',$corte->id));
+});
+
 
 Breadcrumbs::for('InscritoCortesMaestria', function ($trail,$corte) {
     $trail->parent('cortesMaestria',$corte->maestria);
-    $trail->push('Registros del corte '.$corte->numero, route('inscritosCorteMaestria',$corte->id));
+    $trail->push('Registros del cohorte '.$corte->numero, route('inscritosCorteMaestria',$corte->id));
 });
 
 Breadcrumbs::for('InformacionInscritoCortesMaestria', function ($trail,$inscripcion) {

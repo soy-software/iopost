@@ -78,13 +78,16 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
 
         // A: Fabian Lopez
         //D:En estas rutas se encuentra todo lo relacionado con cortes
-        Route::get('/cortes-mestria/{id}', 'Cortes@index')->name('cortesMaestria');
-        Route::post('/nuevo-corte', 'Cortes@guardarCortes')->name('guardarCortes');
-        Route::get('/eliminar-corte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
-        Route::post('/cambiar-estado-corte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
-        Route::get('/registros-corte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
-        Route::get('/informacion-registro-corte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
-        Route::post('/cambiar-estado--de-inscripcion', 'Cortes@cambiarEstadoInscripcion')->name('cambiarEstadoInscripcion');
+        Route::get('/cohortes-de-maestria/{maestria}', 'Cortes@index')->name('cortesMaestria');
+        Route::get('/nuevo-cohorte/{maestria}', 'Cortes@nuevo')->name('nuevoCohorte');
+        Route::post('/guardar-cohorte', 'Cortes@guardar')->name('guardarCorte');
+        Route::get('/editar-cohorte/{corte}', 'Cortes@editar')->name('editarCorte');
+        Route::post('/actualizar-cohorte', 'Cortes@actualizar')->name('actualizarCorte');
+        Route::get('/eliminar-cohorte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
+        Route::post('/cambiar-estado-cohorte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
+        Route::get('/registros-cohorte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
+        Route::get('/informacion-registro-cohorte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
+        Route::post('/cambiar-estado-de-inscripcion', 'Cortes@cambiarEstadoInscripcion')->name('cambiarEstadoInscripcion');
     
         
         

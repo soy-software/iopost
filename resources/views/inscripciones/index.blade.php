@@ -265,13 +265,11 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="" id="documentoRegistroPdf" allowfullscreen></iframe>
-                </div>
+            <div class="modal-body" id="modalBody">
+                
             </div>
             <div class="modal-footer">
-                <i id="loading"></i>
+                
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
             </div>
             </div>
@@ -338,10 +336,14 @@
             }
 
             function abrirModalRegistro(arg){
-                $('#loading').addClass('fas fa-spinner fa-pulse');
+                $.blockUI({message:'<h1>Espere por favor.!</h1>'});
+                
                 $('#documentoRegistro').modal('show');
                 $('#documentoRegistroPdf').attr('src',$(arg).data('url'));
-                $('#loading').removeClass('fas fa-spinner fa-pulse');
+
+                $("#modalBody").load($(arg).data('url'), function(responseTxt, statusTxt, xhr){
+                    $.unblockUI();
+                });
             }
 
            $('#documentoRegistro').on('hidden.bs.modal', function (e) {

@@ -20,6 +20,7 @@ Route::post('/obtener-parroquias-x-canton', 'Estaticas@obtenerParroquiasXcanton'
 Route::get('/registro-en-linea/{corte}', 'Estaticas@inscripcion')->name('incripcion');
 Route::post('/registro-procesar', 'Estaticas@procesarInscripcion')->name('procesarInscripcion');
 Route::get('/descargar-mi-registro-maestria/{inscripcion}', 'Estaticas@descargarRegistroPdf')->name('descargarRegistroPdf');
+Route::get('/ver-mi-registro-maestria/{inscripcion}', 'Estaticas@verRegistroPdf')->name('verRegistroPdf');
 
 
 // A:Deivid

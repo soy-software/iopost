@@ -129,6 +129,12 @@ class Estaticas extends Controller
     {
         $inscripcion=Inscripcion::findOrFail($idInscripcion);
         $data = array('inscripcion' => $inscripcion );
+        return view('inscripciones.documentoRegistroPdf',$data);
+    }
+    public function verRegistroPdf($idInscripcion)
+    {
+        $inscripcion=Inscripcion::findOrFail($idInscripcion);
+        $data = array('inscripcion' => $inscripcion );
         $pdf = PDF::loadView('inscripciones.inscripcionPdf', $data);
         return $pdf->inline('Registro de maestría '.$inscripcion->id.'.pdf');
     }

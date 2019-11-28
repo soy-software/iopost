@@ -15,7 +15,7 @@
     <a  href="{{ route('asignarCoordinadores', $maestria->id) }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Coordinadores de {{ $maestria->nombre }}">
         <i class="fas fa-chalkboard-teacher"></i>
     </a>
-    <a  href="{{ route('cortesMaestria', $maestria->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cortes de {{ $maestria->nombre }}">
+    <a  href="{{ route('cortesMaestria', $maestria->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cohortes de {{ $maestria->nombre }}">
         <i class="fas fa-border-all"></i>
     </a>
 </div>

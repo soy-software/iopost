@@ -1,4 +1,4 @@
-@extends('layouts.app',['title'=>'Listado de cortes'])
+@extends('layouts.app',['title'=>'Listado de cohortes'])
 
 @section('breadcrumbs', Breadcrumbs::render('cortesMaestria',$maestria))
 
@@ -16,11 +16,6 @@
 <div class="card">
     <div class="card-header">
         Cortes de {{ $maestria->nombre }}
-        {{-- @can('crearCortesMaestria',$maestria)
-            <button type="button" onclick="cerarCorte(this)" class="btn btn-primary float-right"  data-id="{{$maestria->id}}" data-toggle="tooltip" data-placement="top" data-title="Crear corte en {{$maestria->nombre}}">
-                <i class="icon-plus3"></i>
-            </button>                           
-        @endcan                        --}}
     </div>
     <div class="card-body">
         <div class="table-responsive">

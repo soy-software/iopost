@@ -109,9 +109,9 @@ class Cortes extends Controller
             $corte->fechaFinMatricula=$request->fechaFinMatricula;
             $corte->usuarioActualizado=Auth::id();
             $corte->save();
-            $request->session()->flash('success','Corte actualizado');
+            $request->session()->flash('success','Cohorte actualizado');
         } catch (\Exception $th) {
-            $request->session()->flash('success','Corte no actualizado, vuelva intentar');
+            $request->session()->flash('success','Cohorte no actualizado, vuelva intentar');
         }
         return redirect()->route('cortesMaestria',$corte->maestria->id);
     }
@@ -122,11 +122,11 @@ class Cortes extends Controller
             DB::beginTransaction();
             $corte->delete();
             DB::commit();
-            session()->flash('success','Corte eliminada');
+            session()->flash('success','Cohorte eliminada');
 
         } catch (\Exception $th) {
             DB::rollBack();
-            session()->flash('warn','El corte no puede ser eliminado');
+            session()->flash('warn','Cohorte no puede ser eliminado');
         }
         return redirect()->route('cortesMaestria',$corte->maestria_id);
     }
@@ -143,11 +143,11 @@ class Cortes extends Controller
             ->where('maestria_id',$corte->maestria_id)
             ->where('id','!=',$corte->id)->count();
         if($cortetodos>0){
-            return response()->json(['info'=>'Corte no actualizado, ya que existe otra corte en estado Registro']);
+            return response()->json(['info'=>'Cohorte no actualizado, ya que existe otra Cohorte en estado Registro']);
         }else{
             $corte->estado=$request->valor;
             $corte->save();
-            return response()->json(['success'=>'La corte cambio de estado a: '.$request->valor]);
+            return response()->json(['success'=>'Cohorte cambio de estado a: '.$request->valor]);
         }
         
     }

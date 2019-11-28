@@ -11,7 +11,7 @@
     <input type="hidden" name="maestria" value="{{ $maestria->id }}" required>
     <div class="card">
         <div class="card-header">
-            Crear una nueva cohorte en {{ $maestria->nombre }}
+            Crear nueva cohorte en {{ $maestria->nombre }}
         </div>
         <div class="card-body">
             <h1>Número de cohorte: <strong>{{ $numero }}</strong></h1>

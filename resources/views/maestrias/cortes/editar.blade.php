@@ -1,4 +1,4 @@
-@extends('layouts.app',['title'=>'Nueva cohorte'])
+@extends('layouts.app',['title'=>'Editar cohorte'])
 
 
 @section('breadcrumbs', Breadcrumbs::render('editarCorte',$corte))

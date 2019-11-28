@@ -101,7 +101,7 @@ class Estaticas extends Controller
                     $inscripcion=new Inscripcion();
                     $inscripcion->user_id=$user->id;
                     $inscripcion->corte_id=$corte->id;
-                    $inscripcion->valorMatricula=$corte->maestria->valorMatricula;
+                    $inscripcion->valorMatricula=$corte->valorRegistro;
                     $inscripcion->save();
                 }
                 

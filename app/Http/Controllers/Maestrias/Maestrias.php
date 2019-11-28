@@ -56,9 +56,11 @@ class Maestrias extends Controller
         if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
                 $extension = $request->foto->extension();
+
                 $path = Storage::putFileAs(
-                    'public/maestrias', $request->file('foto'), $maestria->id.'.'.$extension
+                    'public/maestrias', $imag, $maestria->id.'.'.$extension
                 );
+
                 $maestria->foto=$path;
                 $maestria->save();
             }

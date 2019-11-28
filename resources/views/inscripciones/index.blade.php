@@ -34,8 +34,8 @@
                 <form id="loginForm" action="{{ route('procesarInscripcion') }}" method="POST">
                     @csrf
                     <input type="hidden" name="corte" value="{{ $corte->id }}" required>
-                    <div class="card border border-secondary">
-                        <div class="card-header bg-secondary">
+                    <div class="card border-top-3 border-top-dark border-bottom-3 border-bottom-dark border-dark">
+                        <div class="card-header">
                             Registrar en: <strong>{{ $corte->maestria->nombre }}</strong>
                         </div>
                         <div class="card-body">

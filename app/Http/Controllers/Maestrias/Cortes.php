@@ -47,6 +47,7 @@ class Cortes extends Controller
 
     public function guardar(RqCrear $request)
     {
+        $maestria=Maestria::findOrFail($request->maestria);
         try {
             $numero=Corte::where('maestria_id',$request->maestria)->latest()->value('numero');
             if($numero){
@@ -54,7 +55,6 @@ class Cortes extends Controller
             }else{
                 $numero=1;
             }
-            $maestria=Maestria::findOrFail($request->maestria);
             $this->authorize('crearCortesMaestria',$maestria);
             $corte=new Corte();
             $corte->numero=$numero;
@@ -75,10 +75,11 @@ class Cortes extends Controller
             $corte->maestria_id=$maestria->id;
             $corte->usuarioCreado=Auth::id();
             $corte->save();
-            return response()->json(['success'=>'Nueva corte creado exitosamente']);
+            $request->session()->flash('success','Nueva cohorte creado');
         } catch (\Exception $th) {
-            return $th->getMessage();
+            $request->session()->flash('info','Cohorte no creado, por favor vuelva intentar');
         }
+        return redirect()->route('cortesMaestria',$maestria->id);
     }
 
     public function editar($idCorte)

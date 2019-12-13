@@ -40,6 +40,8 @@ class RqActualizar extends FormRequest
             'inicioClases'=>'required|date',
             'fechaInicioMatricula'=>'required|date',
             'fechaFinMatricula'=>'required|date|after_or_equal:fechaInicioMatricula',
+            'coordinadores'=>'array|nullable',
+            'coordinadores.*'=>'nullable|exists:users,id'
         ];
     }
 }

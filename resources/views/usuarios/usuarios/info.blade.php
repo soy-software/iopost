@@ -35,13 +35,13 @@
             <td><strong>Celular:</strong> {{$usuario->celular??'---'}} </td>
         </tr>
         <tr>
-            <td><strong>País:</strong> {{$usuario->pais??'---'}}</td>
-            <td><strong>Provincia:</strong>{{$usuario->parroquia->canton->provincia->provincia??'---'}}</td>
+            <td><strong>País de procedencia:</strong> {{$usuario->pais??'---'}}</td>
+            <td><strong>Provincia de procedencia:</strong>{{$usuario->parroquia->canton->provincia->provincia??'---'}}</td>
         </tr>
 
         <tr>
-            <td><strong>Cantón:</strong> {{$usuario->parroquia->canton->canton??'---' }} </td>
-            <td><strong>Parroquia:</strong> {{$usuario->parroquia->parroquia??'---'}} </td>
+            <td><strong>Cantón de procedencia:</strong> {{$usuario->parroquia->canton->canton??'---' }} </td>
+            <td><strong>Parroquia de procedencia:</strong> {{$usuario->parroquia->parroquia??'---'}} </td>
         </tr>
         <tr>
             <td><strong>Dirección:</strong> {{$usuario->direccion??'---'}}</td>

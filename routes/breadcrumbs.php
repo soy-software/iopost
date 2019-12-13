@@ -148,7 +148,7 @@ Breadcrumbs::for('cortesEnMisMaestrias', function ($trail,$maestria) {
     $trail->push('Cortes en '.$maestria->nombre, route('cortesEnMisMaestrias',$maestria->id));
 });
 Breadcrumbs::for('inscritosEnCorteMiMaestrias', function ($trail,$corte) {
-    $trail->parent('cortesEnMisMaestrias',$corte->maestria);
+    $trail->parent('misMaestrias');
     $trail->push('Inscripciones en corte '.$corte->numero, route('inscritosEnCorteMiMaestrias',$corte->id));
 });
 Breadcrumbs::for('informacionAspirante', function ($trail,$inscripcion) {

@@ -11,6 +11,7 @@ use App\Models\Corte;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
 use App\Notifications\NotificacionRegistroComprobante;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,13 @@ class Cortes extends Controller
             $numero=1;
         }
 
-        $data = array('maestria' => $maestria,'numero'=>$numero );
+        $coordinadores=User::role('Coordinador de maestría')->get();
+        
+        $data = array(
+            'maestria' => $maestria,
+            'numero'=>$numero,
+            'coordinadores'=>$coordinadores
+        );
         
         return view('maestrias.cortes.nuevo',$data);
     }
@@ -49,6 +56,7 @@ class Cortes extends Controller
     {
         $maestria=Maestria::findOrFail($request->maestria);
         try {
+            DB::beginTransaction();
             $numero=Corte::where('maestria_id',$request->maestria)->latest()->value('numero');
             if($numero){
                 $numero=$numero+1;
@@ -75,8 +83,15 @@ class Cortes extends Controller
             $corte->maestria_id=$maestria->id;
             $corte->usuarioCreado=Auth::id();
             $corte->save();
+
+            $corte->coordinadores()->sync($request->coordinadores);
+            
+
+            DB::commit();
+
             $request->session()->flash('success','Nueva cohorte creado');
         } catch (\Exception $th) {
+            DB::rollback();
             $request->session()->flash('info','Cohorte no creado, por favor vuelva intentar');
         }
         return redirect()->route('cortesMaestria',$maestria->id);
@@ -85,7 +100,8 @@ class Cortes extends Controller
     public function editar($idCorte)
     {
         $corte=Corte::findOrFail($idCorte);
-        $data = array('corte'=>$corte);
+        $coordinadores=User::role('Coordinador de maestría')->get();
+        $data = array('corte'=>$corte,'coordinadores'=>$coordinadores);
         return view('maestrias.cortes.editar',$data);
     }
 
@@ -93,6 +109,7 @@ class Cortes extends Controller
     {
         $corte=Corte::findOrFail($request->corte);
         try {
+            DB::beginTransaction();
             $corte->valorRegistro=$request->valorRegistro;
             $corte->valorMatricula=$request->valorMatricula;
             $corte->valorColegiatura=$request->valorColegiatura;
@@ -109,8 +126,13 @@ class Cortes extends Controller
             $corte->fechaFinMatricula=$request->fechaFinMatricula;
             $corte->usuarioActualizado=Auth::id();
             $corte->save();
+            
+            $corte->coordinadores()->sync($request->coordinadores);
+            
+            DB::commit();
             $request->session()->flash('success','Cohorte actualizado');
         } catch (\Exception $th) {
+            DB::rollback();
             $request->session()->flash('success','Cohorte no actualizado, vuelva intentar');
         }
         return redirect()->route('cortesMaestria',$corte->maestria->id);

@@ -15,15 +15,15 @@ class MisMaestrias extends Controller
 {
     public function index()
     {
-        $maestrias=Auth::user()->maestrias()->paginate(15);
-        $data = array('maestrias' => $maestrias );
+        $cortes=Auth::user()->cortes()->paginate(15);
+        $data = array('cortes' => $cortes );
         return view('maestrias.misMaestrias.index',$data);
     }
 
     public function cortes($idMaestria)
     {
         $maestria=Maestria::findOrFail($idMaestria);
-        $this->authorize('verificarMaestria',$maestria);
+        // $this->authorize('verificarMaestria',$maestria);
         $cortes=$maestria->cortes()->paginate(15);
         $data = array('maestria' => $maestria,'cortes'=>$cortes );
         return view('maestrias.misMaestrias.cortes',$data);

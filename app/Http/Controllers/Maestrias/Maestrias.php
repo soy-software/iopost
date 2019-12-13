@@ -58,7 +58,7 @@ class Maestrias extends Controller
                 $extension = $request->foto->extension();
 
                 $path = Storage::putFileAs(
-                    'public/maestrias', $imag, $maestria->id.'.'.$extension
+                    'public/maestrias', $request->file('foto'), $maestria->id.'.'.$extension
                 );
 
                 $maestria->foto=$path;

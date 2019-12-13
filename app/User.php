@@ -77,12 +77,13 @@ class User extends Authenticatable
         ->withTimestamps();
     }
 
-    // A:deivid
-    // D:un usuario coordinador tiene asignado maestrias
-    public function maestrias()
-    {
-        return $this->belongsToMany(Maestria::class, 'coordinador_maestrias', 'user_id', 'maestria_id');
-    }
 
+    // A:deivid
+    // D:un coordinador de maestria tienes varias cortes de maestria asignados
+    public function cortes()
+    {
+        return $this->belongsToMany(Corte::class, 'coordinador_cortes', 'user_id', 'corte_id');
+    }
+    
 
 }

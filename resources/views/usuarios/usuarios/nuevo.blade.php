@@ -170,7 +170,7 @@
             <div class="form-row">
                 
                 <div class="form-group col-md-3">
-                    <label for="pais">País<i class="text-danger">*</i></label>
+                    <label for="pais">País de procedencia<i class="text-danger">*</i></label>
                     <input type="text" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais" value="{{ old('pais') }}" required placeholder="Ingrese país...">
                     @error('pais')
                         <span class="invalid-feedback" role="alert">
@@ -179,7 +179,7 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="provincia">Provincia<i class="text-danger">*</i></label>
+                    <label for="provincia">Provincia de procedencia<i class="text-danger">*</i></label>
                     <select id="provincia" class="form-control @error('provincia') is-invalid @enderror" name="provincia" required onchange="cargarCantones(this);">
                         @foreach ($provincias as $provincia)
                         <option value="{{ $provincia->id }}" {{ old('provincia')==$provincia->id?'selected':'' }}>
@@ -194,7 +194,7 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="canton">Cantón<i class="text-danger">*</i></label>
+                    <label for="canton">Cantón de procedencia<i class="text-danger">*</i></label>
                     <select id="canton" class="form-control @error('canton') is-invalid @enderror" name="canton" onchange="cargarParroquias(this);" required>
                         
                     </select>
@@ -205,7 +205,7 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="parroquia">Parroquia<i class="text-danger">*</i></label>
+                    <label for="parroquia">Parroquia de procedencia<i class="text-danger">*</i></label>
                     <select id="parroquia" class="form-control @error('parroquia') is-invalid @enderror" name="parroquia"  required>
 
                     </select>

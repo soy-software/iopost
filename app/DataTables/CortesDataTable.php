@@ -21,21 +21,30 @@ class CortesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('numero', function($query){
-                return "Cohorte " .$query->numero ;
+            ->editColumn('numero', function($corte){
+                return "Cohorte " .$corte->numero ;
             })
             ->filterColumn('numero', function($query, $keyword) {
                 $sql = "CONCAT('Corte ',cortes.numero)  like ?";
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->editColumn('estado', function($query){
-                return view('maestrias.cortes.estado',['corte'=>$query])->render();
+            ->editColumn('estado', function($corte){
+                return view('maestrias.cortes.estado',['corte'=>$corte])->render();
+            })
+            ->editColumn('created_at',function($corte){
+                return view('maestrias.cortes.coordinadores',['corte'=>$corte])->render();
+            })
+
+            ->filterColumn('created_at',function($query, $keyword){
+                $query->whereHas('coordinadores', function($query) use ($keyword) {
+                    $query->whereRaw("concat(nombres,' ',apellidos,' ',email) like ?", ["%{$keyword}%"]);
+                });            
             })
 
             ->addColumn('action', function($query){
                 return view('maestrias.cortes.acciones',['corte'=>$query])->render();
             })
-            ->rawColumns(['estado','action']);
+            ->rawColumns(['estado','created_at','action']);
     }
 
     /**
@@ -88,6 +97,7 @@ class CortesDataTable extends DataTable
                   ->title('Acciones')
                   ->addClass('text-center'),
             Column::make('numero')->title('Cohorte'),
+            Column::make('created_at')->title('Coordinadores'),
             Column::make('estado'),
             
         ];

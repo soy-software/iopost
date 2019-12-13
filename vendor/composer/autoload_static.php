@@ -634,7 +634,7 @@ class ComposerStaticInita6f31a1a1a210f19f8311c187dcb2a32
         'App\\Models\\Domicilio\\Provincia' => __DIR__ . '/../..' . '/app/Models/Domicilio/Provincia.php',
         'App\\Models\\Inscripcion' => __DIR__ . '/../..' . '/app/Models/Inscripcion.php',
         'App\\Models\\Maestria' => __DIR__ . '/../..' . '/app/Models/Maestria.php',
-        'App\\Models\\Maestria\\CoordinadorMaestria' => __DIR__ . '/../..' . '/app/Models/Maestria/CoordinadorMaestria.php',
+        'App\\Models\\Maestria\\CoordinadorCorte' => __DIR__ . '/../..' . '/app/Models/Maestria/CoordinadorCorte.php',
         'App\\Models\\MateriaMaestria' => __DIR__ . '/../..' . '/app/Models/MateriaMaestria.php',
         'App\\Models\\Usuario\\InformacionLaboral' => __DIR__ . '/../..' . '/app/Models/Usuario/InformacionLaboral.php',
         'App\\Models\\Usuario\\RegistroAcademico' => __DIR__ . '/../..' . '/app/Models/Usuario/RegistroAcademico.php',

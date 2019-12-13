@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inscripciones;
 use App\DataTables\Inscripciones\RegistrosAprobarDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Inscripcion;
+use App\Models\Maestria;
 use App\Notifications\NotificacionRegistroComprobante;
 use Illuminate\Http\Request;
 
@@ -41,4 +42,19 @@ class Registros extends Controller
             return response()->json(['info'=>'Ocurrion un error vuelva intentar']);
         }
     }
+
+    public function reportesDePago()
+    {
+        $maestrias=Maestria::all();
+        $data = array('maestrias' => $maestrias );
+        return view('inscripciones.registro.reportesPago',$data);
+    }
+
+    public function obtenerCohosrtesMaestria(Request $request)
+    {
+        $maestria=Maestria::findOrFail($request->maestria);
+        return response()->json($maestria->cortes);
+    }
+
+    
 }

@@ -180,6 +180,20 @@
                     </div>
                 </div>
             </div>
+
+            @if (count($coordinadores)>0)
+            <div class="form-group border">
+                <label for="" class="ml-2">Selecione coordinadores encargados de la corte</label>
+                @foreach ($coordinadores as $coor)
+                <div class="form-check ml-1">
+                    <input class="form-check-input" name="coordinadores[{{ $coor->id }}]" {{ $corte->hasCoordinador($corte->id,$coor->id)?'checked':'' }} {{ old('coordinadores.'.$coor->id)==$coor->id?'checked':'' }} type="checkbox" value="{{ $coor->id }}" id="coor_{{ $coor->id }}">
+                    <label class="form-check-label" for="coor_{{ $coor->id }}">
+                        {{ $coor->nombres }} {{ $coor->apellidos }} <small>({{ $coor->email }})</small>
+                    </label>
+                </div>
+                @endforeach
+            </div>
+            @endif
             
         </div>
         <div class="card-footer text-muted">

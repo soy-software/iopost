@@ -1,7 +1,15 @@
 @extends('layouts.app',['title'=>'Aprobar registro'])
 
 @section('breadcrumbs', Breadcrumbs::render('usuarios'))
+@section('barraLateral')
 
+    <div class="breadcrumb justify-content-center">
+        <a href="{{ route('registroReportePagos') }}" class="breadcrumb-elements-item">
+            <i class="fas fa-file-pdf"></i>
+            Reportes
+        </a>
+    </div>
+@endsection
 
 @section('content')
 

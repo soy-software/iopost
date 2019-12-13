@@ -2,7 +2,7 @@
 @section('breadcrumbs', Breadcrumbs::render('misMaestrias'))
 @section('content')
 
-@if (count($maestrias)>0)
+@if (count($cortes)>0)
     <div class="card">
         <div class="card-header">
             Mis maestrías asignados
@@ -18,20 +18,20 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($maestrias as $maestria)
+                @foreach ($cortes as $corte)
                     <tr>
                         <th scope="row">
                             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                <a href="{{ route('cortesEnMisMaestrias',$maestria->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cortes de {{ $maestria->nombre }}">
-                                    <i class="icon-reading"></i> Cortes
+                                <a href="{{ route('inscritosEnCorteMiMaestrias',$corte->id) }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="POSTULANTES">
+                                    <i class="icon-reading"></i>
                                 </a>
                             </div>
                         </th>
                         <td>
-                            {{ $maestria->nombre }}
+                            {{ $corte->maestria->nombre }} <small>Cohorte {{ $corte->numero }}</small>
                         </td>
                         <td>
-                            {{ $maestria->titulo }}
+                            {{ $corte->maestria->titulo }}
                         </td>
                     </tr>      
                 @endforeach
@@ -41,7 +41,7 @@
 
         </div>
         <div class="card-footer text-muted">
-            {{ $maestrias->links() }}
+            {{ $cortes->links() }}
         </div>
     </div>
 @else

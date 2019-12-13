@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Maestria\CoordinadorCorte;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Corte extends Model
@@ -29,5 +31,23 @@ class Corte extends Model
     {
         return $this->hasMany(Inscripcion::class);
     }
+
+
+    // A:Deivid
+    // D: una cohorte tiene varios coordinadores asignados
+    public function coordinadores()
+    {
+        return $this->belongsToMany(User::class, 'coordinador_cortes', 'corte_id', 'user_id');
+    }
     
+
+    // A:Deivid
+    // Verificar si una corte tiene asignado el coordinador
+    public function hasCoordinador($idCorte,$idUser)
+    {
+        $corte_coor=CoordinadorCorte::where(['corte_id'=>$idCorte,'user_id'=>$idUser])->first();
+        if($corte_coor){
+            return true;
+        }return false;
+    }
 }

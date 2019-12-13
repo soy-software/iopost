@@ -63,7 +63,7 @@ return array(
     'App\\Models\\Domicilio\\Provincia' => $baseDir . '/app/Models/Domicilio/Provincia.php',
     'App\\Models\\Inscripcion' => $baseDir . '/app/Models/Inscripcion.php',
     'App\\Models\\Maestria' => $baseDir . '/app/Models/Maestria.php',
-    'App\\Models\\Maestria\\CoordinadorMaestria' => $baseDir . '/app/Models/Maestria/CoordinadorMaestria.php',
+    'App\\Models\\Maestria\\CoordinadorCorte' => $baseDir . '/app/Models/Maestria/CoordinadorCorte.php',
     'App\\Models\\MateriaMaestria' => $baseDir . '/app/Models/MateriaMaestria.php',
     'App\\Models\\Usuario\\InformacionLaboral' => $baseDir . '/app/Models/Usuario/InformacionLaboral.php',
     'App\\Models\\Usuario\\RegistroAcademico' => $baseDir . '/app/Models/Usuario/RegistroAcademico.php',

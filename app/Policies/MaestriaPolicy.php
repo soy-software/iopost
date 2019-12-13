@@ -27,21 +27,21 @@ class MaestriaPolicy
     
     // A:deivid
     // D: un usuario coordinador tiene maestrias asignados
-    public function accederMisMaestrias(User $user)
-    {
-        if(count($user->maestrias)>0 && $user->hasRole('Coordinador de maestría')){
-            return true;
-        }
-    }
+    // public function accederMisMaestrias(User $user)
+    // {
+    //     if(count($user->maestrias)>0 && $user->hasRole('Coordinador de maestría')){
+    //         return true;
+    //     }
+    // }
 
     // A:deivid
     // D: verificar maestria asignada a coordinador sea la correcta
-    public function verificarMaestria(User $user,Maestria $maestria)
-    {
-        $ids_maestrias=$user->maestrias->pluck('id')->toArray();
-        if(in_array($maestria->id,$ids_maestrias)){
-            return true;
-        }
-    }
+    // public function verificarMaestria(User $user,Maestria $maestria)
+    // {
+    //     $ids_maestrias=$user->maestrias->pluck('id')->toArray();
+    //     if(in_array($maestria->id,$ids_maestrias)){
+    //         return true;
+    //     }
+    // }
 
 }

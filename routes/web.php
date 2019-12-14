@@ -108,7 +108,6 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         // A:deivid
         // D: maestrias asignados a un usuario coordinador
         Route::get('/mis-maestrias', 'MisMaestrias@index')->name('misMaestrias');
-        // Route::get('/cortes-en-mis-maestrias/{maestria}', 'MisMaestrias@cortes')->name('cortesEnMisMaestrias');
         Route::get('/inscritos-en-corte/{corte}', 'MisMaestrias@inscritos')->name('inscritosEnCorteMiMaestrias');
         Route::get('/descragar-excel-inscritos/{corte}/{opcion}', 'MisMaestrias@descargarExcelinscritos')->name('descargarExcelInscritos');
         Route::get('/informacion-de-aspirante/{inscripcion}', 'MisMaestrias@informacionAspirante')->name('informacionAspirante');
@@ -134,12 +133,19 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/obtener-cohortes-x-maestrias', 'Registros@obtenerCohortesMaestria')->name('obtenerCohortesMaestria');
         Route::post('/obtener-registros-de-pago-x-cohorte', 'Registros@obtenerRegistroPorCohorte')->name('obtenerRegistroPorCohorte');
         
-        
-        
-        
     });
     
 
+    // A:deivid
+    // D:cuestionario de pregunatas de cada cohore
+    Route::namespace('Admisiones')->group(function () {
+        Route::get('/cuestionario/{cohorte}', 'Cuestionarios@index')->name('cuestionario');
+        Route::post('/guardar-pregunta-cuestionario', 'Cuestionarios@guardarPreguntaCuestionario')->name('guardarPreguntaCuestionario');
+        Route::get('/eliminar-pregunta-cuestionario/{cuestionario}', 'Cuestionarios@eliminarCuestionario')->name('eliminarCuestionario');
+        
+        
+
+    });
 
     //A:Deivid
     //D. roles y permisos de sistema solo acesso Administrador

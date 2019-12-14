@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admision\Cuestionario;
 use App\Models\Maestria\CoordinadorCorte;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -49,5 +50,12 @@ class Corte extends Model
         if($corte_coor){
             return true;
         }return false;
+    }
+
+    // A:deivid
+    // D:una cohorte tien un cuestionario de 10 preguntas
+    public function cuestionario()
+    {
+        return $this->hasMany(Cuestionario::class);
     }
 }

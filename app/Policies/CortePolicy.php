@@ -22,4 +22,15 @@ class CortePolicy
             return true;
         }
     }
+
+
+    // A:deivid
+    // D: solo pueden crear cuestionario en
+    public function crearCuestionario(User $user,Corte $corte)
+    {
+        if(($corte->estado=='Promoción' || $corte->estado=='Registro') && count($corte->cuestionario)<10){
+            return true;
+        }
+        return false;
+    }
 }

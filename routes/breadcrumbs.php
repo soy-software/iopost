@@ -143,10 +143,7 @@ Breadcrumbs::for('misMaestrias', function ($trail) {
     $trail->parent('home');
     $trail->push('Mis maestrías asignados', route('misMaestrias'));
 });
-Breadcrumbs::for('cortesEnMisMaestrias', function ($trail,$maestria) {
-    $trail->parent('misMaestrias');
-    $trail->push('Cortes en '.$maestria->nombre, route('cortesEnMisMaestrias',$maestria->id));
-});
+
 Breadcrumbs::for('inscritosEnCorteMiMaestrias', function ($trail,$corte) {
     $trail->parent('misMaestrias');
     $trail->push('Inscripciones en corte '.$corte->numero, route('inscritosEnCorteMiMaestrias',$corte->id));
@@ -156,6 +153,13 @@ Breadcrumbs::for('informacionAspirante', function ($trail,$inscripcion) {
     $trail->push('Información de inscripción', route('informacionAspirante',$inscripcion->id));
 });
 
+
+// A:deivid
+// D:admision cuestionarios
+Breadcrumbs::for('cuestionario', function ($trail,$corte) {
+    $trail->parent('cortesMaestria',$corte->maestria);
+    $trail->push('Cuestionario de preguntas', route('cuestionario',$corte->id));
+});
 
 
 //A:Deivid

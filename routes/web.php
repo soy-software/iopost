@@ -110,7 +110,7 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/mis-maestrias', 'MisMaestrias@index')->name('misMaestrias');
         // Route::get('/cortes-en-mis-maestrias/{maestria}', 'MisMaestrias@cortes')->name('cortesEnMisMaestrias');
         Route::get('/inscritos-en-corte/{corte}', 'MisMaestrias@inscritos')->name('inscritosEnCorteMiMaestrias');
-        Route::get('/descragar-excel-inscritos/{corte}', 'MisMaestrias@descargarExcelinscritos')->name('descargarExcelInscritos');
+        Route::get('/descragar-excel-inscritos/{corte}/{opcion}', 'MisMaestrias@descargarExcelinscritos')->name('descargarExcelInscritos');
         Route::get('/informacion-de-aspirante/{inscripcion}', 'MisMaestrias@informacionAspirante')->name('informacionAspirante');
         
         
@@ -131,7 +131,8 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/aprobar-registro-maestrias', 'Registros@index')->name('aprobarRegistroMaestrias');
         Route::post('/aprobar-registro-maestrias-factura', 'Registros@aprobarRegistroFactura')->name('aprobarRegistroFactura');
         Route::get('/reporte-registros-de-pagos', 'Registros@reportesDePago')->name('registroReportePagos');
-        Route::post('/obtener-cohortes-x-maestrias', 'Registros@obtenerCohosrtesMaestria')->name('obtenerCohosrtesMaestria');
+        Route::post('/obtener-cohortes-x-maestrias', 'Registros@obtenerCohortesMaestria')->name('obtenerCohortesMaestria');
+        Route::post('/obtener-registros-de-pago-x-cohorte', 'Registros@obtenerRegistroPorCohorte')->name('obtenerRegistroPorCohorte');
         
         
         

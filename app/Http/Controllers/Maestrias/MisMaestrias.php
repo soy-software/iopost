@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Maestrias;
 
+use App\DataTables\Maestrias\MisMaestrias\InscritosDataTable;
 use App\Exports\InscritosExport;
 use App\Http\Controllers\Controller;
 use App\Models\Corte;
@@ -29,22 +30,29 @@ class MisMaestrias extends Controller
         return view('maestrias.misMaestrias.cortes',$data);
     }
 
-    public function inscritos($idCorte)
+    public function inscritos(InscritosDataTable $dataTable, $idCorte)
     {
         $corte=Corte::findOrFail($idCorte);
         $this->authorize('verificarCorteMaestria',$corte);
         $data = array('corte' =>$corte,'inscripciones'=>$corte->inscripciones);
-        return view('maestrias.misMaestrias.inscritos',$data);
+        return $dataTable->with('corte',$idCorte)->render('maestrias.misMaestrias.inscritos',$data);
+        // return view('maestrias.misMaestrias.inscritos',$data);
     }
     
 
     // A:deivid
     // D: descargar inscritos a excel 
-    public function descargarExcelinscritos($idCorte)
+    public function descargarExcelinscritos( Request $request, $idCorte,$opcion)
     {
+        $request->merge(['opcion'=>$opcion,'cohorte'=>$idCorte]);
+        $request->validate([
+            'cohorte'=>'required|exists:cortes,id',
+            'opcion' => 'in:Todos,Registro,Subir comprobante de registro,Aprobado,Inscrito'
+        ]);
+
         $corte=Corte::findOrFail($idCorte);
-        $this->authorize('verificarCorteMaestria',$corte);        
-        return Excel::download(new InscritosExport($idCorte),'inscritos en corte '.$corte->numero .'.xlsx');
+        $this->authorize('verificarCorteMaestria',$corte);     
+        return Excel::download(new InscritosExport($idCorte,$opcion),'inscritos en corte '.$corte->numero .'.xlsx');
     }
 
     public function informacionAspirante($idInscripcion)

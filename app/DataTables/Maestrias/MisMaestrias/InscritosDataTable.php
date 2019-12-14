@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables\Inscripciones;
+namespace App\DataTables\Maestrias\MisMaestrias;
 
 use App\Models\Inscripcion;
 use Yajra\DataTables\Html\Button;
@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class RegistrosAprobarDataTable extends DataTable
+class InscritosDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,61 +21,54 @@ class RegistrosAprobarDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('user_id',function($inscripcion){
-                return $inscripcion->user->nombres.' '.$inscripcion->user->apellidos;
+            ->editColumn('user_id',function($insc){
+                return $insc->user->nombres.' '.$insc->user->apellidos;
             })
             ->filterColumn('user_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("concat(nombres,' ',apellidos) like ?", ["%{$keyword}%"]);
                 });            
             })
-            ->editColumn('updated_at',function($inscripcion){
-                return $inscripcion->user->identificacion;
+            ->editColumn('comprobante',function($insc){
+                return $insc->user->identificacion;
             })
-            ->filterColumn('updated_at',function($query, $keyword){
+            ->filterColumn('comprobante',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("identificacion like ?", ["%{$keyword}%"]);
                 });            
             })
-            ->editColumn('estado',function($inscripcion){
-                return $inscripcion->user->email;
-            })
-            ->filterColumn('estado',function($query, $keyword){
+            ->filterColumn('corte_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("email like ?", ["%{$keyword}%"]);
                 });            
             })
-            
-            ->editColumn('maestria',function($inscripcion){
-                return $inscripcion->corte->maestria->nombre;
+            ->editColumn('corte_id',function($insc){
+                return $insc->user->email;
+            })
+            ->editColumn('updated_at',function($insc){
+                return $insc->user->celular;
+            })
+            ->filterColumn('updated_at',function($query, $keyword){
+                $query->whereHas('user', function($query) use ($keyword) {
+                    $query->whereRaw("celular like ?", ["%{$keyword}%"]);
+                });            
             })
             
-            ->filterColumn('corte_id',function($query, $keyword){
-                $query->whereHas('corte', function($query) use ($keyword) {
-                    $query->whereHas('maestria', function($query) use ($keyword) {
-                        $query->whereRaw("nombre like ?", ["%{$keyword}%"]);
-                    });
-                });
+            ->addColumn('action', function($insc){
+                return view('maestrias.misMaestrias.ifoAspirante',['insc'=>$insc])->render();
             })
-            ->editColumn('comprobante',function($inscripcion){
-                return view('inscripciones.registro.comprobante',['inscripcion'=>$inscripcion])->render();
-            })
-            
-            ->addColumn('action', function($inscripcion){
-                return view('inscripciones.registro.acciones',['inscripcion'=>$inscripcion])->render();
-            })
-            ->rawColumns(['action','comprobante']);
+            ->rawColumns(['action','user_id','comprobante']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Inscripciones/RegistrosAprobar $model
+     * @param \App\Maestrias/MisMaestrias/Inscrito $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Inscripcion $model)
     {
-        return $model->where('estado','!=','Inscrito');
+        return $model->where('corte_id',$this->corte);
     }
 
     /**
@@ -86,11 +79,18 @@ class RegistrosAprobarDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('inscripciones-registrosaprobar-table')
+                    ->setTableId('maestrias-mismaestrias-inscritos-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('frtip')
                     ->orderBy(1)
+                    // ->buttons(
+                    //     Button::make('create'),
+                    //     Button::make('export'),
+                    //     Button::make('print'),
+                    //     Button::make('reset'),
+                    //     Button::make('reload')
+                    // )
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -107,22 +107,16 @@ class RegistrosAprobarDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center')
-                  ->title('Acciones'),
-            Column::make('comprobante')
-                  ->addClass('text-center')
-                  ->exportable(false)
-                  ->printable(false),
-            Column::make('id')
-            ->title('# de registro'),
-            Column::make('user_id')->title('Aspirante'),
-            Column::make('updated_at')->title('Identificación'),
-            Column::make('estado')->title('Email'),
-            Column::make('numero_factura')->title('# factura'),
-            Column::make('created_at')->title('Fecha de registro'),
-            Column::computed('maestria')->title('Maestría'),
-            Column::make('corte_id')->title('Corte'),
-            Column::make('valorMatricula')->title('ok'),
+                  ->title('Acción'),
             
+            Column::make('id')->title('# de registro'),
+            Column::make('user_id')->title('Nombres y Apellidos'),
+            Column::make('comprobante')->title('Identificación'),
+            Column::make('corte_id')->title('Email'),
+            Column::make('updated_at')->title('# de celular'),
+            Column::make('created_at')->title('Fecha de registro'),
+            
+            Column::make('estado'),
             
             
         ];
@@ -135,6 +129,6 @@ class RegistrosAprobarDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Inscripciones_RegistrosAprobar_' . date('YmdHis');
+        return 'Maestrias_MisMaestrias_Inscritos_' . date('YmdHis');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Inscripciones;
 
 use App\DataTables\Inscripciones\RegistrosAprobarDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Corte;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
 use App\Notifications\NotificacionRegistroComprobante;
@@ -50,11 +51,18 @@ class Registros extends Controller
         return view('inscripciones.registro.reportesPago',$data);
     }
 
-    public function obtenerCohosrtesMaestria(Request $request)
+    public function obtenerCohortesMaestria(Request $request)
     {
         $maestria=Maestria::findOrFail($request->maestria);
         return response()->json($maestria->cortes);
     }
 
+
+    public function obtenerRegistroPorCohorte(Request $request)
+    {
+        $cohorte=Corte::findOrFail($request->cohorte);
+        $data = array('cohorte' => $cohorte,'inscripciones'=>$cohorte->inscripciones );
+        return view('inscripciones.registro.registros',$data);
+    }
     
 }

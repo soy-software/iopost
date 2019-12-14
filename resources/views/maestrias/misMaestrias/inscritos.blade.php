@@ -1,80 +1,64 @@
 @extends('layouts.app',['title'=>'Inscripciones en corte'])
 @section('breadcrumbs', Breadcrumbs::render('inscritosEnCorteMiMaestrias',$corte))
+
+@section('barraLateral')
+@if (count($inscripciones)>0)
+    <div class="breadcrumb justify-content-center">
+        
+        <div class="breadcrumb-elements-item dropdown p-0">
+            <a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-file-excel"></i>
+                Descargar EXCEL
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="{{ route('descargarExcelInscritos',['corte'=>$corte->id,'opcion'=>'Todos']) }}" class="dropdown-item">
+                    <i class="fas fa-file-excel"></i> Todos    
+                </a>    
+                <a href="{{ route('descargarExcelInscritos',['corte'=>$corte->id,'opcion'=>'Registro']) }}" class="dropdown-item">
+                    <i class="fas fa-file-excel"></i> Solo registrados    
+                </a>    
+                <a href="{{ route('descargarExcelInscritos',['corte'=>$corte->id,'opcion'=>'Subir comprobante de registro']) }}" class="dropdown-item">
+                    <i class="fas fa-file-excel"></i> Solo quienes tienen comprobante de registro    
+                </a>
+                <a href="{{ route('descargarExcelInscritos',['corte'=>$corte->id,'opcion'=>'Aprobado']) }}" class="dropdown-item">
+                    <i class="fas fa-file-excel"></i> Solo aprobados el registro    
+                </a> 
+                <a href="{{ route('descargarExcelInscritos',['corte'=>$corte->id,'opcion'=>'Inscrito']) }}" class="dropdown-item">
+                    <i class="fas fa-file-excel"></i> Solo inscritos  
+                </a> 
+            </div>
+        </div>
+    </div>
+@endif
+
+@endsection
+
+
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        Inscripciones en corte {{ $corte->numero }}
-    </div>
+    
     <div class="card-body">
-        @if (count($inscripciones)>0)
-        <a href="{{ route('descargarExcelInscritos',$corte->id) }}" class="btn btn-dark float-right mb-1" data-toggle="tooltip" data-placement="top" title="Descargar inscritos a Excel">
-            <i class="fas fa-file-excel"></i>
-        </a>
-        <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Acciones</th>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Identificación</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Celular</th>
-                        <th scope="col">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php($i=0)
-                    @foreach ($inscripciones as $inscripcion)
-                    @php($i++)
-                        <tr>
-                            <th scope="row">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <a href="{{ route('informacionAspirante',$inscripcion->id) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Información de {{ $inscripcion->user->nombres }} {{ $inscripcion->user->apellidos }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </div>
-                            </th>
-                            <th>
-                                {{ $i }}
-                            </th>
-                            <td>
-                                {{ $inscripcion->user->nombres }}
-                            </td>
-                            <td>
-                                {{ $inscripcion->user->apellidos }}
-                            </td>
-                            <td>
-                                {{ $inscripcion->user->identificacion }}
-                            </td>
-                            <td>
-                                {{ $inscripcion->user->email }}
-                            </td>
-                            <td>
-                                {{ $inscripcion->user->celular }}
-                            </td>
-                            <td>
-                                {{ $inscripcion->estado }}
-                            </td>
-                        </tr>      
-                    @endforeach
-                    
-                </tbody>
-            </table>
-
-        @else
-            <div class="alert alert-dark" role="alert">
-                <strong>Está corte no tiene inscripciones</strong>
-            </div>
-        @endif
+        <div class="table-responsive">
+            {!! $dataTable->table()  !!}
+        </div>
+      
     </div>
 </div>
+@push('linksCabeza')
+{{--  datatable  --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
+<script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+
+@endpush
 
 @prepend('linksPie')
     <script>
     $('#menuMisMaestria').addClass('active');  
     </script>
+    {!! $dataTable->scripts() !!}
 @endprepend
 
 @endsection

@@ -111,7 +111,7 @@
         @endif
 </table>
 
-<h1 class="text-danger">Información laboral</h1>
+<h1 class="text-danger">Información acádemica</h1>
 @if (count($usuario->registrosAcademicos)>0)
                         
     <table class="table table-bordered">

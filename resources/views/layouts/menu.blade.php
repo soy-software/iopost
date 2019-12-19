@@ -58,7 +58,7 @@
                 </li>
                 @endcan
 
-                {{-- @can('accederMisMaestrias',App\Models\Maestria::class) --}}
+                @can('accederMisMaestrias',App\Models\Maestria::class)
                     <li class="nav-item">
                         <a href="{{ route('misMaestrias') }}" class="nav-link" id="menuMisMaestria">
                             <i class="icon-newspaper"></i>
@@ -67,7 +67,7 @@
                             </span>
                         </a>
                     </li>
-                {{-- @endcan --}}
+                @endcan
 
 
                 {{--  menu mis inscripciones  --}}

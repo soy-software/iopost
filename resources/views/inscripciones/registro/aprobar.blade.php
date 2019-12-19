@@ -1,6 +1,6 @@
 @extends('layouts.app',['title'=>'Aprobar registro'])
 
-@section('breadcrumbs', Breadcrumbs::render('usuarios'))
+@section('breadcrumbs', Breadcrumbs::render('aprobarRegistroMaestrias'))
 @section('barraLateral')
 
     <div class="breadcrumb justify-content-center">

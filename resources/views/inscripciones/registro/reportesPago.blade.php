@@ -1,5 +1,5 @@
 @extends('layouts.app',['title'=>'Reportes de pago'])
-
+@section('breadcrumbs', Breadcrumbs::render('registroReportePagos'))
 @section('content')
 
 <div class="card">

@@ -173,6 +173,18 @@ Breadcrumbs::for('notasAdmisionAspirante', function ($trail,$inscripcion) {
     $trail->push('Notas de admisión', route('notasAdmisionAspirante',$inscripcion->id));
 });
 
+
+// A:deivid
+// D: con rol de tesorero, aprobar registro, y reportes de pagos
+Breadcrumbs::for('aprobarRegistroMaestrias', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Listado de registros', route('aprobarRegistroMaestrias'));
+});
+Breadcrumbs::for('registroReportePagos', function ($trail) {
+    $trail->parent('aprobarRegistroMaestrias');
+    $trail->push('Reportes de pago de registro', route('registroReportePagos'));
+});
+
 //A:Deivid
 //D:Breadcrums de roles y permisos
 Breadcrumbs::for('roles', function ($trail) {

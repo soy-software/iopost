@@ -21,4 +21,6 @@ class InscripcionPolicy
             return true;
         }
     }
+
+   
 }

@@ -88,6 +88,8 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/registros-cohorte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
         Route::get('/informacion-registro-cohorte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
         Route::post('/cambiar-estado-de-inscripcion', 'Cortes@cambiarEstadoInscripcion')->name('cambiarEstadoInscripcion');
+        Route::get('/ver-admision-estiante/{inscripcion}', 'Cortes@verAdmisionEstudiante')->name('verAdmisionEstudiante');
+        
     
         
         

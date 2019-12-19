@@ -19,6 +19,7 @@ class MisMaestrias extends Controller
 {
     public function index()
     {
+        $this->authorize('accederMisMaestrias',Maestria::class);
         $cortes=Auth::user()->cortes()->paginate(15);
         $data = array('cortes' => $cortes );
         return view('maestrias.misMaestrias.index',$data);

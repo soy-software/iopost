@@ -1,6 +1,16 @@
 @extends('layouts.app',['title'=>'Mis incripciones'])
 @section('breadcrumbs', Breadcrumbs::render('misInscripciones'))
 @section('content')
+
+@if (session('ok'))
+    <div class="alert alert-success" role="alert">
+        <ul>
+            <li><strong>Gracias por subir comprobante de pago  del registro de Maestría.</strong></li>
+            <li><strong>Verificaremos el comprobante lo más pronto posible, y aprobaremos su registro.</strong></li>
+            <li><strong>Estaremos enviando una notificación de aprobación a su cuenta de correo registrada.</strong></li>
+        </ul>
+    </div>
+@endif
 <div class="card">
     <div class="card-header">
         Mis Inscripciones
@@ -15,6 +25,7 @@
                         <th scope="col">Maestría</th>
                         <th scope="col">Corte</th>
                         <th scope="col">Fecha de inscripción</th>
+                        <th scope="col">Valor a cancelar</th>
                         <th scope="col">Número de factura</th>
                         <th scope="col">Estado</th>
                       </tr>
@@ -52,7 +63,10 @@
                                     {{ $inscripcion->inscripcion->created_at }}
                                 </td>
                                 <td>
-                                    01
+                                    {{ $inscri->valorMatricula }}
+                                </td>
+                                <td>
+                                    {{ $inscri->numero_factura }}
                                 </td>
                                 <td>
                                     <strong>

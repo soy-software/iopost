@@ -15,7 +15,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 class Cortes extends Controller
 {
     public function __construct()
@@ -202,5 +202,24 @@ class Cortes extends Controller
 
         $inscripcion->save();
         return response()->json(['success'=>'Estado del registro cambiado exitosamente']);
+    }
+
+
+    // A:deivid
+    // D: ver notas de admision de estudiante
+    public function verAdmisionEstudiante($idInscripcion)
+    {
+        $inscripcion=Inscripcion::findOrFail($idInscripcion);
+        $cohorte=$inscripcion->corte;
+        $data = array(
+            'cohorte'=>$inscripcion->corte,
+            'inscripciones' => $inscripcion);
+            $pdf = PDF::loadView('maestrias.cortes.verAdmisionEstudiante',$data)
+        
+        ->setOption('footer-html', view('admisiones.examenes.pie'))
+        ->setOption('margin-bottom', 10);
+        return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');
+        
+        
     }
 }

@@ -50,6 +50,7 @@ class Inscripciones extends Controller
             }
         }
         $request->session()->flash('success','Comprobante subido exitosamente');
+        $request->session()->flash('ok','Gracias');
         return redirect()->route('misInscripciones');
     }
 

@@ -9,6 +9,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
+
+                <h1>Notas</h1>
                 <div class="card">
                     <div class="card-header">
                         <h2>Nota de examen</h2>
@@ -43,6 +45,7 @@
             </div>
             <div class="col-md-8">
                 @if (count($cuestionarios)>0)
+                
                 <h2>Entrevista</h2>
                 <form action="{{ route('guardarNotasAdmisionAspirante') }}" method="POST">
                     @csrf

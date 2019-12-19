@@ -57,6 +57,10 @@ class RegistrosAprobarDataTable extends DataTable
                     });
                 });
             })
+            ->editColumn('corte_id',function($inscripcion){
+                return $inscripcion->corte->numero;
+            })
+            
             ->editColumn('comprobante',function($inscripcion){
                 return view('inscripciones.registro.comprobante',['inscripcion'=>$inscripcion])->render();
             })
@@ -121,7 +125,7 @@ class RegistrosAprobarDataTable extends DataTable
             Column::make('created_at')->title('Fecha de registro'),
             Column::computed('maestria')->title('Maestría'),
             Column::make('corte_id')->title('Corte'),
-            Column::make('valorMatricula')->title('ok'),
+            Column::make('valorMatricula')->title('Valor'),
             
             
             

@@ -8,7 +8,7 @@ use App\Models\Corte;
 use App\Models\Inscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 class Examenes extends Controller
 {
     public function __construct()
@@ -60,5 +60,19 @@ class Examenes extends Controller
             $request->session()->flash('info','Notas no ingresado vuelva intentar');
         }
         return redirect()->route('notasExamenAdmision',$cohorte->id);
+    }
+
+
+    // A:deivid
+    // D: descarar notas de incritos a PDF
+    public function descargarNotasPdfInscritos($idCohorte)
+    {
+        $cohorte=Corte::findOrFail($idCohorte);
+        $data = array('inscripciones' => $cohorte->inscripciones,'cohorte'=>$cohorte );
+        $pdf = PDF::loadView('admisiones.examenes.notasPdf',$data)
+        
+        ->setOption('footer-html', view('admisiones.examenes.pie'))
+        ->setOption('margin-bottom', 10);
+        return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');
     }
 }

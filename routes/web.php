@@ -149,6 +149,8 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         // examenes
         Route::get('/notas-de-examen-admision/{cohorte}', 'Examenes@index')->name('notasExamenAdmision');
         Route::post('/atualizar-notas-de-examen-admision', 'Examenes@actualizarNota')->name('actualizarExamenAdmision');
+        Route::get('/descargar-notas-de-examen-admision-pdf/{cohorte}', 'Examenes@descargarNotasPdfInscritos')->name('descargarNotasPdfInscritos');
+        
         
         
         

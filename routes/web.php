@@ -111,6 +111,9 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/inscritos-en-corte/{corte}', 'MisMaestrias@inscritos')->name('inscritosEnCorteMiMaestrias');
         Route::get('/descragar-excel-inscritos/{corte}/{opcion}', 'MisMaestrias@descargarExcelinscritos')->name('descargarExcelInscritos');
         Route::get('/informacion-de-aspirante/{inscripcion}', 'MisMaestrias@informacionAspirante')->name('informacionAspirante');
+        Route::get('/notas-admision-aspirante/{inscripcion}', 'MisMaestrias@notasAdmisionAspirante')->name('notasAdmisionAspirante');        
+        Route::post('/guardar-notas-admision-aspirante', 'MisMaestrias@guardarNotasAdmisionAspirante')->name('guardarNotasAdmisionAspirante');
+        Route::post('/guardar-notas-ensayo-aspirante', 'MisMaestrias@guardarNotasEnsayoAspirante')->name('guardarNotasEnsayoAspirante');
         
         
         
@@ -142,6 +145,11 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/cuestionario/{cohorte}', 'Cuestionarios@index')->name('cuestionario');
         Route::post('/guardar-pregunta-cuestionario', 'Cuestionarios@guardarPreguntaCuestionario')->name('guardarPreguntaCuestionario');
         Route::get('/eliminar-pregunta-cuestionario/{cuestionario}', 'Cuestionarios@eliminarCuestionario')->name('eliminarCuestionario');
+        
+        // examenes
+        Route::get('/notas-de-examen-admision/{cohorte}', 'Examenes@index')->name('notasExamenAdmision');
+        Route::post('/atualizar-notas-de-examen-admision', 'Examenes@actualizarNota')->name('actualizarExamenAdmision');
+        
         
         
 

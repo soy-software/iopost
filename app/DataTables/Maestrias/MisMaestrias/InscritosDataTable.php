@@ -55,7 +55,7 @@ class InscritosDataTable extends DataTable
             })
             
             ->addColumn('action', function($insc){
-                return view('maestrias.misMaestrias.ifoAspirante',['insc'=>$insc])->render();
+                return view('maestrias.misMaestrias.accion',['insc'=>$insc])->render();
             })
             ->rawColumns(['action','user_id','comprobante']);
     }

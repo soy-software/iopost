@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admision\Admision;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +18,13 @@ class Inscripcion extends Model
     public function corte()
     {
         return $this->belongsTo(Corte::class);
+    }
+
+
+    // A:deivid
+    // D:una incripcion tiene un solo admision
+    public function admision()
+    {
+        return $this->hasOne(Admision::class,'inscripcion_id');
     }
 }

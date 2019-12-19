@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\Corte;
-use App\Models\Maestria;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -28,7 +27,18 @@ class CortePolicy
     // D: solo pueden crear cuestionario en
     public function crearCuestionario(User $user,Corte $corte)
     {
-        if(($corte->estado=='Promoción' || $corte->estado=='Registro') && count($corte->cuestionario)<10){
+        if($corte->estado!='Finalizado' && count($corte->cuestionario)<10){
+            return true;
+        }
+        return false;
+    }
+
+
+    // A:deivid
+    // D: ingresar notas de examen
+    public function ingresarNotaExamen(User $user,Corte $corte)
+    {
+        if($corte->estado!='Finalizado'){
             return true;
         }
         return false;

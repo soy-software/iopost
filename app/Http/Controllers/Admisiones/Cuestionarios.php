@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class Cuestionarios extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role_or_permission:Administrador|G. Maestrías']);
+    }
     public function index( $idCohorte)
     {
         $cohorte=Corte::findOrFail($idCohorte);

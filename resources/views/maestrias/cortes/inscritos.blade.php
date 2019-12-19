@@ -1,7 +1,15 @@
 @extends('layouts.app',['title'=>'Listado de inscritos en la corte'])
 
 @section('breadcrumbs', Breadcrumbs::render('InscritoCortesMaestria',$corte))
+@section('barraLateral')
 
+    <div class="breadcrumb justify-content-center">
+        <a href="{{ route('notasExamenAdmision',$corte->id) }}" class="breadcrumb-elements-item">
+            <i class="fas fa-sort-numeric-down-alt"></i>
+            Notas de examen
+        </a>
+    </div>
+@endsection
 
 @section('content')
 <div class="card">

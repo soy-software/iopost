@@ -161,6 +161,17 @@ Breadcrumbs::for('cuestionario', function ($trail,$corte) {
     $trail->push('Cuestionario de preguntas', route('cuestionario',$corte->id));
 });
 
+// examnes
+Breadcrumbs::for('notasExamenAdmision', function ($trail,$corte) {
+    $trail->parent('InscritoCortesMaestria',$corte);
+    $trail->push('Notas de examen', route('notasExamenAdmision',$corte->id));
+});
+// notas
+
+Breadcrumbs::for('notasAdmisionAspirante', function ($trail,$inscripcion) {
+    $trail->parent('inscritosEnCorteMiMaestrias',$inscripcion->corte);
+    $trail->push('Notas de admisión', route('notasAdmisionAspirante',$inscripcion->id));
+});
 
 //A:Deivid
 //D:Breadcrums de roles y permisos

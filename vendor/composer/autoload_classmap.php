@@ -70,6 +70,7 @@ return array(
     'App\\Models\\Maestria' => $baseDir . '/app/Models/Maestria.php',
     'App\\Models\\Maestria\\CoordinadorCorte' => $baseDir . '/app/Models/Maestria/CoordinadorCorte.php',
     'App\\Models\\MateriaMaestria' => $baseDir . '/app/Models/MateriaMaestria.php',
+    'App\\Models\\Pago' => $baseDir . '/app/Models/Pago.php',
     'App\\Models\\Usuario\\InformacionLaboral' => $baseDir . '/app/Models/Usuario/InformacionLaboral.php',
     'App\\Models\\Usuario\\RegistroAcademico' => $baseDir . '/app/Models/Usuario/RegistroAcademico.php',
     'App\\Notifications\\NotificacionInscripcion' => $baseDir . '/app/Notifications/NotificacionInscripcion.php',

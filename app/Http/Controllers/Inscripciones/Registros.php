@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Corte;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
+use App\Models\Pago;
 use App\Notifications\NotificacionRegistroComprobante;
 use Illuminate\Http\Request;
 
@@ -36,9 +37,16 @@ class Registros extends Controller
             $incripcion->estado='Aprobado';
             $incripcion->save();
 
+            $pago=new Pago();
+            $pago->detalle='Pago de la inscripción en corte n: '.$incripcion->corte->numero.' maestría en: '.$incripcion->corte->maestria->nombre;
+            $pago->valor=$incripcion->corte->valorRegistro;
+            $pago->user_id=$incripcion->user->id;
+            $pago->estado='Cancelado';
+            $pago->save();
+
             $incripcion->user->notify(new NotificacionRegistroComprobante($incripcion));
             
-            return response()->json(['success'=>'Registro aprobado exitosamente con # de factura '.$request->factura.' se ha enviado informaciión a '.$incripcion->user->email]);
+            return response()->json(['success'=>'Registro aprobado exitosamente con # de factura '.$request->factura.' se ha enviado información a '.$incripcion->user->email]);
         } catch (\Exception $th) {
             return response()->json(['info'=>'Ocurrion un error vuelva intentar']);
         }

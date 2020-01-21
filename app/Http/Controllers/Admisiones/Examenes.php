@@ -75,4 +75,15 @@ class Examenes extends Controller
         ->setOption('margin-bottom', 10);
         return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');
     }
+
+    // A: deivid
+    // D: importar notas de examen de admisión por excel
+    public function importarNotasExamenAdmision($idCohorte)
+    {
+        $cohorte=Corte::findOrFail($idCohorte);
+        $this->authorize('ingresarNuevoRegistro',$cohorte);
+        
+        return view('admisiones.examenes.importarNotasExamenAdmision');
+
+    }
 }

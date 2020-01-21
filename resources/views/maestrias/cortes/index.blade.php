@@ -5,6 +5,7 @@
 @section('barraLateral')
 
     <div class="breadcrumb justify-content-center">
+       
         <a href="{{ route('nuevoCohorte',$maestria->id) }}" class="breadcrumb-elements-item">
             <i class="fas fa-plus"></i>
             Nueva cohorte

@@ -128,6 +128,11 @@ Breadcrumbs::for('InformacionInscritoCortesMaestria', function ($trail,$inscripc
     $trail->push('Información de '.$inscripcion->user->apellidos, route('informacionInscritoCorteMaestria',$inscripcion->id));
 });
 
+Breadcrumbs::for('nuevoRegistroAspirante', function ($trail,$corte) {
+    $trail->parent('InscritoCortesMaestria',$corte);
+    $trail->push('Nuevo registro de aspirante', route('nuevoRegistroAspirante',$corte->id));
+});
+
 
 // A:deivid
 // D:asigmacion de coordinadores

@@ -4,9 +4,13 @@
 @section('barraLateral')
 
     <div class="breadcrumb justify-content-center">
-        <a href="{{ route('notasExamenAdmision',$corte->id) }}" class="breadcrumb-elements-item">
+        <a href="{{ route('nuevoRegistroAspirante',$corte->id) }}" class="breadcrumb-elements-item" data-toggle="tooltip" data-placement="top" title="Nuevo registro de aspirante">
+            <i class="fas fa-plus"></i>
+                Nuevo Registro
+        </a>
+        <a href="{{ route('notasExamenAdmision',$corte->id) }}" class="breadcrumb-elements-item" data-toggle="tooltip" data-placement="top" title="Notas de examen de admisión">
             <i class="fas fa-sort-numeric-down-alt"></i>
-            Notas de examen de admisión
+            Notas Examen
         </a>
     </div>
 @endsection

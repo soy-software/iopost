@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Corte;
 use App\Models\Domicilio\Parroquia;
 use App\Models\Maestria;
+use App\Models\Pago;
 use App\Models\Usuario\InformacionLaboral;
 use App\Models\Usuario\RegistroAcademico;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -85,5 +86,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Corte::class, 'coordinador_cortes', 'user_id', 'corte_id');
     }
     
+
+    // A:deivid
+    // D: un usuario tiene pagos
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class);
+    }
 
 }

@@ -62,7 +62,7 @@ class Estaticas extends Controller
     }
 
     // A:deivid
-    // D:procesar la inscripcion del estudiante en una corte
+    // D:procesar la inscripcion del estudiante en una corte, esto tambien esta en corte nuevo registro
     public function procesarInscripcion(RqProcesar $rq)
     {
         try {

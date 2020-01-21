@@ -73,8 +73,7 @@ return [
             ],
             [
               'extend'=>'print',
-              'text'=>'<i class="fas fa-print"></i> Imprimir',
-               'messageTop' => 'User Report',
+              'text'=>'<i class="fas fa-print"></i> Imprimir'
               
             ],
             [

@@ -5,7 +5,12 @@
 @section('barraLateral')
 @if (count($inscritos)>0)
 <div class="breadcrumb justify-content-center">
-    <a href="{{ route('descargarNotasPdfInscritos',$cohorte) }}" target="_blank" class="breadcrumb-elements-item">
+    
+    <a href="{{ route('importarNotasExamenAdmision',$cohorte) }}" class="breadcrumb-elements-item" data-toggle="tooltip" data-placement="top" title="Importar notas de examen de admisíon">
+        <i class="fas fa-file-excel"></i>
+        Importar notas
+    </a>
+    <a href="{{ route('descargarNotasPdfInscritos',$cohorte) }}" target="_blank" class="breadcrumb-elements-item" data-toggle="tooltip" data-placement="top" title="Descargar notas de admisíon a PDF">
         <i class="fas fa-file-pdf"></i>
         Descargar a PDF
     </a>
@@ -107,7 +112,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuHome').addClass('active');  
+    $('#menuMaestria').addClass('active');  
     </script>
 @endprepend
 

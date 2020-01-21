@@ -89,6 +89,9 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/informacion-registro-cohorte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
         Route::post('/cambiar-estado-de-inscripcion', 'Cortes@cambiarEstadoInscripcion')->name('cambiarEstadoInscripcion');
         Route::get('/ver-admision-estiante/{inscripcion}', 'Cortes@verAdmisionEstudiante')->name('verAdmisionEstudiante');
+        Route::get('/nuevo-resgitro-aspirante/{cohorte}', 'Cortes@nuevoRegistroAspirante')->name('nuevoRegistroAspirante');
+        Route::post('/guardar-nuevo-cohorte', 'Cortes@procesarNuevaInscripcion')->name('procesarNuevaInscripcion');
+        
         
     
         
@@ -152,10 +155,7 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/notas-de-examen-admision/{cohorte}', 'Examenes@index')->name('notasExamenAdmision');
         Route::post('/atualizar-notas-de-examen-admision', 'Examenes@actualizarNota')->name('actualizarExamenAdmision');
         Route::get('/descargar-notas-de-examen-admision-pdf/{cohorte}', 'Examenes@descargarNotasPdfInscritos')->name('descargarNotasPdfInscritos');
-        
-        
-        
-        
+        Route::get('/importar-notas-de-examen-admision/{cohorte}', 'Examenes@importarNotasExamenAdmision')->name('importarNotasExamenAdmision');
 
     });
 

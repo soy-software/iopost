@@ -5,17 +5,22 @@ namespace App\Http\Controllers\Maestrias;
 use App\DataTables\CortesDataTable;
 use App\DataTables\InscritosCorteDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Inscripciones\RqProcesar;
 use App\Http\Requests\Maestrias\Cortes\RqActualizar;
 use App\Http\Requests\Maestrias\Cortes\RqCrear;
 use App\Models\Corte;
+use App\Models\Domicilio\Provincia;
 use App\Models\Inscripcion;
 use App\Models\Maestria;
+use App\Notifications\NotificacionInscripcion;
 use App\Notifications\NotificacionRegistroComprobante;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use PDF;
+use Illuminate\Support\Str;
 class Cortes extends Controller
 {
     public function __construct()
@@ -220,6 +225,77 @@ class Cortes extends Controller
         ->setOption('margin-bottom', 10);
         return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');
         
-        
+    }
+
+
+
+    // A]: deivid
+    // d: NUEVO REGISTRO DE ASPIRANTE
+    public function nuevoRegistroAspirante($idCorte)
+    {
+        $corte=Corte::findOrFail($idCorte);
+        $this->authorize('ingresarNuevoRegistro',$corte);
+        $provincias=Provincia::all();
+        $data = array('corte' => $corte,'provincias'=>$provincias );
+        return view('maestrias.cortes.nuevoRegistroAspirante',$data);
+
+    }
+
+    // A: deivid
+    // D:generar lña inscripcion del aspirante, esto tambien esta en estaticas procesarInscripcion
+    public function procesarNuevaInscripcion(RqProcesar $rq)
+    {
+        try {
+            DB::beginTransaction();
+            $user=User::where('email',$rq->email)->orWhere('identificacion',$rq->identificacion)->first();
+            $corte=Corte::findOrFail($rq->corte);
+            $this->authorize('ingresarNuevoRegistro',$corte);
+            
+            $pass='La contraseña, sigue siendo la misma.';
+
+            if(!$user){
+                $user=new User();
+                $user->name=$rq->email;
+                $user->email=$rq->email;
+                $pass=Str::random(15);
+                $user->password=Hash::make($pass);
+                $user->nombres=$rq->nombres;
+                $user->apellidos=$rq->apellidos;
+                $user->sexo=$rq->sexo;
+                $user->tipo_identificacion=$rq->tipo_identificacion;
+                $user->identificacion=$rq->identificacion;
+                $user->fecha_nacimiento=$rq->fecha_nacimiento;
+                $user->estado_civil=$rq->estado_civil;
+                $user->etnia=$rq->etnia;
+                $user->telefono=$rq->telefono;
+                $user->celular=$rq->celular;
+                $user->pais=$rq->pais;
+                $user->parroquia_id=$rq->parroquia;
+                $user->direccion=$rq->direccion;
+                $user->save();
+                $user->assignRole('Aspirante');
+            }
+
+            $inscripcion=Inscripcion::where(['user_id'=>$user->id,'corte_id'=>$corte->id])->first();
+            if(!$inscripcion){
+                $inscripcion=new Inscripcion();
+                $inscripcion->user_id=$user->id;
+                $inscripcion->corte_id=$corte->id;
+                $inscripcion->valorMatricula=$corte->valorRegistro;
+                $inscripcion->save();
+            }
+            
+            $user->notify(new NotificacionInscripcion($inscripcion,$pass));
+            DB::commit();
+            $rq->session()->flash('success','Inscripción procesado exitosamente');
+            $rq->session()->flash('inscripcionOk',$inscripcion);
+           
+
+        } catch (\Exception $th) {
+            DB::rollback();
+            $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar');
+            return redirect()->route('incripcion',$rq->corte)->withInput();
+        }
+        return redirect()->route('nuevoRegistroAspirante',$rq->corte);
     }
 }

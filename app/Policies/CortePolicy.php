@@ -43,4 +43,15 @@ class CortePolicy
         }
         return false;
     }
+
+
+    // A:deivid
+    // D: realizxar el registro de nuevo aspirante
+    public function ingresarNuevoRegistro(User $user,Corte $corte)
+    {
+        if($corte->estado=='Finalizado'){
+            return false;
+        }
+        return true;
+    }
 }

@@ -8,11 +8,12 @@
 
 
 @section('content')
-<form action="" method="" enctype="multipart/form-data">
+<form action="{{ route('importarNotasExamenAdmisionProcesar') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" name="corte" value="{{ $corte->id }}">
 <div class="card">
     <div class="card-header">
-        <strong>Advertencia:</strong> el archivo excel debe contener extrictamente el siguente formato.
+        <strong>Advertencia:</strong> el archivo excel debe contener estrictamente el siguiente formato.
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -39,7 +40,7 @@
         </div>
     </div>
     <div class="card-footer text-muted">
-        <button type="button" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">
             Importar notas
         </button> 
     </div>

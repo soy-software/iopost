@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admisiones;
 
 use App\Http\Controllers\Controller;
+use App\Imports\NotasAdmisionImport;
 use App\Models\Admision\Admision;
 use App\Models\Corte;
 use App\Models\Inscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 class Examenes extends Controller
 {
@@ -82,8 +84,20 @@ class Examenes extends Controller
     {
         $cohorte=Corte::findOrFail($idCohorte);
         $this->authorize('ingresarNuevoRegistro',$cohorte);
-        
-        return view('admisiones.examenes.importarNotasExamenAdmision');
+        $data = array('corte' => $cohorte );
+        return view('admisiones.examenes.importarNotasExamenAdmision',$data);
 
+    }
+
+    // A: deivid
+    // D: procesar importaciond e notas de admision
+    public function importarNotasExamenAdmisionProcesar(Request $request)
+    {
+        Excel::import(new NotasAdmisionImport($request->corte),$request->archivo);
+        $corte=Corte::findOrFail($request->corte);
+        $this->authorize('ingresarNotaExamen',$corte);
+        $request->session()->flash('success','Notas de examen de admisión importado.');
+        return redirect()->route('notasExamenAdmision',$request->corte);
+        
     }
 }

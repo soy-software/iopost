@@ -51,8 +51,10 @@ class RqProcesar extends FormRequest
             //datos personales
             'corte'=>'required|exists:cortes,id',
             'email'=>'required|string|email|max:255',
-            'nombres'=>'required|string|max:255', 
-            'apellidos'=>'required|string|max:255',
+            'primer_nombre'=>'required|string|max:255', 
+            'segundo_nombre'=>'required|string|max:255',
+            'primer_apellido'=>'required|string|max:255', 
+            'segundo_apellido'=>'required|string|max:255',
             'sexo'=>'required|in:Masculino,Femenino',
             'tipo_identificacion'=>'required|in:Cédula,Ruc persona Natural,Ruc Sociedad Pública,Ruc Sociedad Privada,Pasaporte,Otros',
             'identificacion'=>'required|string|'.$rg_tipo_identificacion,

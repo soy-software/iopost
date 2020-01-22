@@ -318,7 +318,7 @@
                 <label for="">Selecionar rol<i class="text-danger">*</i></label> <br>
                 @foreach ($roles as $rol)
 
-                    <div class="form-check form-check-inline">
+                    <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="roles[{{ $rol->id }}]"  value="{{ $rol->id }}" {{ $usuario->hasRole($rol)?'checked':'' }} {{ old('roles.'.$rol->id)==$rol->id ?'checked':'' }} id="rol_{{ $rol->id }}">
                         <label class="form-check-label" for="rol_{{ $rol->id }}">
                             {{ $rol->name }}

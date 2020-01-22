@@ -53,7 +53,7 @@ class Inscripciones extends Controller
         $request->session()->flash('ok','Gracias');
         return redirect()->route('misInscripciones');
     }
-
+    
 
 
     public function inscripcionPdf($idInscripcion)

@@ -83,8 +83,10 @@ class UsuariosDataTable extends DataTable
                 ->printable(false)
                 ->title('Acciones'),
             Column::make('email'),
-            Column::make('nombres'),
-            Column::make('apellidos'),
+            Column::make('primer_nombre'),
+            Column::make('segundo_nombre'),
+            Column::make('primer_apellido'),
+            Column::make('segundo_apellido'),
             Column::make('identificacion')->title('Identificación'),
             Column::make('celular'),
             Column::make('estado'),

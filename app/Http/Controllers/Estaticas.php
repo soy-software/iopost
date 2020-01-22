@@ -79,8 +79,10 @@ class Estaticas extends Controller
                     $user->email=$rq->email;
                     $pass=Str::random(15);
                     $user->password=Hash::make($pass);
-                    $user->nombres=$rq->nombres;
-                    $user->apellidos=$rq->apellidos;
+                    $user->primer_nombre=$rq->primer_nombre;
+                    $user->segundo_nombre=$rq->segundo_nombre;
+                    $user->primer_apellido=$rq->primer_apellido;
+                    $user->segundo_apellido=$rq->segundo_apellido;
                     $user->sexo=$rq->sexo;
                     $user->tipo_identificacion=$rq->tipo_identificacion;
                     $user->identificacion=$rq->identificacion;

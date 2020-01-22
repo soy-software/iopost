@@ -35,19 +35,38 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="nombres">Nombres<i class="text-danger">*</i></label>
-                    <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="nombres" name="nombres" value="{{ old('nombres') }}" placeholder="Ingrese nombres.." required>
-                    @error('nombres')
+                <div class="form-group col-md-3">
+                    <label for="primer_nombre">Primer nombre<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('primer_nombre') is-invalid @enderror" id="primer_nombre" name="primer_nombre" value="{{ old('primer_nombre') }}" placeholder="Ingrese primer nombre.." required>
+                    @error('primer_nombre')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="apellidos">Apellidos<i class="text-danger">*</i></label>
-                    <input type="text" class="form-control @error('apellidos') is-invalid @enderror" id="apellidos" name="apellidos" value="{{ old('apellidos') }}" placeholder="Ingrese apellidos..." required>
-                    @error('apellidos')
+                <div class="form-group col-md-3">
+                    <label for="segundo_nombre">Segundo nombre<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('segundo_nombre') is-invalid @enderror" id="segundo_nombre" name="segundo_nombre" value="{{ old('segundo_nombre') }}" placeholder="Ingrese segundo nombre..." required>
+                    @error('segundo_nombre')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="primer_apellido">Primer apellido<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('primer_apellido') is-invalid @enderror" id="primer_apellido" name="primer_apellido" value="{{ old('primer_apellido') }}" placeholder="Ingrese primer apellido.." required>
+                    @error('primer_apellido')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="segundo_apellido">Segundo apellido<i class="text-danger">*</i></label>
+                    <input type="text" class="form-control @error('segundo_apellido') is-invalid @enderror" id="segundo_apellido" name="segundo_apellido" value="{{ old('segundo_apellido') }}" placeholder="Ingrese segundo apellido..." required>
+                    @error('segundo_apellido')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

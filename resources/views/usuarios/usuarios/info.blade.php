@@ -9,7 +9,7 @@
                 <strong>Email:</strong> {{ $usuario->email }}
             </td>
             <td>
-                <strong>Nombres y apelidos:</strong> {{ $usuario->nombres??'---' }} {{ $usuario->apellidos??'---' }}
+                <strong>Nombres y apellidos:</strong> {{ $usuario->primer_nombre }} {{ $usuario->segundo_nombre }} {{ $usuario->primer_apellido}} {{ $usuario->segundo_apellido}}
             </td>
         </tr>
         <tr>

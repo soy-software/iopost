@@ -47,8 +47,10 @@ class HomeController extends Controller
         if($request->password){
             $user->password=Hash::make($request->password);
         }
-        $user->nombres=$request->nombres;
-        $user->apellidos=$request->apellidos;
+        $user->primer_nombre=$request->primer_nombre;
+        $user->segundo_nombre=$request->segundo_nombre;
+        $user->primer_apellido=$request->primer_apellido;
+        $user->segundo_apellido=$request->segundo_apellido;
         $user->sexo=$request->sexo;
         $user->tipo_identificacion=$request->tipo_identificacion;
         $user->identificacion=$request->identificacion;

@@ -22,8 +22,11 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->string('nombres')->nullable();
-            $table->string('apellidos')->nullable();
+            $table->string('primer_nombre')->nullable();
+            $table->string('segundo_nombre')->nullable();
+            $table->string('primer_apellido')->nullable();
+            $table->string('segundo_apellido')->nullable();
+            $table->string('profesion')->nullable();
             $table->enum('sexo',['Masculino','Femenino'])->default('Masculino');
             $table->enum('tipo_identificacion',['Cédula','Ruc persona Natural','Ruc Sociedad Pública','Ruc Sociedad Privada','Pasaporte','Otros'])->default('Cédula');
             $table->string('identificacion')->nullable();

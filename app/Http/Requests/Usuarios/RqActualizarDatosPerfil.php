@@ -50,8 +50,10 @@ class RqActualizarDatosPerfil extends FormRequest
 
         return [
             'password'=>'nullable|string|max:255|min:8',
-            'nombres'=>'required|string|max:255', 
-            'apellidos'=>'required|string|max:255',
+            'primer_nombre'=>'required|string|max:255', 
+            'segundo_nombre'=>'required|string|max:255', 
+            'primer_apellido'=>'required|string|max:255',
+            'segundo_apellido'=>'required|string|max:255',
             'sexo'=>'required|in:Masculino,Femenino',
             'tipo_identificacion'=>'required|in:Cédula,Ruc persona Natural,Ruc Sociedad Pública,Ruc Sociedad Privada,Pasaporte,Otros',
             'identificacion'=>'required|string|'.$rg_tipo_identificacion,

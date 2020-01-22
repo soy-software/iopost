@@ -37,7 +37,7 @@ class CortesDataTable extends DataTable
 
             ->filterColumn('created_at',function($query, $keyword){
                 $query->whereHas('coordinadores', function($query) use ($keyword) {
-                    $query->whereRaw("concat(nombres,' ',apellidos,' ',email) like ?", ["%{$keyword}%"]);
+                    $query->whereRaw("concat(primer_nombre,' ',segundo_nombre,' ',primer_apellido,' ',segundo_apellido,' ',email) like ?", ["%{$keyword}%"]);
                 });            
             })
 

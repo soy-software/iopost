@@ -24,7 +24,7 @@ class InscritosCorteDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('user_id',function($inscri){
-                return $inscri->user->nombres .' '.$inscri->user->apellidos;
+                return $inscri->user->primer_nombre .' '.$inscri->user->segundo_nombre.' '.$inscri->user->primer_apellido.' '.$inscri->user->segundo_apellido;
             })
             ->editColumn('updated_at',function($inscripcion){
                 return $inscripcion->user->identificacion;
@@ -34,7 +34,7 @@ class InscritosCorteDataTable extends DataTable
             })
             ->filterColumn('user_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
-                    $query->whereRaw("concat(nombres,' ',apellidos) like ?", ["%{$keyword}%"]);
+                    $query->whereRaw("concat(primer_nombre,' ',segundo_nombre,' ',primer_apellido,' ',segundo_apellido) like ?", ["%{$keyword}%"]);
                 });            
             })
             ->filterColumn('updated_at',function($query, $keyword){

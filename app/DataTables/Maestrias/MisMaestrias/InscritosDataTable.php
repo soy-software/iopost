@@ -22,11 +22,11 @@ class InscritosDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('user_id',function($insc){
-                return $insc->user->nombres.' '.$insc->user->apellidos;
+                return $insc->user->primer_nombre.' '.$insc->user->segundo_nombre.' '.$insc->user->primer_apellido.' '.$insc->user->segundo_apellido;
             })
             ->filterColumn('user_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
-                    $query->whereRaw("concat(nombres,' ',apellidos) like ?", ["%{$keyword}%"]);
+                    $query->whereRaw("concat(primer_nombre,' ',segundo_nombre,' ',primer_apellido,' ',segundo_apellido) like ?", ["%{$keyword}%"]);
                 });            
             })
             ->editColumn('comprobante',function($insc){

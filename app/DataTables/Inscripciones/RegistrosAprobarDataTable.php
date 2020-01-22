@@ -22,11 +22,11 @@ class RegistrosAprobarDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('user_id',function($inscripcion){
-                return $inscripcion->user->nombres.' '.$inscripcion->user->apellidos;
+                return $inscripcion->user->primer_nombre.' '.$inscripcion->user->segundo_nombre.' '.$inscripcion->user->primer_apellido.' '.$inscripcion->user->segundo_apellido;
             })
             ->filterColumn('user_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
-                    $query->whereRaw("concat(nombres,' ',apellidos) like ?", ["%{$keyword}%"]);
+                    $query->whereRaw("concat(primer_nombre,' ',segundo_nombre,' ',primer_apellido,' ',segundo_apellido) like ?", ["%{$keyword}%"]);
                 });            
             })
             ->editColumn('updated_at',function($inscripcion){
@@ -124,7 +124,7 @@ class RegistrosAprobarDataTable extends DataTable
             Column::make('numero_factura')->title('# factura'),
             Column::make('created_at')->title('Fecha de registro'),
             Column::computed('maestria')->title('Maestría'),
-            Column::make('corte_id')->title('Corte'),
+            Column::make('corte_id')->title('Cohorte'),
             Column::make('valorMatricula')->title('Valor'),
             
             

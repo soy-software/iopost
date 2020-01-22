@@ -57,7 +57,7 @@
                                     {{ $i }}
                                 </td>
                                 <td>
-                                    {{ $inscrito->user->nombres }} {{ $inscrito->user->apellidos }}
+                                    {{ $inscrito->user->primer_nombre }} {{ $inscrito->user->segundo_nombre }} {{ $inscrito->user->primer_apellido }} {{ $inscrito->user->segundo_apellido }}
                                 </td>
                                 <td>
                                     {{ $inscrito->user->identificacion }}

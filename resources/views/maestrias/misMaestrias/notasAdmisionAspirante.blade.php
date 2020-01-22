@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        Admisión de <strong>{{ $inscripcion->user->nombres }} {{ $inscripcion->user->apellidos }}</strong>
+        Admisión de <strong>{{ $inscripcion->user->primer_nombre }} {{ $inscripcion->user->segundo_nombre }} {{ $inscripcion->user->primer_apellido }} {{ $inscripcion->user->segundo_apellido }}</strong>
     </div>
     <div class="card-body">
         <div class="row">

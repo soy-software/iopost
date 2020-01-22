@@ -30,7 +30,7 @@
                 {{ $ins->id }}
             </td>
             <td>
-                {{ $ins->user->nombres.' '.$ins->user->apellidos }}
+                {{ $ins->user->primer_nombre }} {{ $ins->user->segundo_nombre }} {{ $ins->user->primer_apellido }} {{ $ins->user->segundo_apellido }}
             </td>
             <td>
                 {{ $ins->user->identificacion }}

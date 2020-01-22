@@ -187,7 +187,7 @@
                 <div class="form-check ml-1">
                     <input class="form-check-input" name="coordinadores[{{ $coor->id }}]" {{ old('coordinadores.'.$coor->id)==$coor->id?'checked':'' }} type="checkbox" value="{{ $coor->id }}" id="coor_{{ $coor->id }}">
                     <label class="form-check-label" for="coor_{{ $coor->id }}">
-                        {{ $coor->nombres }} {{ $coor->apellidos }} <small>({{ $coor->email }})</small>
+                        {{ $coor->primer_nombre }} {{ $coor->segundo_nombre }} {{ $coor->primer_apellido }} {{ $coor->segundo_apellido }} <small>({{ $coor->email }})</small>
                     </label>
                 </div>
                 @endforeach

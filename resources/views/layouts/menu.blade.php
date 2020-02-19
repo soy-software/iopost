@@ -21,10 +21,10 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <!-- Main -->
-                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Navegación</div> 
+                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Navegación</div>
                     <i class="icon-menu" title="Navegación"></i>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link" id="menuHome">
                         <i class="fas fa-home"></i>
@@ -75,17 +75,17 @@
                     <a href="{{ route('misInscripciones') }}" class="nav-link" id="menuMisInscripciones">
                         <i class="fas fa-clipboard-check"></i>
                         <span>
-                            Mis inscripciones
+                            Mis pagos
                         </span>
                     </a>
                 </li>
 
                 @role('Tesorero')
                     <li class="nav-item">
-                        <a href="{{ route('aprobarRegistroMaestrias') }}" class="nav-link" id="menuaprobarRegistroMaestrias">
-                            <i class="fas fa-user-check"></i>
+                        <a href="{{ route('cobros') }}" class="nav-link" id="menuaprobarRegistroMaestrias">
+                            <i class="fas fa-money-check-alt"></i>
                             <span>
-                                Aprobar registros de maestrías
+                                Cobros
                             </span>
                         </a>
                     </li>
@@ -93,7 +93,7 @@
 
                 @role('Administrador')
                 <li class="nav-item-header">
-                    <div class="text-uppercase font-size-xs line-height-xs">SISTEMA</div> 
+                    <div class="text-uppercase font-size-xs line-height-xs">SISTEMA</div>
                     <i class="icon-menu" title="Sistemas"></i>
                 </li>
 
@@ -114,7 +114,7 @@
                         <li class="nav-item"><a href="" class="nav-link">Layout 2</a></li>
                     </ul>
                 </li>  --}}
-            
+
             </ul>
         </div>
         <!-- /main navigation -->

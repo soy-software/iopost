@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Bienvenido</div>
+    <div class="card-header">
+        Bienvenido
+        @foreach (Auth::user()->getRoleNames() as $rol)
+        {{ $rol }},
+        @endforeach
+    </div>
 
     <div class="card-body">
         @if (session('status'))
@@ -11,15 +16,14 @@
             </div>
         @endif
 
-        @foreach (Auth::user()->getRoleNames() as $rol)
-        {{ $rol }},
-        @endforeach
+        <img src="" alt="">
+
     </div>
 </div>
 
 @prepend('linksPie')
     <script>
-    $('#menuHome').addClass('active');  
+    $('#menuHome').addClass('active');
     </script>
 @endprepend
 

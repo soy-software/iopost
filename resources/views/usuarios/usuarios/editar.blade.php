@@ -13,11 +13,11 @@
             Datos personales
         </div>
         <div class="card-body">
-            
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email<i class="text-danger">*</i></label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email',$usuario->email) }}" placeholder="Ingrese email..." required>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email',$usuario->email) }}" placeholder="Ingrese email..." autocomplete="off" required>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Ingrese password...">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Ingrese password..." autocomplete="off">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
 
 
             <div class="form-row">
-                
+
                 <div class="form-group col-md-3">
                     <label for="tipo_identificacion">Tipo de identificación<i class="text-danger">*</i></label>
                     <select id="tipo_identificacion" class="form-control @error('tipo_identificacion') is-invalid @enderror" name="tipo_identificacion" required>
@@ -87,7 +87,7 @@
                         <option value="Ruc Sociedad Privada" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Ruc Sociedad Privada'?'selected':'' }}>Ruc Sociedad Privada</option>
                         <option value="Pasaporte" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Pasaporte'?'selected':'' }}>Pasaporte</option>
                         <option value="Otros" {{ old('tipo_identificacion',$usuario->tipo_identificacion)=='Otros'?'selected':'' }}>Otros</option>
-                        
+
                     </select>
                     @error('tipo_identificacion')
                         <span class="invalid-feedback" role="alert">
@@ -132,16 +132,16 @@
             </div>
 
             <div class="form-row">
-                
+
                 <div class="form-group col-md-3">
                     <label for="estado_civil">Estado civil<i class="text-danger">*</i></label>
                     <select id="estado_civil" class="form-control @error('estado_civil') is-invalid @enderror" name="estado_civil" required>
-                        
+
                         <option value="Soltero/a" {{ old('estado_civil',$usuario->estado_civil)=='Soltero/a'?'selected':'' }}>Soltero/a</option>
                         <option value="Casado/a" {{ old('estado_civil',$usuario->estado_civil)=='Casado/a'?'selected':'' }}>Casado/a</option>
                         <option value="Divorciado/a" {{ old('estado_civil',$usuario->estado_civil)=='Divorciado/a'?'selected':'' }}>Divorciado/a</option>
                         <option value="Vuido/a" {{ old('estado_civil',$usuario->estado_civil)=='Vuido/a'?'selected':'' }}>Vuido/a</option>
-                        
+
                     </select>
                     @error('estado_civil')
                         <span class="invalid-feedback" role="alert">
@@ -152,14 +152,14 @@
                 <div class="form-group col-md-3">
                     <label for="etnia">Etnia<i class="text-danger">*</i></label>
                     <select id="etnia" class="form-control @error('etnia') is-invalid @enderror" name="etnia" required>
-                        
+
                         <option value="Mestizos" {{ old('etnia',$usuario->etnia)=='Mestizos'?'selected':'' }}>Mestizos</option>
                         <option value="Blancos" {{ old('etnia',$usuario->etnia)=='Blancos'?'selected':'' }}>Blancos</option>
                         <option value="Afroecuatorianos" {{ old('etnia',$usuario->etnia)=='Afroecuatorianos'?'selected':'' }}>Afroecuatorianos</option>
                         <option value="Indígenas" {{ old('etnia',$usuario->etnia)=='Indígenas'?'selected':'' }}>Indígenas</option>
                         <option value="Montubios" {{ old('etnia',$usuario->etnia)=='Montubios'?'selected':'' }}>Montubios</option>
                         <option value="otros" {{ old('etnia',$usuario->etnia)=='otros'?'selected':'' }}>otros</option>
-                        
+
                     </select>
                     @error('etnia')
                         <span class="invalid-feedback" role="alert">
@@ -188,7 +188,7 @@
             </div>
 
             <div class="form-row">
-                
+
                 <div class="form-group col-md-3">
                     <label for="pais">País de procedencia<i class="text-danger">*</i></label>
                     <input type="text" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais" value="{{ old('pais',$usuario->pais) }}" required placeholder="Ingrese país...">
@@ -216,7 +216,7 @@
                 <div class="form-group col-md-3">
                     <label for="canton">Cantón de procedencia<i class="text-danger">*</i></label>
                     <select id="canton" class="form-control @error('canton') is-invalid @enderror" name="canton" onchange="cargarParroquias(this);" required>
-                        
+
                     </select>
                     @error('canton')
                         <span class="invalid-feedback" role="alert">
@@ -248,7 +248,7 @@
             </div>
 
             <div class="form-row">
-                
+
                 <div class="form-group col-md-3">
                     <label for="">Tiene discapacidad</label>
                     <div class="form-check form-check-inline ml-2">
@@ -264,7 +264,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                        
+
                 </div>
                 <div class="form-group col-md-3">
                     <label for="porcentaje_discapacidad">% discapacidad</label>
@@ -326,10 +326,10 @@
                     </div>
 
                 @endforeach
-                
+
             </div>
 
-            
+
             <div class="form-group">
                 <label for="foto">Seleciona foto</label>
                 <input type="file" class="form-control-file @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/*">
@@ -339,14 +339,14 @@
                     </span>
                 @enderror
 
-                
+
                 @if (Storage::exists($usuario->foto))
                     <a href="{{ Storage::url($usuario->foto) }}" class="btn-link float-right" data-toggle="tooltip" data-placement="top" title="Ver foto">
                         <img src="{{ Storage::url($usuario->foto) }}" alt="" class="img-fluid" width="45px;">
                     </a>
                 @endif
             </div>
-            
+
         </div>
         <div class="card-footer text-muted">
             <button type="submit" class="btn btn-primary">Actualizar datos personales</button>
@@ -389,11 +389,11 @@
                     <div class="form-group col-md-6">
                         <label for="tipo_institucion">Tipo de institución</label>
                         <select id="tipo_institucion" class="form-control @error('tipo_institucion') is-invalid @enderror" name="tipo_institucion">
-                            
+
                             <option value="PÚBLICA" {{ old('tipo_institucion',$infoLab->tipo_institucion??'')=='PÚBLICA'?'selected':'' }}>PÚBLICA</option>
                             <option value="PRIVADA" {{ old('tipo_institucion',$infoLab->tipo_institucion??'')=='PRIVADA'?'selected':'' }}>PRIVADA</option>
                             <option value="MIXTA" {{ old('tipo_institucion',$infoLab->tipo_institucion??'')=='MIXTA'?'selected':'' }}>MIXTA</option>
-                            
+
                         </select>
                         @error('tipo_institucion')
                             <span class="invalid-feedback" role="alert">
@@ -425,17 +425,17 @@
                 </div>
 
                 <div class="form-row">
-                        
-                    
+
+
                     <div class="form-group col-md-3">
                         <label for="provincia_laboral">Provincia</label>
                         <select id="provincia_laboral" class="form-control @error('provincia_laboral') is-invalid @enderror" name="provincia_laboral" required onchange="cargarCantonesLaboral(this);">
                             @foreach ($provincias as $provincia)
-                            
+
                             <option value="{{ $provincia->id }}" {{ old('provincia_laboral',$infoLab->parroquia->canton->provincia->id??0)==$provincia->id?'selected':'' }}>
                                 {{ $provincia->provincia }}
                             </option>
-                        
+
 
 
                             @endforeach
@@ -449,7 +449,7 @@
                     <div class="form-group col-md-3">
                         <label for="canton_laboral">Cantón</label>
                         <select id="canton_laboral" class="form-control @error('canton_laboral') is-invalid @enderror" name="canton_laboral" onchange="cargarParroquiasLaboral(this);">
-                            
+
                         </select>
                         @error('canton_laboral')
                             <span class="invalid-feedback" role="alert">
@@ -532,7 +532,7 @@
             .done(function( data ) {
                 $('#canton_laboral').html('');
                 $.each(data, function(i, item) {
-                    
+
                     if(item.id=={{ $infoLab->parroquia->canton->id??0 }}){
                         fila+='<option value="'+item.id+'" selected>'+item.canton+'</option>';
                     }else{
@@ -540,7 +540,7 @@
                     }
                 });
                 $('#canton_laboral').append(fila);
-    
+
                 //cargar cantones
                 var canton=$("#canton_laboral option:selected").val();
                 obtenerParroquiasLaboral(canton);
@@ -595,9 +595,9 @@
         </div>
         <div class="card-body">
             <p class="text-danger"> <strong>Información Pregrado</strong></p>
-                    
+
             <div class="form-row">
-                
+
                 <div class="form-group col-md-6">
                     <label for="institucion_pregrado">Institución<i class="text-danger">*</i></label>
                     <input type="text" class="form-control @error('institucion_pregrado') is-invalid @enderror" id="institucion_pregrado" name="institucion_pregrado" value="{{ old('institucion_pregrado',$regAca->institucion_pregrado??'') }}" placeholder="Ingrese institución..." required>
@@ -610,11 +610,11 @@
                 <div class="form-group col-md-6">
                     <label for="tipo_pregrado">Tipo de universidad<i class="text-danger">*</i> </label>
                     <select id="tipo_pregrado" class="form-control @error('tipo_pregrado') is-invalid @enderror" name="tipo_pregrado" required>
-                        
+
                         <option value="PÚBLICA" {{ old('tipo_pregrado',$regAca->tipo_pregrado??'')=='PÚBLICA'?'selected':'' }}>PÚBLICA</option>
                         <option value="PRIVADA" {{ old('tipo_pregrado',$regAca->tipo_pregrado??'')=='PRIVADA'?'selected':'' }}>PRIVADA</option>
                         <option value="MIXTA" {{ old('tipo_pregrado',$regAca->tipo_pregrado??'')=='MIXTA'?'selected':'' }}>MIXTA</option>
-                        
+
                     </select>
                     @error('tipo_pregrado')
                         <span class="invalid-feedback" role="alert">
@@ -624,7 +624,7 @@
                 </div>
             </div>
 
-            <div class="form-row">    
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="titulo_pregrado">Título<i class="text-danger">*</i></label>
                     <input type="text" class="form-control @error('titulo_pregrado') is-invalid @enderror" id="titulo_pregrado" name="titulo_pregrado" value="{{ old('titulo_pregrado',$regAca->titulo_pregrado??'') }}" placeholder="Ingrese título de pregrado..." required>
@@ -712,7 +712,7 @@
             <hr>
             <p class="text-danger"> <strong>Información Posgrado</strong></p>
 
-            
+
             <div class="form-group">
                 <label for="institucion_posgrado">Institución</label>
                 <input type="text" class="form-control @error('institucion_posgrado') is-invalid @enderror" id="institucion_posgrado" name="institucion_posgrado" value="{{ old('institucion_posgrado',$regAca->institucion_posgrado??'') }}" placeholder="Ingrese institución...">
@@ -722,9 +722,9 @@
                     </span>
                 @enderror
             </div>
-            
 
-            <div class="form-row">    
+
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="titulo_posgrado">Título</label>
                     <input type="text" class="form-control @error('titulo_posgrado') is-invalid @enderror" id="titulo_posgrado" name="titulo_posgrado" value="{{ old('titulo_posgrado',$regAca->titulo_posgrado??'') }}" placeholder="Ingrese título de posgrado...">
@@ -819,9 +819,9 @@
 @endpush
 @prepend('linksPie')
     <script>
-    $('#menuUsuarios').addClass('active');   
-    
-    
+    $('#menuUsuarios').addClass('active');
+
+
     var provincia=$("#provincia option:selected").val();
     obtenerCantones(provincia);
     function cargarCantones(arg){
@@ -835,7 +835,7 @@
         .done(function( data ) {
             $('#canton').html('');
             $.each(data, function(i, item) {
-                
+
                 if(item.id=={{ $usuario->parroquia->canton->id??0 }}){
                     fila+='<option value="'+item.id+'" selected>'+item.canton+'</option>';
                 }else{
@@ -881,9 +881,9 @@
     }
 
 
-    
+
 
     </script>
-    
+
 @endprepend
 @endsection

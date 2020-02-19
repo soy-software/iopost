@@ -30,8 +30,8 @@ class Usuarios extends Controller
         $roles=Role::all();
         $data = array('roles' =>$roles );
         return $dataTable->with('rol',$rol)->render('usuarios.usuarios.index',$data);
-        
-        
+
+
     }
 
     public function nuevo()
@@ -42,7 +42,7 @@ class Usuarios extends Controller
         return view('usuarios.usuarios.nuevo',$data);
     }
 
-    
+
 
 
     // A:Deivid
@@ -72,7 +72,7 @@ class Usuarios extends Controller
         $user->porcentaje_discapacidad=$request->porcentaje_discapacidad??0;
         $user->tiene_carnet_conadis=$request->tiene_carnet_conadis;
         $user->porcentaje_carnet_conadis=$request->porcentaje_carnet_conadis??0;
-        
+
         $user->save();
 
         if ($request->hasFile('foto')) {
@@ -89,7 +89,7 @@ class Usuarios extends Controller
         $user->assignRole($request->roles);
 
         $request->session()->flash('success','Nuevo usuario ingresado');
-        
+
         return redirect()->route('usuarios');
     }
     public function informacionUsuario($idUsuario)
@@ -98,7 +98,7 @@ class Usuarios extends Controller
         $data = array('usuario'=>$usuario);
         return view('usuarios.usuarios.informacion',$data);
     }
-    
+
     public function editarUsuario($idUsuario)
     {
         $usuario=User::findOrFail($idUsuario);
@@ -115,7 +115,7 @@ class Usuarios extends Controller
         $this->authorize('editar', $user);
         $user->email=$request->email;
         $user->name=$request->email;
-        
+
         if($request->password){
             $user->password=Hash::make($request->password);
         }
@@ -140,7 +140,7 @@ class Usuarios extends Controller
         $user->tiene_carnet_conadis=$request->tiene_carnet_conadis;
         $user->porcentaje_carnet_conadis=$request->porcentaje_carnet_conadis??0;
         $user->estado=$request->estado;
-        
+
         $user->save();
 
         if ($request->hasFile('foto')) {
@@ -156,7 +156,7 @@ class Usuarios extends Controller
         }
         $user->syncRoles($request->roles);
         $request->session()->flash('success','Usuario actualizado');
-        
+
         return redirect()->route('usuarios');
 
     }
@@ -203,7 +203,7 @@ class Usuarios extends Controller
         $regAcademico->pais_pregrado=$rq->pais_pregrado;
         $regAcademico->provincia_pregrado=$rq->provincia_pregrado;
         $regAcademico->canton_pregrado=$rq->canton_pregrado;
-        
+
         $regAcademico->institucion_posgrado=$rq->institucion_posgrado;
         $regAcademico->titulo_posgrado=$rq->titulo_posgrado;
         $regAcademico->especialidad_posgrado=$rq->especialidad_posgrado;

@@ -1,47 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>Resutado_COHORTE_N_{{ $cohorte->numero }}_MAESTRÍA_{{ $cohorte->maestria->nombre }}</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%
-        }
-            
-        table, th, td {
-            border: 1px solid black;
-            text-align: center;
-        }
-        .noBorder {
-            border:none !important;
-        }
-        
-    </style>
-</head>
+        <title>Resutado_cohorte_n_{{ $cohorte->numero }}_maestría_en_{{ $cohorte->maestria->nombre }}</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                text-align: center;
+            }
+            .noBorder {
+                border:none !important;
+            }
+
+            tr {page-break-inside: avoid;}
+
+        </style>
+    </head>
 <body>
-    <table style="border-collapse: collapse; border: none;">
-        <tr>
-            <td class="noBorder">
-                <img src="{!! public_path('img/utc.png') !!}" alt="" width="120px;" style="text-align: right;">
-            </td>
-            <td class="noBorder">
-                <h4 style="text-align: center;">
-                    UNIVERSIDAD TÉCNICA DE COTOPAXI <br>
-                    POSGRADO
-                </h4>
-            </td>
-            <td class="noBorder">
-                
-                <img src="{!! public_path('img/posgrado.jpeg') !!}" alt="" width="120px;" style="text-align: right;">
-            </td>
-        </tr>
-    </table>
-    <hr>
+<div>
     <table style="border-collapse: collapse; border: none;">
         <tr style="text-align: center;">
             <td class="noBorder" colspan="3"><strong>RESULTADO DE PROCESO DE ADMISIÓN - ELEGIBLES</strong></td>
@@ -85,29 +70,29 @@
           @php($i=0)
             @foreach ($inscripciones as $inscrito)
             @php($i++)
-            <tr>
-                <th scope="row">
-                    {{ $i }}
-                </th>
-                <td style="text-align: justify;">
-                    {{ $inscrito->user->primer_nombre }} {{ $inscrito->user->segundo_nombre }} {{ $inscrito->user->primer_apellido }} {{ $inscrito->user->segundo_apellido }}
-                </td>
-                <td style="text-align: justify;">
-                    {{ $inscrito->user->identificacion }}
-                </td>
-                <td>
-                    {{ $inscrito->admision->examen??0 }}
-                </td>
-                <td>
-                    {{ $inscrito->admision->entrevista??0 }}
-                </td>
-                <td>
-                    {{ $inscrito->admision->ensayo??0 }}
-                </td>
-                <td>
-                    {{ ($inscrito->admision->examen??0)+($inscrito->admision->entrevista??0)+($inscrito->admision->ensayo??0) }}
-                </td>
-            </tr>
+                <tr>
+                    <th scope="row">
+                        {{ $i }}
+                    </th>
+                    <td style="text-align: justify;">
+                        {{ $inscrito->user->primer_nombre }} {{ $inscrito->user->segundo_nombre }} {{ $inscrito->user->primer_apellido }} {{ $inscrito->user->segundo_apellido }}
+                    </td>
+                    <td style="text-align: justify;">
+                        {{ $inscrito->user->identificacion }}
+                    </td>
+                    <td>
+                        {{ $inscrito->admision->examen??0 }}
+                    </td>
+                    <td>
+                        {{ $inscrito->admision->entrevista??0 }}
+                    </td>
+                    <td>
+                        {{ $inscrito->admision->ensayo??0 }}
+                    </td>
+                    <td>
+                        {{ ($inscrito->admision->examen??0)+($inscrito->admision->entrevista??0)+($inscrito->admision->ensayo??0) }}
+                    </td>
+                </tr>
             @endforeach
 
         </tbody>
@@ -115,7 +100,6 @@
     @else
         <p>No existe registros</p>
     @endif
-    
-
+</div>
 </body>
 </html>

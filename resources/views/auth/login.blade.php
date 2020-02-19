@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card border border-info">
-                <img src="{{ asset('img/maestria.jpg') }}" class="card-img-top" alt="...">
-                <div class="card-header">
+            <div class="card border border-dark">
+
+                <div class="card-header bg-dark">
                     {{ __('Login') }}
                 </div>
 

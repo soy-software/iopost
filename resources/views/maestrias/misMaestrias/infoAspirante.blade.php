@@ -13,7 +13,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuMisMaestria').addClass('active');  
+    $('#menuMisMaestria').addClass('active');
     </script>
 @endprepend
 

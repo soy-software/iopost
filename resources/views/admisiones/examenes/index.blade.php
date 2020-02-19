@@ -5,7 +5,7 @@
 @section('barraLateral')
 @if (count($inscritos)>0)
 <div class="breadcrumb justify-content-center">
-    
+
     <a href="{{ route('importarNotasExamenAdmision',$cohorte) }}" class="breadcrumb-elements-item" data-toggle="tooltip" data-placement="top" title="Importar notas de examen de admisíon">
         <i class="fas fa-file-excel"></i>
         Importar notas
@@ -31,9 +31,9 @@
             Listado de registros
         </div>
         <div class="card-body">
-            
+
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="table-listado">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                
+
                         @php($i=0)
                         @foreach ($inscritos as $inscrito)
                         @php($i++)
@@ -57,7 +57,8 @@
                                     {{ $i }}
                                 </td>
                                 <td>
-                                    {{ $inscrito->user->primer_nombre }} {{ $inscrito->user->segundo_nombre }} {{ $inscrito->user->primer_apellido }} {{ $inscrito->user->segundo_apellido }}
+                                    {{ $inscrito->user->primer_apellido }} {{ $inscrito->user->segundo_apellido }}
+                                    {{ $inscrito->user->primer_nombre }} {{ $inscrito->user->segundo_nombre }}
                                 </td>
                                 <td>
                                     {{ $inscrito->user->identificacion }}
@@ -69,7 +70,7 @@
                                     {{ $inscrito->estado }}
                                 </td>
                                 <td>
-                                    
+
                                     <input type="hidden" name="inscripciones[{{ $inscrito->id }}]" value="{{ $inscrito->id }}">
                                     <input type="text" name="notas[{{ $inscrito->id }}]" class="form-control @error('notas.'.$inscrito->id) is-invalid  @enderror" value="{{ old('notas.'.$inscrito->id,$inscrito->admision->examen??'0.00') }}" id="" placeholder="Ingrese nota">
                                 </td>
@@ -84,7 +85,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                
+
                     </tbody>
                 </table>
             </div>
@@ -95,9 +96,9 @@
                     Actualizar notas
                 </button>
             @else
-            <button disabled class="btn btn-danger"> No puede actualizar notas en cohorte estado:{{ $cohorte->estado }}</button>    
+            <button disabled class="btn btn-danger"> No puede actualizar notas en cohorte estado:{{ $cohorte->estado }}</button>
             @endcan
-            
+
         </div>
     </div>
 </form>
@@ -110,9 +111,52 @@
 
 
 
+@push('linksCabeza')
+{{--  datatable  --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
+<script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+
+@endpush
+
+
 @prepend('linksPie')
     <script>
-    $('#menuMaestria').addClass('active');  
+    $('#menuMaestria').addClass('active');
+
+    $('#table-listado').DataTable({
+        "paging":   false,
+        "ordering": false,
+        "language": {
+            "sProcessing":
+            "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
+            }
+        }
+    });
     </script>
 @endprepend
 

@@ -38,12 +38,12 @@ class Examenes extends Controller
 
         $cohorte=Corte::findOrFail($request->cohorte);
         $this->authorize('ingresarNotaExamen',$cohorte);
-        
+
         try {
             DB::beginTransaction();
             foreach ($request->inscripciones as $idInscripcion) {
                 $inscripcion=Inscripcion::findOrFail($idInscripcion);
-    
+
                 $admision=$inscripcion->admision;
                 if($admision){
                     $admision->examen=$request->notas[$inscripcion->id];
@@ -52,7 +52,7 @@ class Examenes extends Controller
                     $admision->inscripcion_id=$idInscripcion;
                     $admision->examen=$request->notas[$inscripcion->id];
                 }
-                
+
                 $admision->save();
             }
             DB::commit();
@@ -72,10 +72,12 @@ class Examenes extends Controller
         $cohorte=Corte::findOrFail($idCohorte);
         $data = array('inscripciones' => $cohorte->inscripciones,'cohorte'=>$cohorte );
         $pdf = PDF::loadView('admisiones.examenes.notasPdf',$data)
-        
+        ->setOption('header-html', view('admisiones.examenes.cabeza',$data))
         ->setOption('footer-html', view('admisiones.examenes.pie'))
+        ->setOption('margin-top', 25)
         ->setOption('margin-bottom', 10);
-        return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');
+
+        return $pdf->inline('Resultado_cohorte_n_'.$cohorte->numero.'_maestría_en_'.$cohorte->maestria->nombre. '.pdf');
     }
 
     // A: deivid
@@ -98,6 +100,6 @@ class Examenes extends Controller
         $this->authorize('ingresarNotaExamen',$corte);
         $request->session()->flash('success','Notas de examen de admisión importado.');
         return redirect()->route('notasExamenAdmision',$request->corte);
-        
+
     }
 }

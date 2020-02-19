@@ -87,7 +87,7 @@ Breadcrumbs::for('informacionMaestria', function ($trail,$maestria) {
     $trail->push('Información  '. $maestria->nombre, route('informacionMaestria',$maestria->id));
 });
 
-//A:fabian 
+//A:fabian
 //d:Breadcrums de materias maestria
 Breadcrumbs::for('listadoMateriaMaestria', function ($trail,$maestria) {
     $trail->parent('maestrias');
@@ -101,7 +101,7 @@ Breadcrumbs::for('editarMateriaMaestria', function ($trail,$materiaMaestria) {
     $trail->parent('listadoMateriaMaestria',$materiaMaestria->maestria);
     $trail->push('Editar materia', route('materiaMaestria',$materiaMaestria->id));
 });
-//A:fabian 
+//A:fabian
 //d:Breadcrums de cortes
 Breadcrumbs::for('cortesMaestria', function ($trail,$maestria) {
     $trail->parent('maestrias');
@@ -181,13 +181,9 @@ Breadcrumbs::for('notasAdmisionAspirante', function ($trail,$inscripcion) {
 
 // A:deivid
 // D: con rol de tesorero, aprobar registro, y reportes de pagos
-Breadcrumbs::for('aprobarRegistroMaestrias', function ($trail) {
+Breadcrumbs::for('cobros', function ($trail) {
     $trail->parent('home');
-    $trail->push('Listado de registros', route('aprobarRegistroMaestrias'));
-});
-Breadcrumbs::for('registroReportePagos', function ($trail) {
-    $trail->parent('aprobarRegistroMaestrias');
-    $trail->push('Reportes de pago de registro', route('registroReportePagos'));
+    $trail->push('Cobros - Listado de registro', route('cobros'));
 });
 
 //A:Deivid

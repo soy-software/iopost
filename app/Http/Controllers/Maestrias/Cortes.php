@@ -47,13 +47,13 @@ class Cortes extends Controller
         }
 
         $coordinadores=User::role('Coordinador de maestría')->get();
-        
+
         $data = array(
             'maestria' => $maestria,
             'numero'=>$numero,
             'coordinadores'=>$coordinadores
         );
-        
+
         return view('maestrias.cortes.nuevo',$data);
     }
 
@@ -90,7 +90,7 @@ class Cortes extends Controller
             $corte->save();
 
             $corte->coordinadores()->sync($request->coordinadores);
-            
+
 
             DB::commit();
 
@@ -110,7 +110,7 @@ class Cortes extends Controller
         return view('maestrias.cortes.editar',$data);
     }
 
-    public function actualizar(RqActualizar $request) 
+    public function actualizar(RqActualizar $request)
     {
         $corte=Corte::findOrFail($request->corte);
         try {
@@ -131,9 +131,9 @@ class Cortes extends Controller
             $corte->fechaFinMatricula=$request->fechaFinMatricula;
             $corte->usuarioActualizado=Auth::id();
             $corte->save();
-            
+
             $corte->coordinadores()->sync($request->coordinadores);
-            
+
             DB::commit();
             $request->session()->flash('success','Cohorte actualizado');
         } catch (\Exception $th) {
@@ -176,9 +176,9 @@ class Cortes extends Controller
             $corte->save();
             return response()->json(['success'=>'Cohorte cambio de estado a: '.$request->valor]);
         }
-        
+
     }
-    
+
     public function inscritosCorte(InscritosCorteDataTable $dataTable,  $idCorte)
     {
         $corte=Corte::findOrFail($idCorte);
@@ -220,11 +220,11 @@ class Cortes extends Controller
             'cohorte'=>$inscripcion->corte,
             'inscripciones' => $inscripcion);
             $pdf = PDF::loadView('maestrias.cortes.verAdmisionEstudiante',$data)
-        
+
         ->setOption('footer-html', view('admisiones.examenes.pie'))
         ->setOption('margin-bottom', 10);
         return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');
-        
+
     }
 
 
@@ -250,7 +250,7 @@ class Cortes extends Controller
             $user=User::where('email',$rq->email)->orWhere('identificacion',$rq->identificacion)->first();
             $corte=Corte::findOrFail($rq->corte);
             $this->authorize('ingresarNuevoRegistro',$corte);
-            
+
             $pass='La contraseña, sigue siendo la misma.';
 
             if(!$user){
@@ -259,8 +259,10 @@ class Cortes extends Controller
                 $user->email=$rq->email;
                 $pass=Str::random(15);
                 $user->password=Hash::make($pass);
-                $user->nombres=$rq->nombres;
-                $user->apellidos=$rq->apellidos;
+                $user->primer_nombre=$rq->primer_nombre;
+                $user->segundo_nombre=$rq->segundo_nombre;
+                $user->primer_apellido=$rq->primer_apellido;
+                $user->segundo_apellido=$rq->segundo_apellido;
                 $user->sexo=$rq->sexo;
                 $user->tipo_identificacion=$rq->tipo_identificacion;
                 $user->identificacion=$rq->identificacion;
@@ -284,17 +286,18 @@ class Cortes extends Controller
                 $inscripcion->valorMatricula=$corte->valorRegistro;
                 $inscripcion->save();
             }
-            
+
             $user->notify(new NotificacionInscripcion($inscripcion,$pass));
             DB::commit();
             $rq->session()->flash('success','Inscripción procesado exitosamente');
             $rq->session()->flash('inscripcionOk',$inscripcion);
-           
+
 
         } catch (\Exception $th) {
             DB::rollback();
+
             $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar');
-            return redirect()->route('incripcion',$rq->corte)->withInput();
+            return redirect()->route('nuevoRegistroAspirante',$rq->corte)->withInput();
         }
         return redirect()->route('nuevoRegistroAspirante',$rq->corte);
     }

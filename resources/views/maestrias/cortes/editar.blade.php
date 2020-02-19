@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
             <h1>Número de cohorte: <strong>{{ $corte->numero }}</strong></h1>
-            
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="valorRegistro">Valor del registro:<i class="text-danger">*</i></label>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-sm-5 mt-1 mb-1">
-                     
+
                         <div class="form-group">
                             <label for="fechaFinDocumentos">Fecha de fin</label>
                             <input type="date" name="fechaFinDocumentos" id="fechaFinDocumentos" value="{{ old('fechaFinDocumentos',$corte->fechaFinDocumentos) }}" class="form-control @error('fechaFinDocumentos') is-invalid @enderror"  required>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-sm-5 mt-1 mb-1">
-                    
+
                     <div class="form-group">
                         <label for="horaAdmision">Hora</label>
                         <input type="time" name="horaAdmision" id="horaAdmision" value="{{ old('horaAdmision',$corte->horaAdmision) }}" class="form-control @error('horaAdmision') is-invalid @enderror"  required>
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="entrevistaEnsayo">Entrevista y ensayo:<i class="text-danger">*</i></label>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="col-sm-5 mt-1 mb-1">
-                    
+
                     <div class="form-group">
                         <label for="fechaFinMatricula">Fecha de fin</label>
                         <input type="date" name="fechaFinMatricula" id="fechaFinMatricula" value="{{ old('fechaFinMatricula',$corte->fechaFinMatricula) }}" class="form-control @error('fechaFinMatricula') is-invalid @enderror"  required>
@@ -193,8 +193,12 @@
                 </div>
                 @endforeach
             </div>
+            @else
+            <div class="alert alert-dark" role="alert">
+                No existe usuarios coordinadores registrados en el sistema, para asignar a está cohorte.
+            </div>
             @endif
-            
+
         </div>
         <div class="card-footer text-muted">
             <button type="submit" class="btn btn-primary">Guardar</button>

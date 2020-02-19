@@ -8,7 +8,7 @@
             Mis maestrías asignados
         </div>
         <div class="card-body">
-            
+
         <table class="table table-bordered">
             <thead>
               <tr>
@@ -33,9 +33,9 @@
                         <td>
                             {{ $corte->maestria->titulo }}
                         </td>
-                    </tr>      
+                    </tr>
                 @endforeach
-              
+
             </tbody>
         </table>
 
@@ -53,7 +53,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuMisMaestria').addClass('active');  
+    $('#menuMisMaestria').addClass('active');
     </script>
 @endprepend
 

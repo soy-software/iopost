@@ -55,7 +55,7 @@
 
 	<!-- Page content -->
 	<div class="page-content">
-		
+
 		<!-- Main sidebar -->
 		@auth
 			@include('layouts.menu')
@@ -73,7 +73,7 @@
 						<div class="breadcrumb">
 							@yield('breadcrumbs')
 						</div>
-						
+
 						{{--  si existe barra laterla se muestra  --}}
 						@hasSection('barraLateral')
 							<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -90,14 +90,19 @@
 
 			<!-- Content area -->
 			<div class="content">
-				@if ($errors->any())
-					<div class="alert alert-danger">
-						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-					</div>
+                @if ($errors->any())
+
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><strong>{{ $error }}</strong></li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
 				@endif
 
 				@foreach (['success', 'warn', 'info', 'error'] as $msg)

@@ -27,6 +27,20 @@ class UsuariosDataTable extends DataTable
             ->editColumn('estado',function($user){
                 return view('usuarios.usuarios.estado',['user'=>$user])->render();
             })
+            ->editColumn('primer_nombre',function($user){
+                return $user->primer_nombre.' '.$user->segundo_nombre;
+            })
+            ->filterColumn('primer_nombre', function($query, $keyword) {
+                $sql = "CONCAT(primer_nombre,' ',segundo_nombre)  like ?";
+                return $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->editColumn('primer_apellido',function($user){
+                return $user->primer_apellido.' '.$user->segundo_apellido;
+            })
+            ->filterColumn('primer_apellido', function($query, $keyword) {
+                $sql = "CONCAT(primer_apellido,' ',segundo_apellido)  like ?";
+                return $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->rawColumns(['estado','action']);
     }
 
@@ -39,11 +53,11 @@ class UsuariosDataTable extends DataTable
     public function query(User $model)
     {
         if($this->rol){
-            return $model->role($this->rol)->newQuery();    
+            return $model->role($this->rol)->newQuery()->orderBy('primer_apellido','asc');
         }else{
-            return $model->newQuery();
+            return $model->newQuery()->orderBy('primer_apellido','asc');
         }
-        
+
     }
 
     /**
@@ -68,7 +82,7 @@ class UsuariosDataTable extends DataTable
                     // )
                     ->parameters($this->getBuilderParameters());
     }
-   
+
 
     /**
      * Get columns.
@@ -83,10 +97,10 @@ class UsuariosDataTable extends DataTable
                 ->printable(false)
                 ->title('Acciones'),
             Column::make('email'),
-            Column::make('primer_nombre'),
-            Column::make('segundo_nombre'),
-            Column::make('primer_apellido'),
-            Column::make('segundo_apellido'),
+            Column::make('primer_apellido')->title('Apellidos'),
+            Column::make('primer_nombre')->title('Nombres'),
+            // Column::make('segundo_nombre'),
+            // Column::make('segundo_apellido'),
             Column::make('identificacion')->title('Identificación'),
             Column::make('celular'),
             Column::make('estado'),

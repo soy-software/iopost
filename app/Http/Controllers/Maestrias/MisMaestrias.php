@@ -20,7 +20,7 @@ class MisMaestrias extends Controller
     public function index()
     {
         $this->authorize('accederMisMaestrias',Maestria::class);
-        $cortes=Auth::user()->cortes()->paginate(15);
+        $cortes=Auth::user()->cortes()->orderBy('numero','desc')->paginate(15);
         $data = array('cortes' => $cortes );
         return view('maestrias.misMaestrias.index',$data);
     }
@@ -40,12 +40,12 @@ class MisMaestrias extends Controller
         $this->authorize('verificarCorteMaestria',$corte);
         $data = array('corte' =>$corte,'inscripciones'=>$corte->inscripciones);
         return $dataTable->with('corte',$idCorte)->render('maestrias.misMaestrias.inscritos',$data);
-        
+
     }
-    
+
 
     // A:deivid
-    // D: descargar inscritos a excel 
+    // D: descargar inscritos a excel
     public function descargarExcelinscritos( Request $request, $idCorte,$opcion)
     {
         $request->merge(['opcion'=>$opcion,'cohorte'=>$idCorte]);
@@ -55,7 +55,7 @@ class MisMaestrias extends Controller
         ]);
 
         $corte=Corte::findOrFail($idCorte);
-        $this->authorize('verificarCorteMaestria',$corte);     
+        $this->authorize('verificarCorteMaestria',$corte);
         return Excel::download(new InscritosExport($idCorte,$opcion),'inscritos en corte '.$corte->numero .'.xlsx');
     }
 
@@ -110,7 +110,7 @@ class MisMaestrias extends Controller
             foreach ($request->preguntas as $idPregunta) {
                 $pregunta=Pregunta::findOrFail($idPregunta);
                 $pregunta->opcion=$request->opcion[$idPregunta];
-                
+
                 switch ($request->opcion[$idPregunta]) {
                     case 'Excelente':
                         $pregunta->nota=3;
@@ -154,7 +154,7 @@ class MisMaestrias extends Controller
         ]);
 
         $inscripcion=Inscripcion::findOrFail($request->inscripcion);
-        $this->authorize('verificarCorteMaestria',$inscripcion->corte);        
+        $this->authorize('verificarCorteMaestria',$inscripcion->corte);
         $inscripcion->admision->ensayo=$request->nota;
         $inscripcion->admision->save();
         $request->session()->flash('success','Nota de ensayo guardado exitosamente');

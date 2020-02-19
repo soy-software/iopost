@@ -20,10 +20,10 @@ class CreateAdmisionsTable extends Migration
             $table->decimal('examen',9,2)->nullable();
             $table->decimal('ensayo',9,2)->nullable();
             $table->decimal('entrevista',9,2)->nullable();
-            $table->enum('estado',['Proceso','Aprobado'])->nullable('Proceso');
+            $table->enum('estado',['No admitido','Admitido'])->default('No admitido');
             $table->unsignedBigInteger('inscripcion_id');
             $table->foreign('inscripcion_id')->references('id')->on('inscripcions');
-            
+
 
 
         });

@@ -20,7 +20,7 @@
                     @foreach ($roles as $rol_i)
                         <a href="{{ route('usuarios',$rol_i->name) }}" class="dropdown-item">
                             <i class="fas fa-user-lock"></i>{{ $rol_i->name }}
-                        </a>        
+                        </a>
                     @endforeach
                 @endif
             </div>
@@ -51,7 +51,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuUsuarios').addClass('active');  
+    $('#menuUsuarios').addClass('active');
     </script>
     {!! $dataTable->scripts() !!}
 @endprepend

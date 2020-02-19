@@ -10,17 +10,13 @@ class InscripcionPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+
+
+// aqui esta de analizar, xk no se ni puta idea hace
+    public function xxx(User $user, Inscripcion $inscripcion)
     {
-        //
+        return false;
     }
 
-    public function subirComprobante(User $user, Inscripcion $inscripcion)
-    {
-        if($inscripcion->estado!='Aprobado' && $inscripcion->user->id==$user->id){
-            return true;
-        }
-    }
 
-   
 }

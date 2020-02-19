@@ -44,24 +44,24 @@ Route::post('/mi-perfil-actualizar-academico', 'HomeController@actualizarMiRegis
 
 
 Route::middleware(['estado','verified', 'auth'])->group(function () {
-    
+
     Route::get('/home', 'HomeController@index')->name('home');
-    
+
     // A:Deivid
     // D:Gestion de usuarios
     Route::namespace('Usuarios')->group(function () {
         Route::get('/usuarios/{rol?}', 'Usuarios@index')->name('usuarios');
         Route::get('/nuevo-usuario', 'Usuarios@nuevo')->name('nuevoUsuario');
         Route::post('/guardar-usuario', 'Usuarios@guardar')->name('guardarUsuario');
-        Route::get('/informacion-usuario/{id}', 'Usuarios@informacionUsuario')->name('informacionUsuario');   
+        Route::get('/informacion-usuario/{id}', 'Usuarios@informacionUsuario')->name('informacionUsuario');
         Route::get('/editar-usuario/{id}', 'Usuarios@editarUsuario')->name('editarUsuario');
         Route::post('/actualizar-usuario', 'Usuarios@actualizar')->name('actualizarUsuario');
         Route::post('/actualizar-informacion-laboral-usuario', 'Usuarios@actualizarInformacionLaboral')->name('actualizarInformacionLaboral');
         Route::post('/actualizar-registro-academico-usuario', 'Usuarios@actualizarRegistroAcademico')->name('actualizarRegistroAcademico');
-        
+
         Route::get('/eliminar-usuario/{id}', 'Usuarios@eliminar')->name('eliminarUsuario');
     });
-    
+
 
     // A:deivid
     // maestrias
@@ -73,8 +73,8 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/guardar-mestria', 'Maestrias@guardar')->name('guardarMaestria');
         Route::get('/editar-mestria/{id}', 'Maestrias@editar')->name('editarMaestria');
         Route::post('/actualizar-mestria', 'Maestrias@actualizar')->name('actualizarMaestria');
-        Route::get('/informacion-mestria/{id}', 'Maestrias@informacion')->name('informacionMaestria');   
-        Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminar')->name('eliminarMaestria');   
+        Route::get('/informacion-mestria/{id}', 'Maestrias@informacion')->name('informacionMaestria');
+        Route::get('/eliminar-mestria/{id}', 'Maestrias@eliminar')->name('eliminarMaestria');
 
         // A: Fabian Lopez
         //D:En estas rutas se encuentra todo lo relacionado con cortes
@@ -83,19 +83,19 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/guardar-cohorte', 'Cortes@guardar')->name('guardarCorte');
         Route::get('/editar-cohorte/{corte}', 'Cortes@editar')->name('editarCorte');
         Route::post('/actualizar-cohorte', 'Cortes@actualizar')->name('actualizarCorte');
-        Route::get('/eliminar-cohorte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');   
+        Route::get('/eliminar-cohorte/{id}', 'Cortes@eliminarCorte')->name('eliminarCorte');
         Route::post('/cambiar-estado-cohorte', 'Cortes@cambiarEstadoCorte')->name('cambiarEstadoCorte');
-        Route::get('/registros-cohorte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria'); 
-        Route::get('/informacion-registro-cohorte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria'); 
+        Route::get('/registros-cohorte/{id}', 'Cortes@inscritosCorte')->name('inscritosCorteMaestria');
+        Route::get('/informacion-registro-cohorte/{id}', 'Cortes@informacionInscritoCorte')->name('informacionInscritoCorteMaestria');
         Route::post('/cambiar-estado-de-inscripcion', 'Cortes@cambiarEstadoInscripcion')->name('cambiarEstadoInscripcion');
         Route::get('/ver-admision-estiante/{inscripcion}', 'Cortes@verAdmisionEstudiante')->name('verAdmisionEstudiante');
         Route::get('/nuevo-resgitro-aspirante/{cohorte}', 'Cortes@nuevoRegistroAspirante')->name('nuevoRegistroAspirante');
         Route::post('/guardar-nuevo-cohorte', 'Cortes@procesarNuevaInscripcion')->name('procesarNuevaInscripcion');
-        
-        
-    
-        
-        
+
+
+
+
+
         // A: Fabian Lopez
         //D:En estas rutas se encuentra todo lo relacionado con maestria materias
         Route::get('/materias-maestria/{id}', 'Materias@index')->name('materiaMaestria');
@@ -103,10 +103,10 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::post('/guardar-materias-mestria', 'Materias@guardarMateria')->name('guardarMateriaMaestria');
         Route::get('/editar-materias-mestria/{id}', 'Materias@editarMateriaMaestria')->name('editarmateriaMaestria');
         Route::post('/actualizar-materias-mestria', 'Materias@actualizarMateriaMaestria')->name('actualizarMateriaMaestrias');
-        Route::get('/eliminar-materias-mestria/{id}', 'Materias@eliminarMateriaMaestria')->name('eliminarMateriaMaestria'); 
+        Route::get('/eliminar-materias-mestria/{id}', 'Materias@eliminarMateriaMaestria')->name('eliminarMateriaMaestria');
 
 
-     
+
 
 
 
@@ -116,12 +116,12 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/inscritos-en-corte/{corte}', 'MisMaestrias@inscritos')->name('inscritosEnCorteMiMaestrias');
         Route::get('/descragar-excel-inscritos/{corte}/{opcion}', 'MisMaestrias@descargarExcelinscritos')->name('descargarExcelInscritos');
         Route::get('/informacion-de-aspirante/{inscripcion}', 'MisMaestrias@informacionAspirante')->name('informacionAspirante');
-        Route::get('/notas-admision-aspirante/{inscripcion}', 'MisMaestrias@notasAdmisionAspirante')->name('notasAdmisionAspirante');        
+        Route::get('/notas-admision-aspirante/{inscripcion}', 'MisMaestrias@notasAdmisionAspirante')->name('notasAdmisionAspirante');
         Route::post('/guardar-notas-admision-aspirante', 'MisMaestrias@guardarNotasAdmisionAspirante')->name('guardarNotasAdmisionAspirante');
         Route::post('/guardar-notas-ensayo-aspirante', 'MisMaestrias@guardarNotasEnsayoAspirante')->name('guardarNotasEnsayoAspirante');
-        
-        
-        
+
+
+
     });
 
 
@@ -130,19 +130,19 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
     // incripciones
     Route::namespace('Inscripciones')->group(function () {
 
-        Route::get('/mis-inscripciones', 'Inscripciones@misInscripciones')->name('misInscripciones');
+        Route::get('/mis-pagos', 'Inscripciones@misInscripciones')->name('misInscripciones');
         Route::get('/subir-comprobante-de-registro/{inscripcion}', 'Inscripciones@subirComprobantePago')->name('subirComprobantePago');
         Route::post('/guardar-comprobante-pago', 'Inscripciones@guardarComprobantePago')->name('guardarComprobantePago');
         Route::get('/ver-mi-inscripcion-pdf/{id}', 'Inscripciones@inscripcionPdf')->name('inscripcionPdf');
-        
-        Route::get('/aprobar-registro-maestrias', 'Registros@index')->name('aprobarRegistroMaestrias');
+
+
         Route::post('/aprobar-registro-maestrias-factura', 'Registros@aprobarRegistroFactura')->name('aprobarRegistroFactura');
-        Route::get('/reporte-registros-de-pagos', 'Registros@reportesDePago')->name('registroReportePagos');
+        Route::get('/cobros', 'Registros@registroReporteCobro')->name('cobros');
         Route::post('/obtener-cohortes-x-maestrias', 'Registros@obtenerCohortesMaestria')->name('obtenerCohortesMaestria');
         Route::post('/obtener-registros-de-pago-x-cohorte', 'Registros@obtenerRegistroPorCohorte')->name('obtenerRegistroPorCohorte');
-        
+
     });
-    
+
 
     // A:deivid
     // D:cuestionario de pregunatas de cada cohore
@@ -150,7 +150,7 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/cuestionario/{cohorte}', 'Cuestionarios@index')->name('cuestionario');
         Route::post('/guardar-pregunta-cuestionario', 'Cuestionarios@guardarPreguntaCuestionario')->name('guardarPreguntaCuestionario');
         Route::get('/eliminar-pregunta-cuestionario/{cuestionario}', 'Cuestionarios@eliminarCuestionario')->name('eliminarCuestionario');
-        
+
         // examenes
         Route::get('/notas-de-examen-admision/{cohorte}', 'Examenes@index')->name('notasExamenAdmision');
         Route::post('/atualizar-notas-de-examen-admision', 'Examenes@actualizarNota')->name('actualizarExamenAdmision');
@@ -171,9 +171,9 @@ Route::middleware(['estado','verified', 'auth'])->group(function () {
         Route::get('/permisos/{idRol}', 'Permisos@index')->name('permisos');
         Route::post('/permisos-sincronizar', 'Permisos@sincronizar')->name('sincronizarPermiso');
     });
-    
-   
 
-    
-    
+
+
+
+
 });

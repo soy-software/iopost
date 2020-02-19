@@ -27,7 +27,7 @@ class CreateInscripcionsTable extends Migration
             $table->string('numero_factura')->nullable();
             $table->string('comprobante')->nullable();
             $table->decimal('valorMatricula',19,2)->default(0);
-            
+
         });
     }
 

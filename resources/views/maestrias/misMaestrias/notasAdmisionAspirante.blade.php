@@ -15,13 +15,13 @@
                     <div class="card-header">
                         <h2>Nota de examen</h2>
                         <h1>{{ $admision->examen??'---' }}</h1>
-                        
+
                     </div>
                     <div class="card-body">
 
                         <h2>Nota de entrevista</h2>
                         <h1>{{ $admision->entrevista??'---' }}</h1>
-                        
+
                     </div>
                     <div class="card-footer">
                         <h2>Nota de ensayo</h2>
@@ -40,12 +40,12 @@
                         <h1>{{ ($admision->ensayo??0)+($admision->entrevista??0)+($admision->examen??0) }}</h1>
                     </div>
                 </div>
-                
+
 
             </div>
             <div class="col-md-8">
                 @if (count($cuestionarios)>0)
-                
+
                 <h2>Entrevista</h2>
                 <form action="{{ route('guardarNotasAdmisionAspirante') }}" method="POST">
                     @csrf
@@ -71,7 +71,7 @@
                                         </th>
                                         <td>
                                             {{ $cues->nombre }} <br>
-                                            
+
                                         </td>
                                         <td>
                                             <select class="form-control @error('opcion.'.$cues->pregunta->id) is-invalid @enderror" id="" name="opcion[{{ $cues->pregunta->id }}]" required >
@@ -86,15 +86,21 @@
                                         <td>
                                             {{ $cues->pregunta->nota }}
                                         </td>
-                                    </tr>      
+                                    </tr>
                                 @endforeach
-                            
-                            
+
+
                             </tbody>
                         </table>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2 btn-lg">Guardar entrevista</button>
                 </form>
+
+                {{ $admision->estado }}
+
+                @if ($admision->examen && $admision->ensayo && $admision->entrevista)
+                <h1>PUEDES CAMBIAR A ADMITIDO</h1>
+                @endif
 
                 @else
                     <div class="alert alert-dark" role="alert">
@@ -108,7 +114,7 @@
 
 @prepend('linksPie')
     <script>
-    $('#menuMisMaestria').addClass('active');  
+    $('#menuMisMaestria').addClass('active');
     </script>
 @endprepend
 

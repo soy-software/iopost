@@ -11,13 +11,13 @@
             width: 100%;
             text-align: justify;
         }
-            
+
         table, th, td {
         border: 1px solid black;
         }
         .noBorder {
             border:none !important;
-            
+
         }
     </style>
 </head>
@@ -47,12 +47,12 @@
             <tr>
                 <td colspan="2" style="text-align: center;">
                     <h4>
-                        COMPROBANTE DE REGISTRO DE MAESTRÍA UTC 
+                        COMPROBANTE DE REGISTRO DE MAESTRÍA UTC
                     </h4>
                     <h4>
                         DATOS DEL POSTULANTE
                     </h4>
-                    
+
                 </td>
             </tr>
             <tr>
@@ -65,10 +65,10 @@
             </tr>
             <tr>
                 <td>
-                    <strong>Nombres: </strong> {{ $inscripcion->user->nombres }}
+                    <strong>Nombres: </strong> {{ $inscripcion->user->primer_nombre }} {{ $inscripcion->user->segundo_nombre }}
                 </td>
                 <td>
-                    <strong>Apellidos:</strong> {{ $inscripcion->user->apellidos }}
+                    <strong>Apellidos:</strong> {{ $inscripcion->user->primer_apellido }} {{ $inscripcion->user->segundo_apellido }}
                 </td>
             </tr>
             <tr>
@@ -89,10 +89,10 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <strong>Dirección: </strong> 
+                    <strong>Dirección: </strong>
                     {{ $inscripcion->user->parroquia->canton->provincia->provincia??'' }} -
-                    {{ $inscripcion->user->parroquia->canton->canton??'' }} - 
-                    {{ $inscripcion->user->parroquia->parroquia??'' }} - 
+                    {{ $inscripcion->user->parroquia->canton->canton??'' }} -
+                    {{ $inscripcion->user->parroquia->parroquia??'' }} -
                     {{ $inscripcion->user->direccion??'' }}
                 </td>
             </tr>
@@ -117,7 +117,7 @@
                 <td colspan="2" style="text-align: right; padding-right: 15px;">
                     <h3>
                             <strong>Valor a cancelar: </strong>
-                            $ {{ $inscripcion->valorMatricula }} 
+                            $ {{ $inscripcion->valorMatricula }}
                     </h3>
                 </td>
             </tr>
@@ -189,6 +189,6 @@
             </tr>
         </table>
 
-        
+
 </body>
 </html>

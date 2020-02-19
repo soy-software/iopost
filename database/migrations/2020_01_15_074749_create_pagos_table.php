@@ -16,10 +16,10 @@ class CreatePagosTable extends Migration
         Schema::create('pagos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-
+            $table->enum('estado',['Registro','Matricula','Colegiatura','Otros'])->nullable();
             $table->string('detalle')->nullable();
             $table->decimal('valor',19,2)->default(0)->nullable();
-            $table->enum('estado',['Cancelalo','Pendiente'])->default('Pendiente')->nullable();
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

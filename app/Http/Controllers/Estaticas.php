@@ -35,7 +35,7 @@ class Estaticas extends Controller
     }
 
     // A:Deivid
-    // D: obtener cantones por provinvia 
+    // D: obtener cantones por provinvia
     public function obtenerCantonesXprovincia(Request $request)
     {
         $provincia=Provincia::findOrFail($request->id);
@@ -44,7 +44,7 @@ class Estaticas extends Controller
 
 
     // A:Deivid
-    // D: obtener parroquias por canton 
+    // D: obtener parroquias por canton
     public function obtenerParroquiasXcanton(Request $request)
     {
         $canton=Canton::findOrFail($request->id);
@@ -106,7 +106,7 @@ class Estaticas extends Controller
                     $inscripcion->valorMatricula=$corte->valorRegistro;
                     $inscripcion->save();
                 }
-                
+
                 $user->notify(new NotificacionInscripcion($inscripcion,$pass));
                 DB::commit();
                 $rq->session()->flash('success','Inscripción procesado exitosamente');
@@ -121,7 +121,7 @@ class Estaticas extends Controller
             return redirect()->route('incripcion',$rq->corte)->withInput();
         }
         return redirect()->route('incripcion',$rq->corte);
-        
+
     }
 
 

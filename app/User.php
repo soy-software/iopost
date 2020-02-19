@@ -85,7 +85,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Corte::class, 'coordinador_cortes', 'user_id', 'corte_id');
     }
-    
+
 
     // A:deivid
     // D: un usuario tiene pagos

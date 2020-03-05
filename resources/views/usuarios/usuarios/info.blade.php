@@ -1,5 +1,5 @@
 <table class="table table-bordered">
-    
+
     <tbody>
         <tr>
             <th colspan="2" class="text-center" style="text-align: center;">Datos personales</th>
@@ -19,9 +19,9 @@
         <tr>
             <td>
                 <strong>Fecha nacimiento:</strong>
-                {{ $usuario->fecha_nacimiento??'---' }}, 
+                {{ $usuario->fecha_nacimiento??'---' }},
                 <strong>Edad:</strong>  {{Carbon\Carbon::parse($usuario->fecha_nacimiento)->age }}
-            </td>                                    
+            </td>
             <td>
                 <strong>Sexo:</strong> {{  $usuario->sexo }}
             </td>
@@ -63,10 +63,10 @@
     </tbody>
 </table>
 <h1 class="text-danger">Información laboral</h1>
-<table class="table table-bordered">
-        @if ($usuario->informacionLaboral)
+@if ($usuario->informacionLaboral)
         @php($infoL=$usuario->informacionLaboral)
-               
+        <table class="table table-bordered">
+
             <tr>
                 <td>
                     <strong>Trabaja:</strong> {{ $infoL->trabaja }}
@@ -87,16 +87,16 @@
             <tr>
                 <td>
                     <strong>Dirección:</strong>
-                    
+
                         {{ $infoL->direccion??'' }} -
                         {{ $infoL->parroquia->parroquia??'' }} -
                         {{ $infoL->parroquia->canton->canton??'' }} -
                         {{ $infoL->parroquia->canton->provincia->provincia??'' }}
-                    
+
                 </td>
                 <td>
                     <strong>Teléfono:</strong>{{ $infoL->telefono }}
-                    
+
                 </td>
             </tr>
 
@@ -108,12 +108,17 @@
                     <strong>Email: </strong>{{ $infoL->email }}
                 </td>
             </tr>
-        @endif
-</table>
+        </table>
+    @else
+    <div class="alert alert-dark" role="alert">
+        No tiene información laboral
+    </div>
+    @endif
+
 
 <h1 class="text-danger">Información acádemica</h1>
 @if (count($usuario->registrosAcademicos)>0)
-                        
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -133,7 +138,7 @@
         <tbody>
             @foreach ($usuario->registrosAcademicos as $ra)
                 <tr>
-                    
+
                     <th scope="row">
                         {{ $ra->institucion_pregrado }}
                     </th>
@@ -156,7 +161,7 @@
                         {{ $ra->fecha_graduacion_pregrado }}
                     </td>
                     <td>
-                        {{ $ra->calificacion_grado_pregrado }} 
+                        {{ $ra->calificacion_grado_pregrado }}
                     </td>
                     <td>
                         {{ $ra->pais_pregrado }}
@@ -167,9 +172,13 @@
                     <td>
                         {{ $ra->canton_pregrado }}
                     </td>
-                </tr>    
+                </tr>
             @endforeach
-            
+
         </tbody>
     </table>
+@else
+<div class="alert alert-dark" role="alert">
+    No tiene información acádemica
+</div>
 @endif

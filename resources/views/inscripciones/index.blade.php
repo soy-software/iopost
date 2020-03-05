@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    
+
                     @if (session('inscripcionOk'))
                         <div class="alert alert-success alert-dismissible fade show text-justify" role="alert">
                             <h1><strong >Registro exitoso</strong></h1>
@@ -16,16 +16,16 @@
                             </button>
                             <div class="row">
                                 <div class="col-md-6">
-                                    
+
                                     <strong>
-                                            Registro generado exitosamente, por favor revisa su cuenta de correo electrónico, y sigue la instrucciones. 
+                                            Registro generado exitosamente, por favor revisa su cuenta de correo electrónico, y sigue la instrucciones.
                                     </strong>
-                                    
+
                                 </div>
                                 <div class="col-md-6">
                                     <button onclick="abrirModalRegistro(this);" type="button" data-url="{{ route('descargarRegistroPdf',session('inscripcionOk')->id) }}" class="btn btn-dark btn-block btn-lg">
-                                        <i class="fas fa-download"></i> DESCARGAR REGISTRO
-                                    </button>  
+                                        <i class="fas fa-download"></i> DESCARGAR COMPROBANTE DE REGISTRO
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                             </span>
                                         @enderror
                                     </div>
-                    
+
                                     <div class="form-group col-md-3">
                                         <label for="primer_apellido">Primer apellido<i class="text-danger">*</i></label>
                                         <input type="text" class="form-control @error('primer_apellido') is-invalid @enderror" id="primer_apellido" name="primer_apellido" value="{{ old('primer_apellido') }}" placeholder="Ingrese primer apellido.." required>
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="form-row">
-                                    
+
                                     <div class="form-group col-md-3">
                                         <label for="tipo_identificacion">Tipo de identificación<i class="text-danger">*</i></label>
                                         <select id="tipo_identificacion" class="form-control @error('tipo_identificacion') is-invalid @enderror" name="tipo_identificacion" required>
@@ -101,7 +101,7 @@
                                             <option value="Ruc Sociedad Privada" {{ old('tipo_identificacion')=='Ruc Sociedad Privada'?'selected':'' }}>Ruc Sociedad Privada</option>
                                             <option value="Pasaporte" {{ old('tipo_identificacion')=='Pasaporte'?'selected':'' }}>Pasaporte</option>
                                             <option value="Otros" {{ old('tipo_identificacion')=='Otros'?'selected':'' }}>Otros</option>
-                                            
+
                                         </select>
                                         @error('tipo_identificacion')
                                             <span class="invalid-feedback" role="alert">
@@ -144,18 +144,18 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-row">
-                                    
+
                                     <div class="form-group col-md-3">
                                         <label for="estado_civil">Estado civil<i class="text-danger">*</i></label>
                                         <select id="estado_civil" class="form-control @error('estado_civil') is-invalid @enderror" name="estado_civil" required>
-                                            
+
                                             <option value="Soltero/a" {{ old('estado_civil')=='Soltero/a'?'selected':'' }}>Soltero/a</option>
                                             <option value="Casado/a" {{ old('estado_civil')=='Casado/a'?'selected':'' }}>Casado/a</option>
                                             <option value="Divorciado/a" {{ old('estado_civil')=='Divorciado/a'?'selected':'' }}>Divorciado/a</option>
                                             <option value="Vuido/a" {{ old('estado_civil')=='Vuido/a'?'selected':'' }}>Vuido/a</option>
-                                            
+
                                         </select>
                                         @error('estado_civil')
                                             <span class="invalid-feedback" role="alert">
@@ -166,14 +166,14 @@
                                     <div class="form-group col-md-3">
                                         <label for="etnia">Etnia<i class="text-danger">*</i></label>
                                         <select id="etnia" class="form-control @error('etnia') is-invalid @enderror" name="etnia" required>
-                                            
+
                                             <option value="Mestizos" {{ old('etnia')=='Mestizos'?'selected':'' }}>Mestizos</option>
                                             <option value="Blancos" {{ old('etnia')=='Blancos'?'selected':'' }}>Blancos</option>
                                             <option value="Afroecuatorianos" {{ old('etnia')=='Afroecuatorianos'?'selected':'' }}>Afroecuatorianos</option>
                                             <option value="Indígenas" {{ old('etnia')=='Indígenas'?'selected':'' }}>Indígenas</option>
                                             <option value="Montubios" {{ old('etnia')=='Montubios'?'selected':'' }}>Montubios</option>
                                             <option value="otros" {{ old('etnia')=='otros'?'selected':'' }}>otros</option>
-                                            
+
                                         </select>
                                         @error('etnia')
                                             <span class="invalid-feedback" role="alert">
@@ -202,7 +202,7 @@
                                 </div>
 
                                 <div class="form-row">
-                                    
+
                                     <div class="form-group col-md-3">
                                         <label for="pais">País de procedencia<i class="text-danger">*</i></label>
                                         <input type="text" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais" value="{{ old('pais','ECUADOR') }}" required placeholder="Ingrese país...">
@@ -230,7 +230,7 @@
                                     <div class="form-group col-md-3">
                                         <label for="canton">Cantón de procedencia<i class="text-danger">*</i></label>
                                         <select id="canton" class="form-control @error('canton') is-invalid @enderror" name="canton" onchange="cargarParroquias(this);" required>
-                                            
+
                                         </select>
                                         @error('canton')
                                             <span class="invalid-feedback" role="alert">
@@ -284,10 +284,10 @@
                     </button>
                 </div>
                 <div class="modal-body" id="modalBody">
-                    
+
                 </div>
                 <div class="modal-footer">
-                    
+
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
                 </div>
                 </div>
@@ -303,9 +303,9 @@
             <script>
                 //obtener cantones por provincia
                 var provincia=$("#provincia option:selected").val();
-                
+
                 obtenerCantones(provincia);
-                
+
                 function cargarCantones(arg){
                     var id=$(arg).val();
                     obtenerCantones(id);
@@ -355,7 +355,7 @@
 
                 function abrirModalRegistro(arg){
                     $.blockUI({message:'<h1>Espere por favor.!</h1>'});
-                    
+
                     $('#documentoRegistro').modal('show');
                     $('#documentoRegistroPdf').attr('src',$(arg).data('url'));
 

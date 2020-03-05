@@ -195,7 +195,7 @@
             </div>
             @else
             <div class="alert alert-dark" role="alert">
-                No existe usuarios coordinadores registrados en el sistema, para asignar a está cohorte.
+                <strong>No existe usuarios coordinadores registrados en el sistema, para asignar a está cohorte.</strong>
             </div>
             @endif
 

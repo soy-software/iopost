@@ -48,7 +48,7 @@ class RolesDataTable extends DataTable
                     ->setTableId('sistema-roles-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('frtip')
                     ->orderBy(1)
                     ->parameters($this->getBuilderParameters());
     }

@@ -24,7 +24,7 @@ class InscritosCorteDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('user_id',function($inscri){
-                return $inscri->user->primer_nombre .' '.$inscri->user->segundo_nombre.' '.$inscri->user->primer_apellido.' '.$inscri->user->segundo_apellido;
+                return $inscri->user->primer_apellido.' '.$inscri->user->segundo_apellido.' '.$inscri->user->primer_nombre .' '.$inscri->user->segundo_nombre;
             })
             ->editColumn('updated_at',function($inscripcion){
                 return $inscripcion->user->identificacion;
@@ -34,22 +34,22 @@ class InscritosCorteDataTable extends DataTable
             })
             ->filterColumn('user_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
-                    $query->whereRaw("concat(primer_nombre,' ',segundo_nombre,' ',primer_apellido,' ',segundo_apellido) like ?", ["%{$keyword}%"]);
-                });            
+                    $query->whereRaw("concat(primer_apellido,' ',segundo_apellido,' ',primer_nombre,' ',segundo_nombre) like ?", ["%{$keyword}%"]);
+                });
             })
             ->filterColumn('updated_at',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("identificacion like ?", ["%{$keyword}%"]);
-                });            
+                });
             })
-            
+
             ->filterColumn('corte_id',function($query, $keyword){
                 $query->whereHas('user', function($query) use ($keyword) {
                     $query->whereRaw("email like ?", ["%{$keyword}%"]);
-                });            
+                });
             })
-            
-            
+
+
             ->editColumn('estado',function($inscripcion){
                 return view('maestrias.cortes.estadoRegistro',['inscripcion'=>$inscripcion])->render();
             })
@@ -81,7 +81,7 @@ class InscritosCorteDataTable extends DataTable
                     ->setTableId('inscritoscorte-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('frtip')
                     ->orderBy(1)
                     // ->buttons(
                   //     Button::make('create'),
@@ -107,16 +107,15 @@ class InscritosCorteDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center')
                   ->title('Acciones'),
-            
-            Column::make('estado')->title('Estado'),      
+
+            Column::make('estado')->title('Estado'),
             Column::make('id')
             ->title('# de registro'),
             Column::make('user_id')->title('Aspirante'),
             Column::make('updated_at')->title('Identificación'),
             Column::make('corte_id')->title('Email'),
-            Column::make('numero_factura')->title('# factura'),
             Column::make('created_at')->title('Fecha de registro'),
-            
+
         ];
     }
 

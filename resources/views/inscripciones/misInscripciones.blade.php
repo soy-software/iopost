@@ -18,12 +18,12 @@
     <div class="card-body">
         @if (count($inscripciones)>0)
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover table-sm">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">Ingresar</th>
                         <th scope="col">Maestría</th>
-                        <th scope="col">Corte</th>
+                        <th scope="col">Cohorte</th>
                         <th scope="col">Fecha de inscripción</th>
                       </tr>
                     </thead>
@@ -34,11 +34,13 @@
                         @php($inscri=$inscripcion->obtenerInscripcion($inscripcion->inscripcion->id))
 
                             <tr>
-                                <th scope="row">
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <strong>Ok mañana sera otro dia</strong>
-                                    </div>
-                                </th>
+                                <td>
+
+                                    <a href="" class="btn btn-primary">
+                                        Ingresar
+                                    </a>
+
+                                </td>
                                 <td>
                                     {{ $inscripcion->maestria->nombre }}
                                 </td>

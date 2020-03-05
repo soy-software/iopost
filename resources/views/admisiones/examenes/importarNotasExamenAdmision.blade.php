@@ -1,6 +1,5 @@
 @extends('layouts.app',['title'=>'Importar notas de examen de admisión'])
-
-
+@section('breadcrumbs', Breadcrumbs::render('importarNotasExamenAdmision',$corte))
 
 @section('barraLateral')
 
@@ -13,7 +12,7 @@
     <input type="hidden" name="corte" value="{{ $corte->id }}">
 <div class="card">
     <div class="card-header">
-        <strong>Advertencia:</strong> el archivo excel debe contener estrictamente el siguiente formato.
+        <strong class="text-danger">Advertencia:</strong> El archivo excel debe contener estrictamente el siguiente formato.
     </div>
     <div class="card-body">
         <div class="table-responsive">

@@ -22,11 +22,7 @@ class CortesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('numero', function($corte){
-                return "Cohorte " .$corte->numero ;
-            })
-            ->filterColumn('numero', function($query, $keyword) {
-                $sql = "CONCAT('Corte ',cortes.numero)  like ?";
-                return $query->whereRaw($sql, ["%{$keyword}%"]);
+                return $corte->numero ;
             })
             ->editColumn('estado', function($corte){
                 return view('maestrias.cortes.estado',['corte'=>$corte])->render();
@@ -70,7 +66,7 @@ class CortesDataTable extends DataTable
                     ->setTableId('cortes-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('frtip')
                     ->orderBy(1)
                     // ->buttons(
                     //     Button::make('create'),
@@ -96,7 +92,7 @@ class CortesDataTable extends DataTable
                   ->width(60)
                   ->title('Acciones')
                   ->addClass('text-center'),
-            Column::make('numero')->title('Cohorte'),
+            Column::make('numero')->title('Cohorte')->addClass('text-center'),
             Column::make('created_at')->title('Coordinadores'),
             Column::make('estado'),
             

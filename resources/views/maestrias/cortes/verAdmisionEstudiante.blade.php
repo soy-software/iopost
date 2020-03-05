@@ -12,7 +12,7 @@
             border-collapse: collapse;
             width: 100%
         }
-            
+
         table, th, td {
             border: 1px solid black;
             text-align: center;
@@ -20,7 +20,7 @@
         .noBorder {
             border:none !important;
         }
-        
+
     </style>
 </head>
 <body>
@@ -36,7 +36,7 @@
                 </h4>
             </td>
             <td class="noBorder">
-                
+
                 <img src="{!! public_path('img/posgrado.jpeg') !!}" alt="" width="120px;" style="text-align: right;">
             </td>
         </tr>
@@ -82,13 +82,14 @@
           </tr>
         </thead>
         <tbody>
-          
+
             <tr>
                 <th scope="row">
                     1
                 </th>
                 <td style="text-align: justify;">
-                    {{ $inscripciones->user->nombres }} {{ $inscripciones->user->apellidos }}
+                    {{ $inscripciones->user->primer_apellido }} {{ $inscripciones->user->segundo_apellido }}
+                    {{ $inscripciones->user->primer_nombre }} {{ $inscripciones->user->segundo_nombre }}
                 </td>
                 <td style="text-align: justify;">
                     {{ $inscripciones->user->identificacion }}
@@ -106,14 +107,14 @@
                     {{ ($inscripciones->admision->examen??0)+($inscripciones->admision->entrevista??0)+($inscripciones->admision->ensayo??0) }}
                 </td>
             </tr>
-            
+
 
         </tbody>
       </table>
     @else
         <p>No existe registros</p>
     @endif
-    
+
 
 </body>
 </html>

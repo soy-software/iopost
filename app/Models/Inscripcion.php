@@ -27,4 +27,11 @@ class Inscripcion extends Model
     {
         return $this->hasOne(Admision::class,'inscripcion_id');
     }
+
+    // A: deivid
+    // D: una inscripcion tiene un pago de registro
+    public function pagoRegistro()
+    {
+        return $this->hasOne(Pago::class,'inscripcion_id')->where('opcion','Registro');
+    }
 }

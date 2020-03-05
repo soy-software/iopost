@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inscripción</title>
+    <title>Comprobante de registro</title>
     <style>
         table {
             border-collapse: collapse;
@@ -65,10 +65,10 @@
             </tr>
             <tr>
                 <td>
-                    <strong>Nombres: </strong> {{ $inscripcion->user->primer_nombre }} {{ $inscripcion->user->segundo_nombre }}
+                    <strong>Apellidos:</strong> {{ $inscripcion->user->primer_apellido }} {{ $inscripcion->user->segundo_apellido }}
                 </td>
                 <td>
-                    <strong>Apellidos:</strong> {{ $inscripcion->user->primer_apellido }} {{ $inscripcion->user->segundo_apellido }}
+                    <strong>Nombres: </strong> {{ $inscripcion->user->primer_nombre }} {{ $inscripcion->user->segundo_nombre }}
                 </td>
             </tr>
             <tr>
@@ -116,9 +116,10 @@
             <tr>
                 <td colspan="2" style="text-align: right; padding-right: 15px;">
                     <h3>
-                            <strong>Valor a cancelar: </strong>
-                            $ {{ $inscripcion->valorMatricula }}
+                            <strong>Valor a cancelar de registro: </strong>
+                            $ {{ $inscripcion->pagoRegistro->valor }}
                     </h3>
+                    <strong>Estado de pago: {{ $inscripcion->pagoRegistro->estado}}</strong>
                 </td>
             </tr>
             <tr>

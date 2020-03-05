@@ -52,7 +52,7 @@ class MateriasMaestriasDataTable extends DataTable
                     ->setTableId('materiasmaestrias-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('frtip')
                     ->orderBy(1)
                       // ->buttons(
                     //     Button::make('create'),

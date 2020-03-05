@@ -7,9 +7,7 @@ use App\Models\Corte;
 use App\Models\Domicilio\Canton;
 use App\Models\Domicilio\Provincia;
 use App\Models\Inscripcion;
-use App\Models\Usuario\InformacionLaboral;
-use App\Models\Usuario\RegistroAcademico;
-use App\Notifications\NotificacionInscripcion;
+use App\Models\Pago;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -103,11 +101,23 @@ class Estaticas extends Controller
                     $inscripcion=new Inscripcion();
                     $inscripcion->user_id=$user->id;
                     $inscripcion->corte_id=$corte->id;
-                    $inscripcion->valorMatricula=$corte->valorRegistro;
                     $inscripcion->save();
                 }
 
-                $user->notify(new NotificacionInscripcion($inscripcion,$pass));
+                $pago_registro=$inscripcion->pagoRegistro;
+
+                if(!$pago_registro){
+                    $pago_registro=new Pago();
+                    $pago_registro->opcion='Registro';
+                    $pago_registro->detalle='Pago de registro en linea en '.$inscripcion->corte->maestria->nombre.' cohorte N: '.$inscripcion->corte->numero;
+                    $pago_registro->valor=$inscripcion->corte->valorRegistro;
+                    $pago_registro->inscripcion_id=$inscripcion->id;
+                    $pago_registro->save();
+
+                }
+
+
+                //$user->notify(new NotificacionInscripcion($inscripcion,$pass));
                 DB::commit();
                 $rq->session()->flash('success','Inscripción procesado exitosamente');
                 $rq->session()->flash('inscripcionOk',$inscripcion);
@@ -117,7 +127,7 @@ class Estaticas extends Controller
 
         } catch (\Exception $th) {
             DB::rollback();
-            $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar');
+            $rq->session()->flash('error','Ocurrio en error, por favor vuelva intentar'.$th->getMessage());
             return redirect()->route('incripcion',$rq->corte)->withInput();
         }
         return redirect()->route('incripcion',$rq->corte);

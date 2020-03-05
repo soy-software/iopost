@@ -16,12 +16,17 @@ class CreatePagosTable extends Migration
         Schema::create('pagos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->enum('estado',['Registro','Matricula','Colegiatura','Otros'])->nullable();
+            $table->string('factura')->nullable();
+            $table->enum('estado',['Ingresado','Cancelado'])->default('Ingresado');
+            $table->enum('opcion',['Registro','Matricula','Colegiatura'])->nullable();
             $table->string('detalle')->nullable();
             $table->decimal('valor',19,2)->default(0)->nullable();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('responsable')->nullable();
+
+
+            $table->unsignedBigInteger('inscripcion_id');
+            $table->foreign('inscripcion_id')->references('id')->on('inscripcions');
 
         });
     }

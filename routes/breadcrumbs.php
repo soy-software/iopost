@@ -171,6 +171,11 @@ Breadcrumbs::for('notasExamenAdmision', function ($trail,$corte) {
     $trail->parent('InscritoCortesMaestria',$corte);
     $trail->push('Notas de examen', route('notasExamenAdmision',$corte->id));
 });
+// importar notas
+Breadcrumbs::for('importarNotasExamenAdmision', function ($trail,$corte) {
+    $trail->parent('notasExamenAdmision',$corte);
+    $trail->push('Importar notas de examen', route('importarNotasExamenAdmision',$corte->id));
+});
 // notas
 
 Breadcrumbs::for('notasAdmisionAspirante', function ($trail,$inscripcion) {

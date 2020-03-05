@@ -74,7 +74,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Corte::class, 'inscripcions', 'user_id', 'corte_id')
         ->as('inscripcion')
-        ->withPivot('id','estado','comprobante')
+        ->withPivot('id','estado')
         ->withTimestamps();
     }
 

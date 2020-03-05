@@ -71,7 +71,7 @@
 
 
       function cambiarEstadoRegistro(arg){
-        
+
         $.blockUI({message:'<h1>Espere por favor.!</h1>'});
         $.post("{{ route('cambiarEstadoInscripcion') }}", { inscripcion: $(arg).data('id'),estado:$(arg).val() })
         .done(function( data ) {
@@ -80,7 +80,7 @@
                 $.notify(data.success, "success");
             }
             if(data.info){
-                $.notify(data.info, "info");   
+                $.notify(data.info, "info");
             }
         }).always(function(){
             $.unblockUI();
@@ -90,9 +90,9 @@
 
       }
     </script>
-   
+
     {!! $dataTable->scripts() !!}
-    
+
 @endprepend
 
 @endsection

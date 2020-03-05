@@ -182,7 +182,7 @@ class Cortes extends Controller
     public function inscritosCorte(InscritosCorteDataTable $dataTable,  $idCorte)
     {
         $corte=Corte::findOrFail($idCorte);
-        $data = array('corte' =>$corte , );
+        $data = array('corte' =>$corte);
         return  $dataTable->with('idCorte',$corte->id)->render('maestrias.cortes.inscritos',$data);
     }
     public function informacionInscritoCorte($idInscripcion)
@@ -197,10 +197,10 @@ class Cortes extends Controller
     {
         $request->validate([
             'inscripcion' => 'required|exists:inscripcions,id',
-            'estado' => 'required|in:Registro,Subir comprobante de registro,Aprobado,Inscrito',
+            'estado' => 'required|in:Registro,Inscrito,Matriculado',
         ]);
         $inscripcion=Inscripcion::findOrFail($request->inscripcion);
-        if($request->estado=='Aprobado'){
+        if($request->estado=='Inscrito'){
             $inscripcion->user->notify(new NotificacionRegistroComprobante($inscripcion));
         }
         $inscripcion->estado=$request->estado;
@@ -218,9 +218,11 @@ class Cortes extends Controller
         $cohorte=$inscripcion->corte;
         $data = array(
             'cohorte'=>$inscripcion->corte,
-            'inscripciones' => $inscripcion);
-            $pdf = PDF::loadView('maestrias.cortes.verAdmisionEstudiante',$data)
+            'inscripciones' => $inscripcion
+        );
 
+
+        $pdf = PDF::loadView('maestrias.cortes.verAdmisionEstudiante',$data)
         ->setOption('footer-html', view('admisiones.examenes.pie'))
         ->setOption('margin-bottom', 10);
         return $pdf->inline('Resultado_COHORTE_N_'.$cohorte->numero.'_MAESTRÍA_'.$cohorte->maestria->nombre. '.pdf');

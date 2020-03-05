@@ -6,7 +6,7 @@
 <form action="{{ route('guardarMaestria') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card">
-        <div class="card-header">Nueva Maestría </div>
+        <div class="card-header">Complete información </div>
 
         <div class="card-body">
             
